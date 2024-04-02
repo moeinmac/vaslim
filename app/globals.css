@@ -26,3 +26,17 @@
     text-wrap: balance;
   }
 }
+
+.hero {
+  transform-origin: top left;
+  position: absolute;
+  left: -483px;
+  top: 45vh;
+  width: 1000px;
+  height: 625px;
+  background-image: url('/first.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: matrix(0.6928, -0.7212, 0.7212, 0.6928, 0, 0);
+}

@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        alibaba: ['var(--alibaba)'],
-        kalameh : ['var(--kalameh)']
+        alibaba: ["var(--alibaba)"],
+        kalameh: ["var(--kalameh)"],
       },
       colors: {
         black: "var(--black)",
