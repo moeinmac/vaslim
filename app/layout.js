@@ -25,7 +25,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${alibaba.variable} ${kalameh.variable} bg-black`}>{children}</body>
+      <body className={`${alibaba.variable} ${kalameh.variable} bg-black text-white`}>{children}</body>
     </html>
   );
 }
