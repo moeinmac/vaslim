@@ -1,4 +1,4 @@
-import Button from "@/UI/button";
+import Button from "@/UI/Button";
 
 const welcome = () => {
   return (
@@ -11,7 +11,7 @@ const welcome = () => {
           دوســـتان خــود را در وصـــــــلیم پیدا کــنید
         </h1>
         <p className="text-right px-10 text-lg text-gray">با وصلیم شما به همه جا وصلین.</p>
-        <Button className="">ورود / ثبت نام</Button>
+        <Button path="/login">ورود / ثبت نام</Button>
       </div>
     </>
   );

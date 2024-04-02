@@ -11,21 +11,7 @@
   font-family: "alibaba";
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --black: #010d11;
-    --blue: #14213d;
-    --orange: #fca311;
-    --white: #ffffff;
-    --gray: #e5e5e5;
-  }
-}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
 
 .hero {
   transform-origin: top left;
@@ -39,4 +25,17 @@
   background-repeat: no-repeat;
   background-size: cover;
   transform: matrix(0.6928, -0.7212, 0.7212, 0.6928, 0, 0);
+}
+
+.login {
+  transform-origin: top left;
+  position: absolute;
+  left: -100px;
+  top: -100px;
+  width: 700px;
+  height: 700px;
+  background-image: url('/circle.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

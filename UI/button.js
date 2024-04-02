@@ -1,8 +1,23 @@
-const Button = ({ children, onClick }) => {
+import Link from "next/link";
+
+const Button = ({ children, onClick, path }) => {
+  const classNames = "bg-blue text-5xl font-kalameh rounded-xl px-8 py-4 mx-8"
+  if (!path)
+    return (
+      <button
+        className={classNames}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    );
   return (
-    <button className="bg-blue text-5xl font-kalameh rounded-xl px-8 py-4 mx-8" onClick={onClick}>
+    <Link
+      href={path}
+      className={`${classNames} text-center`}
+    >
       {children}
-    </button>
+    </Link>
   );
 };
 
