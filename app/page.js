@@ -7,10 +7,10 @@ const welcome = () => {
         <div className="hero"></div>
       </div>
       <div className="absolute bottom-10 z-10 w-full flex flex-col gap-y-6">
-        <h1 className="text-white font-kalameh text-6xl text-center px-4">
-          دوســـتان خــود را در وصـــــــلیم پیدا کــنید
+        <h1 className="text-white font-kalameh text-5xl text-center px-4">
+          دوســـتان خــود را در<br /> وصـــــــلیم پیدا کــنید
         </h1>
-        <p className="text-right px-10 text-lg text-gray">با وصلیم شما به همه جا وصلین.</p>
+        <p className="text-right  px-10 text-gray font-alibaba">با وصلیم شما به همه جا وصلین.</p>
         <Button className={"mx-8 bg-blue"} path="/login">ورود / ثبت نام</Button>
       </div>
     </>

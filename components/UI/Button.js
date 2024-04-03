@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const Button = ({ children, onClick, path, className }) => {
-  const classNames = `${className} text-5xl font-kalameh rounded-xl px-8 py-4 `;
+  const classNames = `${className} text-4xl font-kalameh rounded-xl px-8 py-4 `;
   if (!path)
     return (
       <button className={classNames} onClick={onClick}>

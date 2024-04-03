@@ -31,7 +31,7 @@
   transform-origin: top left;
   position: absolute;
   left: -100px;
-  top: -100px;
+  top: -15vh;
   width: 700px;
   height: 700px;
   background-image: url('/circle.png');

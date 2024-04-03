@@ -7,7 +7,7 @@ const Input = ({ pholder, id, bg_color, type }) => {
       type={type}
       id={id}
       placeholder={pholder ? pholder : ""}
-      className={`w-full bg-[#${bg_color}] text-3xl outline-0 border-0 px-4 py-3 rounded-xl mt-2`}
+      className={`w-full bg-[#${bg_color}] font-alibaba text-xl outline-0 border-0 px-4 py-3 rounded-xl mt-2`}
     />
   );
 };
