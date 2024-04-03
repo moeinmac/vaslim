@@ -1,4 +1,4 @@
-import Button from "@/UI/Button";
+import Button from "@/components/UI/Button";
 
 const welcome = () => {
   return (
@@ -11,7 +11,7 @@ const welcome = () => {
           دوســـتان خــود را در وصـــــــلیم پیدا کــنید
         </h1>
         <p className="text-right px-10 text-lg text-gray">با وصلیم شما به همه جا وصلین.</p>
-        <Button path="/login">ورود / ثبت نام</Button>
+        <Button className={"mx-8 bg-blue"} path="/login">ورود / ثبت نام</Button>
       </div>
     </>
   );
