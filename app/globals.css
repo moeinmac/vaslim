@@ -11,8 +11,6 @@
   font-family: "alibaba";
 }
 
-
-
 .hero {
   transform-origin: top left;
   position: absolute;
@@ -25,17 +23,4 @@
   background-repeat: no-repeat;
   background-size: cover;
   transform: matrix(0.6928, -0.7212, 0.7212, 0.6928, 0, 0);
-}
-
-.login {
-  transform-origin: top left;
-  position: absolute;
-  left: -100px;
-  top: -15vh;
-  width: 700px;
-  height: 700px;
-  background-image: url('/circle.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
