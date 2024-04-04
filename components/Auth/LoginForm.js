@@ -3,8 +3,6 @@ import { redirect } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 
 const LoginForm = ({ message }) => {
-  console.log(message);
-
   const signIn = async (formData) => {
     "use server";
     const supabase = createClient();

@@ -19,7 +19,7 @@ const auth = ({ searchParams }) => {
           <p className="text-lg text-gray font-alibaba">
             هنوز در وصلیم حساب نداری؟ منتظر چی هستی پس؟
           </p>
-          <Button className={"bg-orange text-black"} path={"/signup"}>
+          <Button className={"bg-orange text-black"} path={"auth/signup"}>
             ثبت نام سریع
           </Button>
         </div>

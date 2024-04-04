@@ -1,5 +1,7 @@
 const signup = () => {
-  return<h1>ثبت نام</h1>
+  return <>
+    
+  </>
 }
 
 export default signup
