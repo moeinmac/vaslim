@@ -24,3 +24,14 @@
   background-size: cover;
   transform: matrix(0.6928, -0.7212, 0.7212, 0.6928, 0, 0);
 }
+.signup-circle {
+  position: absolute;
+  left: -216px;
+  top: 560px;
+  width: 700px;
+  height: 700px;
+  overflow: visible;
+}
+input:placeholder-shown {
+  direction: rtl;
+}
