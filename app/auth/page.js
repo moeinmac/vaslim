@@ -1,7 +1,7 @@
 import LoginForm from "@/components/Auth/LoginForm";
 import Button from "@/components/UI/Button";
 
-const auth = ({ searchParams }) => {
+const auth = () => {
   return (
     <>
       <div className="p-8 w-full flex flex-col h-screen justify-between">
@@ -13,7 +13,7 @@ const auth = ({ searchParams }) => {
             </strong>{" "}
             خود شــوید
           </h1>
-          <LoginForm message={searchParams.message}/>
+          <LoginForm />
         </div>
         <div className="flex flex-col gap-y-4">
           <p className="text-lg text-gray font-alibaba">

@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 
-const LoginForm = ({ message }) => {
+const LoginForm = () => {
   const signIn = async (formData) => {
     "use server";
     const supabase = createClient();
@@ -55,11 +55,11 @@ const LoginForm = ({ message }) => {
       >
         ورود
       </SubmitButton>
-      {message && (
+      {/* {message && (
         <p className="text-red-600 font-alibaba">
           ورود ناموفق بود ، اطلاعات ورود را چک کنید و دوبار امتحان کنید
         </p>
-      )}
+      )} */}
     </form>
   );
 };
