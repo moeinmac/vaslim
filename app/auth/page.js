@@ -1,7 +1,13 @@
 import LoginForm from "@/components/Auth/LoginForm";
 import Button from "@/components/UI/Button";
+import { createClient } from "@/lib/supabase/server";
 
-const auth = () => {
+const auth = async ({searchParams}) => {
+
+  const supabase = createClient();
+  const data = await supabase.auth.getUser();
+  if(data.data.user) redirect("/home");
+
   return (
     <>
       <div className="p-8 w-full flex flex-col h-screen justify-between">
@@ -13,7 +19,7 @@ const auth = () => {
             </strong>{" "}
             خود شــوید
           </h1>
-          <LoginForm />
+          <LoginForm message={searchParams.message}/>
         </div>
         <div className="flex flex-col gap-y-4">
           <p className="text-lg text-gray font-alibaba">
