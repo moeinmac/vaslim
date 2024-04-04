@@ -1,4 +1,5 @@
-const { default: SignOutForm } = require("@/components/Auth/SignouForm")
+import SignOutForm from "@/components/Auth/SignouForm"
+
 
 const Home = () => {
   return <SignOutForm />

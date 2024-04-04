@@ -2,7 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 
-const LoginForm = () => {
+const LoginForm = ({ message }) => {
+  console.log(message);
+
   const signIn = async (formData) => {
     "use server";
     const supabase = createClient();
@@ -18,7 +20,7 @@ const LoginForm = () => {
     });
 
     if (error) {
-      return redirect("/login?message=ورود با موفقیت انجام نشد");
+      return redirect("/auth?message=authentication-failed");
     }
 
     return redirect("/home");
@@ -55,6 +57,11 @@ const LoginForm = () => {
       >
         ورود
       </SubmitButton>
+      {message && (
+        <p className="text-red-600 font-alibaba">
+          ورود ناموفق بود ، اطلاعات ورود را چک کنید و دوبار امتحان کنید
+        </p>
+      )}
     </form>
   );
 };

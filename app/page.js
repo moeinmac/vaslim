@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 const welcome = async () => {
   const supabase = createClient();
   const data = await supabase.auth.getUser();
-  if(data) redirect("/home");
+  if(data.user) redirect("/home");
   
   return (
     <>
