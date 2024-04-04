@@ -11,7 +11,7 @@ const welcome = () => {
           دوســـتان خــود را در<br /> وصـــــــلیم پیدا کــنید
         </h1>
         <p className="text-right  px-10 text-gray font-alibaba">با وصلیم شما به همه جا وصلین.</p>
-        <Button className={"mx-8 bg-blue"} path="/login">ورود / ثبت نام</Button>
+        <Button className={"mx-8 bg-blue"} path="/auth">ورود / ثبت نام</Button>
       </div>
     </>
   );
