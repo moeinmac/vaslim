@@ -1,5 +1,7 @@
+const { default: SignOutForm } = require("@/components/Auth/SignouForm")
+
 const Home = () => {
-  return <h1>خانه</h1>
+  return <SignOutForm />
 }
 
 export default Home

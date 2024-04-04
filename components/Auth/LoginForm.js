@@ -5,13 +5,13 @@ import SubmitButton from "./SubmitButton";
 const LoginForm = () => {
   const signIn = async (formData) => {
     "use server";
-
-    const email = formData.get("email");
-    const password = formData.get("password");
     const supabase = createClient();
 
+    const username = formData.get("username");
+    const password = formData.get("password");
+     
     const { error } = await supabase.auth.signInWithPassword({
-      email,
+      email : `${username}@gmail.com`,
       password,
     });
 
@@ -32,7 +32,7 @@ const LoginForm = () => {
           className="w-full bg-[#FFC970] text-black font-alibaba text-xl outline-0 border-0 px-4 py-3 rounded-xl mt-2"
           type="text"
           dir="ltr"
-          name="email"
+          name="username"
         />
       </label>
       <label htmlFor="password" className="text-sm font-alibaba">
