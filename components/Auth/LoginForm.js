@@ -9,9 +9,11 @@ const LoginForm = () => {
 
     const username = formData.get("username");
     const password = formData.get("password");
-     
+    // if uesr's email don't start with gmail it crashes {#fix_later}
+    const email = username.includes("@") ? username : `${username}@gmail.com`;
+
     const { error } = await supabase.auth.signInWithPassword({
-      email : `${username}@gmail.com`,
+      email,
       password,
     });
 
@@ -25,7 +27,7 @@ const LoginForm = () => {
   return (
     <form className="w-full flex flex-col gap-6 text-white">
       <label htmlFor="username" className="text-sm font-alibaba">
-        نام کاربری
+        نام کاربری (ایمیل)
         <input
           id="username"
           required
