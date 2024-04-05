@@ -11,7 +11,7 @@ const signupUser = async (email, password, phone) => {
   await supabase.from("user").insert({phone});
 
   if (error) return redirect("/auth/signup?message=signupuser-failed");
-  return redirect("/home");
+  return redirect("/auth/signup/welcome");
 };
 
 export default signupUser;

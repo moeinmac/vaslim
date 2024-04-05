@@ -7,6 +7,8 @@ import Button from "@/components/UI/Button";
 const signupWelcome = async () => {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
+  if(!data.user) redirect("/auth");
+
   let user = await supabase.from("user").select().eq("id", data.user.id);
 
   return (
