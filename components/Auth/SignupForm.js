@@ -1,10 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Button from "../UI/Button";
+import SubmitButton from "./SubmitButton";
 import SignupData from "@/lib/SignupFormData";
 import Input from "./Input";
 import { IoReturnDownBack } from "react-icons/io5";
+import signupUser from "./SubmitSignupForm";
 
 const SignupForm = () => {
   const [inputFocus, setInputFocus] = useState(false);
@@ -17,15 +18,12 @@ const SignupForm = () => {
   const passwordRef = useRef();
   const phoneRef = useRef();
 
-  const signupUser = async () => {
-    console.log(usernameRef.current.value);
-    console.log(passwordRef.current.value);
-    console.log(phoneRef.current.value);
-  };
-
   const nextSignupLevel = () => {
     if (signupLevel.level === 2) {
-      signupUser();
+      const email = usernameRef.current.value;
+      const password = passwordRef.current.value;
+      const phone = phoneRef.current.value;
+      signupUser(email, password, phone);
       return;
     }
     setSignupLevel({ level: signupLevel.level + 1 });
@@ -47,7 +45,7 @@ const SignupForm = () => {
           <p className="font-alibaba">{SignupData[signupLevel.level].help}</p>
         )}
       </div>
-      <form action={nextSignupLevel}>
+      <form>
         <Input
           hidden={signupLevel.level != 0}
           ref={usernameRef}
@@ -70,13 +68,15 @@ const SignupForm = () => {
           blurHandler={blurHandler}
         />
         <div className="flex align-center mt-4 gap-4">
-          <Button
-            className={`bg-blue text-white ${
+          <SubmitButton
+            formAction={nextSignupLevel}
+            pendingText="بررسی اطلاعات..."
+            className={`text-4xl font-kalameh rounded-xl px-8 py-4 bg-blue text-white ${
               signupLevel.level != 0 ? "w-[90%]" : "w-full"
             }`}
           >
             {SignupData[signupLevel.level].button}
-          </Button>
+          </SubmitButton>
           {signupLevel.level != 0 && (
             <button
               onClick={signupLevelDown}
