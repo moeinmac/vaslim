@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 
-const LoginForm = ({message}) => {
+const LoginForm = ({ message }) => {
   const signIn = async (formData) => {
     "use server";
     const supabase = createClient();
@@ -40,6 +40,7 @@ const LoginForm = ({message}) => {
       <label htmlFor="password" className="text-sm font-alibaba">
         رمز عبور
         <input
+          required
           name="password"
           id="password"
           dir="ltr"

@@ -1,68 +1,69 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, forwardRef } from "react";
 import Button from "../UI/Button";
 import SignupData from "@/lib/SignupFormData";
-
-const Input = ({ name, placeholder, focusHandler }) => {
-  return (
-    <input
-      onFocus={focusHandler}
-      on
-      required
-      className="w-full text-black font-alibaba text-xl outline-0 border-0 px-4 py-3 rounded-xl mt-2"
-      type={placeholder === "رمز عبور" ? "password" : "text"}
-      dir="auto"
-      name={name}
-      placeholder={placeholder}
-    />
-  );
-};
+import Input from "./Input";
 
 const SignupForm = () => {
   const [inputFocus, setInputFocus] = useState(false);
   const focusHandler = () => setInputFocus(true);
-  let [signupLevel, setSignupLevel] = useState(0);
-  const nextSignupLevel = async (event) => {
-    setSignupLevel(signupLevel++);
+  const blurHandler = () => setInputFocus(false);
+
+  const [signupLevel, setSignupLevel] = useState({ level: 0 });
+
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+  const phoneRef = useRef();
+
+  const signupUser = async () => {
+    console.log(usernameRef.current.value);
+    console.log(passwordRef.current.value);
+    console.log(phoneRef.current.value);
+  };
+
+  const nextSignupLevel = () => {
+    if (signupLevel.level === 2) {
+      signupUser();
+      return;
+    }
+    setSignupLevel({ level: signupLevel.level + 1 });
   };
 
   return (
     <div className="flex flex-col p-8 justify-between h-[55%]">
       <div className="flex flex-col gap-y-6">
         <h1 className="font-alibaba text-3xl">
-          {SignupData[signupLevel].header}
+          {SignupData[signupLevel.level].header}
         </h1>
-        {inputFocus && <p>{SignupData[signupLevel].help}</p>}
+        {inputFocus && <p>{SignupData[signupLevel.level].help}</p>}
       </div>
-      <div>
-        <form action={nextSignupLevel}>
-          {signupLevel === 0 && (
-            <Input
-              name="username"
-              placeholder={SignupData[signupLevel].input}
-              focusHandler={focusHandler}
-            />
-          )}
-          {signupLevel === 1 && (
-            <Input
-              name="password"
-              placeholder={SignupData[signupLevel].input}
-              focusHandler={focusHandler}
-            />
-          )}
-          {signupLevel === 2 && (
-            <Input
-              name="phone"
-              placeholder={SignupData[signupLevel].input}
-              focusHandler={focusHandler}
-            />
-          )}
-          <Button className="bg-blue text-white w-full mt-4">
-            {SignupData[signupLevel].button}
-          </Button>
-        </form>
-      </div>
+      <form action={nextSignupLevel}>
+        <Input
+          hidden={signupLevel.level != 0}
+          ref={usernameRef}
+          placeholder={SignupData[signupLevel.level].input}
+          focusHandler={focusHandler}
+          blurHandler={blurHandler}
+        />
+        <Input
+          hidden={signupLevel.level != 1}
+          ref={passwordRef}
+          placeholder={SignupData[signupLevel.level].input}
+          focusHandler={focusHandler}
+          blurHandler={blurHandler}
+        />
+        <Input
+          hidden={signupLevel.level != 2}
+          ref={phoneRef}
+          placeholder={SignupData[signupLevel.level].input}
+          focusHandler={focusHandler}
+          blurHandler={blurHandler}
+        />
+        <Button className="bg-blue text-white w-full mt-4">
+          {SignupData[signupLevel.level].button}
+        </Button>
+      </form>
     </div>
   );
 };
