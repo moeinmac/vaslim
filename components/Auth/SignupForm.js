@@ -1,11 +1,17 @@
-import Button from "../UI/Button";
+"use client";
 
-const Input = ({ name, placeholder, type }) => {
+import { useState } from "react";
+import Button from "../UI/Button";
+import SignupData from "@/lib/SignupFormData";
+
+const Input = ({ name, placeholder, focusHandler }) => {
   return (
     <input
+      onFocus={focusHandler}
+      on
       required
       className="w-full text-black font-alibaba text-xl outline-0 border-0 px-4 py-3 rounded-xl mt-2"
-      type={type}
+      type={placeholder === "رمز عبور" ? "password" : "text"}
       dir="auto"
       name={name}
       placeholder={placeholder}
@@ -14,22 +20,47 @@ const Input = ({ name, placeholder, type }) => {
 };
 
 const SignupForm = () => {
+  const [inputFocus, setInputFocus] = useState(false);
+  const focusHandler = () => setInputFocus(true);
+  let [signupLevel, setSignupLevel] = useState(0);
+  const nextSignupLevel = async (event) => {
+    setSignupLevel(signupLevel++);
+  };
+
   return (
     <div className="flex flex-col p-8 justify-between h-[55%]">
-      <div>
+      <div className="flex flex-col gap-y-6">
         <h1 className="font-alibaba text-3xl">
-          خیلی راحت در وصـــــلیم ثبت نام کنید
+          {SignupData[signupLevel].header}
         </h1>
-        <p>
-          توجه کنید در این بخش ایمیل خود را وارد کنید ، درواقع ایمیل همان نام
-          کاربری شما در وصلیم میباشد . (انتخاب نام کاربری به صورت مجزا هنوز در
-          دست توسعه میباشد)
-        </p>
+        {inputFocus && <p>{SignupData[signupLevel].help}</p>}
       </div>
       <div>
-        <form>
-          <Input type="text" name="username" placeholder="نام کاربری (ایمیل)"/>
-          <Button className="bg-blue text-white w-full">مرحله بعدی</Button>
+        <form action={nextSignupLevel}>
+          {signupLevel === 0 && (
+            <Input
+              name="username"
+              placeholder={SignupData[signupLevel].input}
+              focusHandler={focusHandler}
+            />
+          )}
+          {signupLevel === 1 && (
+            <Input
+              name="password"
+              placeholder={SignupData[signupLevel].input}
+              focusHandler={focusHandler}
+            />
+          )}
+          {signupLevel === 2 && (
+            <Input
+              name="phone"
+              placeholder={SignupData[signupLevel].input}
+              focusHandler={focusHandler}
+            />
+          )}
+          <Button className="bg-blue text-white w-full mt-4">
+            {SignupData[signupLevel].button}
+          </Button>
         </form>
       </div>
     </div>
