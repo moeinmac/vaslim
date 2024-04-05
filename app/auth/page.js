@@ -1,6 +1,7 @@
 import LoginForm from "@/components/Auth/LoginForm";
 import Button from "@/components/UI/Button";
 import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 const auth = async ({searchParams}) => {
 
