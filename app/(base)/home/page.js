@@ -11,6 +11,7 @@ const Home =  () => {
   </div>
   <HomePens />
   <Link href="/moein.mac" >معین</Link>
+  <SignOutForm />
   </>;
 };
 
