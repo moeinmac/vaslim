@@ -1,12 +1,17 @@
 import SignOutForm from "@/components/Auth/SignoutForm";
-import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
+import HomePens from "@/components/pen/homePens";
+import Link from "next/link"
 
-const Home = async () => {
-  const supabase = createClient();
-  const data = await supabase.auth.getUser();
-  if (!data.data.user) redirect("/auth");
-  return <SignOutForm />;
+const Home =  () => {
+  
+  return <>
+  <h1 className="font-kalameh text-5xl p-6">وصـــلیم</h1>
+  <div className="font-kalameh bg-orange text-3xl p-6">
+    بخش نقطه(در حال توسعه)
+  </div>
+  <HomePens />
+  <Link href="/moein.mac" >معین</Link>
+  </>;
 };
 
 export default Home;

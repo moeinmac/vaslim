@@ -3,7 +3,7 @@
 import styles from "./MobileTabbar.module.css";
 import { useRouter, usePathname } from "next/navigation";
 
-import { useReducer, useRef } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import { GoHome } from "react-icons/go";
 import { GoHomeFill } from "react-icons/go";
 
@@ -25,7 +25,7 @@ const tabbarReducer = (state, action) => {
     return {
       home: true,
       search: false,
-      pen : false,
+      pen: false,
       message: false,
       user: false,
       light: lightLeft,
@@ -35,7 +35,7 @@ const tabbarReducer = (state, action) => {
     return {
       home: false,
       search: true,
-      pen : false,
+      pen: false,
       message: false,
       user: false,
       light: lightLeft,
@@ -45,7 +45,7 @@ const tabbarReducer = (state, action) => {
     return {
       home: false,
       search: false,
-      pen : true,
+      pen: true,
       message: false,
       user: false,
       light: lightLeft,
@@ -55,7 +55,7 @@ const tabbarReducer = (state, action) => {
     return {
       home: false,
       search: false,
-      pen : false,
+      pen: false,
       message: true,
       user: false,
       light: lightLeft,
@@ -65,7 +65,7 @@ const tabbarReducer = (state, action) => {
     return {
       home: false,
       search: false,
-      pen : false,
+      pen: false,
       message: false,
       user: true,
       light: lightLeft,
@@ -93,6 +93,21 @@ const MobileTabbar = () => {
   const userRef = useRef();
 
   const [tabbar, dispatchTabbar] = useReducer(tabbarReducer, initTabbar);
+
+  const isDynamic =
+    path !== "/home" &&
+    path !== "/search" &&
+    path !== "/pen/new" &&
+    path !== "/message" &&
+    path != "/user";
+
+  useEffect(() => {
+    if (isDynamic)
+      dispatchTabbar({
+        type: "SEARCH",
+        left: searchRef.current.getBoundingClientRect().left,
+      });
+  }, [isDynamic]);
 
   const homeSwitchHandler = () => {
     dispatchTabbar({
@@ -152,7 +167,7 @@ const MobileTabbar = () => {
         <li onClick={penSwitchHandler} ref={penRef}>
           {!tabbar.pen && <TbPencil className={styles.icon} />}
           {tabbar.pen && (
-            <BiSolidPencil  className={`${styles.icon} ${styles.active}`} />
+            <BiSolidPencil className={`${styles.icon} ${styles.active}`} />
           )}
         </li>
         <li onClick={messageSwitchHandler} ref={messageRef}>
