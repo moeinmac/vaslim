@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 .icon {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 .active{
   animation: show .7s;

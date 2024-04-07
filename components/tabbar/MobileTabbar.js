@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./MobileTabbar.module.css";
+import { useRouter, usePathname } from "next/navigation";
 
 import { useReducer, useRef } from "react";
 import { GoHome } from "react-icons/go";
@@ -15,17 +16,8 @@ import { RiMessage3Fill } from "react-icons/ri";
 import { RiUser3Line } from "react-icons/ri";
 import { RiUser3Fill } from "react-icons/ri";
 
-const initTabbar = {
-  home: true,
-  search: false,
-  message: false,
-  user: false,
-  light: "",
-};
-
 const tabbarReducer = (state, action) => {
-  const lightLeft = `${action.left + 38}px`;
-  console.log(state);
+  const lightLeft = `${action.left + 36}px`;
   if (action.type == "HOME") {
     return {
       home: true,
@@ -65,6 +57,17 @@ const tabbarReducer = (state, action) => {
 };
 
 const MobileTabbar = () => {
+  const router = useRouter();
+  const path = usePathname();
+
+  const initTabbar = {
+    home: path === "/home" ? true : false,
+    search: path === "/search" ? true : false,
+    message: path === "/message" ? true : false,
+    user: path === "/user" ? true : false,
+    light: "",
+  };
+
   const homeRef = useRef();
   const searchRef = useRef();
   const messageRef = useRef();
@@ -77,6 +80,7 @@ const MobileTabbar = () => {
       type: "HOME",
       left: homeRef.current.getBoundingClientRect().left,
     });
+    router.push("/home");
   };
 
   const searchSwitchHandler = () => {
@@ -84,6 +88,7 @@ const MobileTabbar = () => {
       type: "SEARCH",
       left: searchRef.current.getBoundingClientRect().left,
     });
+    router.push("/search");
   };
 
   const messageSwitchHandler = () => {
@@ -91,6 +96,7 @@ const MobileTabbar = () => {
       type: "MESSAGE",
       left: messageRef.current.getBoundingClientRect().left,
     });
+    router.push("/message");
   };
 
   const userSwitchHandler = () => {
@@ -98,6 +104,7 @@ const MobileTabbar = () => {
       type: "USER",
       left: userRef.current.getBoundingClientRect().left,
     });
+    router.push("/user");
   };
 
   return (
