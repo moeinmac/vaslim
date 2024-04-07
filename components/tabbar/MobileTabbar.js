@@ -16,12 +16,16 @@ import { RiMessage3Fill } from "react-icons/ri";
 import { RiUser3Line } from "react-icons/ri";
 import { RiUser3Fill } from "react-icons/ri";
 
+import { TbPencil } from "react-icons/tb";
+import { BiSolidPencil } from "react-icons/bi";
+
 const tabbarReducer = (state, action) => {
   const lightLeft = `${action.left + 36}px`;
   if (action.type == "HOME") {
     return {
       home: true,
       search: false,
+      pen : false,
       message: false,
       user: false,
       light: lightLeft,
@@ -31,6 +35,17 @@ const tabbarReducer = (state, action) => {
     return {
       home: false,
       search: true,
+      pen : false,
+      message: false,
+      user: false,
+      light: lightLeft,
+    };
+  }
+  if (action.type == "PEN") {
+    return {
+      home: false,
+      search: false,
+      pen : true,
       message: false,
       user: false,
       light: lightLeft,
@@ -40,6 +55,7 @@ const tabbarReducer = (state, action) => {
     return {
       home: false,
       search: false,
+      pen : false,
       message: true,
       user: false,
       light: lightLeft,
@@ -49,6 +65,7 @@ const tabbarReducer = (state, action) => {
     return {
       home: false,
       search: false,
+      pen : false,
       message: false,
       user: true,
       light: lightLeft,
@@ -63,6 +80,7 @@ const MobileTabbar = () => {
   const initTabbar = {
     home: path === "/home" ? true : false,
     search: path === "/search" ? true : false,
+    pen: path === "/pen/new" ? true : false,
     message: path === "/message" ? true : false,
     user: path === "/user" ? true : false,
     light: "",
@@ -70,6 +88,7 @@ const MobileTabbar = () => {
 
   const homeRef = useRef();
   const searchRef = useRef();
+  const penRef = useRef();
   const messageRef = useRef();
   const userRef = useRef();
 
@@ -89,6 +108,14 @@ const MobileTabbar = () => {
       left: searchRef.current.getBoundingClientRect().left,
     });
     router.push("/search");
+  };
+
+  const penSwitchHandler = () => {
+    dispatchTabbar({
+      type: "PEN",
+      left: penRef.current.getBoundingClientRect().left,
+    });
+    router.push("/pen/new");
   };
 
   const messageSwitchHandler = () => {
@@ -120,6 +147,12 @@ const MobileTabbar = () => {
           {!tabbar.search && <MdOutlinePersonSearch className={styles.icon} />}
           {tabbar.search && (
             <MdPersonSearch className={`${styles.icon} ${styles.active}`} />
+          )}
+        </li>
+        <li onClick={penSwitchHandler} ref={penRef}>
+          {!tabbar.pen && <TbPencil className={styles.icon} />}
+          {tabbar.pen && (
+            <BiSolidPencil  className={`${styles.icon} ${styles.active}`} />
           )}
         </li>
         <li onClick={messageSwitchHandler} ref={messageRef}>
