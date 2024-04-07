@@ -3,6 +3,7 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
 import Profile from "@/components/user/Profile";
 import Account from "@/components/user/Account";
+import { redirect } from "next/navigation";
 
 const username = async ({ params }) => {
   const supabase = createClient();
@@ -13,6 +14,8 @@ const username = async ({ params }) => {
 
   const myAuth = await supabase.auth.getUser();
   let me = await supabase.from("user").select().eq("id", myAuth.data.user.id);
+
+  if (data[0].username === me.data[0].username) redirect("/user");
 
   const isVasl = data[0].vasl.find(
     (username) => username === me.data[0].username

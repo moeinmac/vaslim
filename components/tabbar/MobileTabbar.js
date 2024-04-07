@@ -94,20 +94,47 @@ const MobileTabbar = () => {
 
   const [tabbar, dispatchTabbar] = useReducer(tabbarReducer, initTabbar);
 
-  const isDynamic =
-    path !== "/home" &&
-    path !== "/search" &&
-    path !== "/pen/new" &&
-    path !== "/message" &&
-    path != "/user";
-
   useEffect(() => {
-    if (isDynamic)
-      dispatchTabbar({
-        type: "SEARCH",
-        left: searchRef.current.getBoundingClientRect().left,
-      });
-  }, [isDynamic]);
+    switch (path) {
+      case "/home":
+        dispatchTabbar({
+          type: "HOME",
+          left: homeRef.current.getBoundingClientRect().left,
+        });
+        break;
+      case "/search":
+        dispatchTabbar({
+          type: "SEARCH",
+          left: searchRef.current.getBoundingClientRect().left,
+        });
+        break;
+      case "/pen/new":
+        dispatchTabbar({
+          type: "PEN",
+          left: penRef.current.getBoundingClientRect().left,
+        });
+        break;
+      case "/message":
+        dispatchTabbar({
+          type: "MESSAGE",
+          left: messageRef.current.getBoundingClientRect().left,
+        });
+        break;
+      case "/user":
+        dispatchTabbar({
+          type: "USER",
+          left: userRef.current.getBoundingClientRect().left,
+        });
+        break;
+
+      default:
+        dispatchTabbar({
+          type: "SEARCH",
+          left: searchRef.current.getBoundingClientRect().left,
+        });
+        break;
+    }
+  }, [path]);
 
   const homeSwitchHandler = () => {
     dispatchTabbar({
