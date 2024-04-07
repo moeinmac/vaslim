@@ -8,7 +8,7 @@ const signupUser = async (email, password, phone) => {
     email,
     password,
   });
-  await supabase.from("user").insert({phone});
+  await supabase.from("user").insert({phone,username : email.split("@")[0]});
 
   if (error) return redirect("/auth/signup?message=signupuser-failed");
   return redirect("/auth/signup/welcome");
