@@ -9,6 +9,8 @@ const Account = ({ vasl, isVasl, me, user }) => {
   const supabase = createClient();
   const [vaslData, setVaslData] = useState({ vasl, isVasl });
 
+  const [confirm, setconfirm] = useState();
+
   const vaslshimHandler = async () => {
     // nedd to add request to vasl first . {#fix_later}
     await supabase
@@ -22,8 +24,13 @@ const Account = ({ vasl, isVasl, me, user }) => {
     setVaslData({ vasl: vasl + 1, isVasl: !isVasl });
   };
 
+  const confirmUnvasl = () => setconfirm(!confirm);
+
+  const unVaslHandler = async () => {};
+
   return (
     <div className="flex flex-col gap-4 px-8 py-4">
+        {confirm && <p>مطمئنی که میخوای این کاربر رو از لیست متصل هات حذف کنی؟</p>}
       <div className="flex items-center gap-8  w-full">
         <p className="font-kalameh text-3xl flex flex-col">
           <span className="text-center">{vaslData.vasl}</span>
@@ -37,8 +44,20 @@ const Account = ({ vasl, isVasl, me, user }) => {
             وصــــــل شیم
           </Button>
         )}
-        {vaslData.isVasl && (
-          <Button className="bg-blue w-full text-4xl">متصـــل</Button>
+        {vaslData.isVasl && !confirm && (
+          <Button className="bg-blue w-full text-4xl" onClick={confirmUnvasl}>
+            متصـــل
+          </Button>
+        )}
+        {vaslData.isVasl && confirm && (
+          <div className="flex w-full justify-between text-xl font-kalameh">
+            <button className="bg-red-700 p-2 rounded-lg" onClick={unVaslHandler}>
+              اره
+            </button>
+            <button className="bg-blue p-2 rounded-lg" onClick={confirmUnvasl}>
+              نه ولش کن
+            </button>
+          </div>
         )}
       </div>
       <Button className="w-full border-4 border-white">پیام دهید</Button>
