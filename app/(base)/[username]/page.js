@@ -3,7 +3,7 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
 import Profile from "@/components/user/Profile";
 import Account from "@/components/user/Account";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 const username = async ({ params }) => {
   const supabase = createClient();
@@ -11,9 +11,11 @@ const username = async ({ params }) => {
 
   const myAuth = await supabase.auth.getUser();
   let me = await supabase.from("user").select().eq("id", myAuth.data.user.id);
+  if(data[0]){
+    if (data[0].username === me.data[0].username) redirect("/user"); 
+  }
 
 
-  // if (data[0].username === me.data[0].username) redirect("/user");
 
   return data.length !== 0 ? (
     <>
@@ -24,7 +26,7 @@ const username = async ({ params }) => {
           fullname={data[0].fullname}
           username={data[0].username}
         />
-        <IoReturnUpBackSharp className=" text-orange" />
+        <Link href="/home"><IoReturnUpBackSharp className=" text-orange"/></Link>
       </div>
 
       <Account myUsername={me.data[0].username} userUsername={data[0].username} />
