@@ -1,5 +1,6 @@
 "use client";
 
+import removeVasl from "@/lib/removeVasl";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 
@@ -7,6 +8,8 @@ const Account = ({ myUsername, userUsername }) => {
   const [me, setMe] = useState([]);
   const [user, setUser] = useState([]);
   const [isVasl, setIsVasl] = useState(false);
+
+  const [confirm, setconfirm] = useState();
 
   const supabase = createClient();
   const getAllData = async () => {
@@ -22,24 +25,22 @@ const Account = ({ myUsername, userUsername }) => {
   };
 
   const handleChanges = (paylod) => {
-    if (paylod.new.username === myUsername){
-      setMe(paylod.new)
-    };
-    if (paylod.new.username === userUsername){
-      setUser(paylod.new)
-    };
+    if (paylod.new.username === myUsername) {
+      setMe(paylod.new);
+    }
+    if (paylod.new.username === userUsername) {
+      setUser(paylod.new);
+    }
   };
 
   supabase
-  .channel("updateVaslUser")
-  .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
-  .subscribe();
+    .channel("updateVaslUser")
+    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
+    .subscribe();
 
   useEffect(() => {
     getAllData();
   }, []);
-
-  const [confirm, setconfirm] = useState();
 
   const vaslshimHandler = async () => {
     // nedd to add request to vasl first . {#fix_later}
@@ -56,7 +57,17 @@ const Account = ({ myUsername, userUsername }) => {
 
   const confirmUnvasl = () => setconfirm(!confirm);
 
-  const unVaslHandler = async () => {};
+  const unVaslHandler = async () => {
+    await supabase
+      .from("user")
+      .update({ vasl: removeVasl(user.vasl, myUsername) })
+      .eq("username", userUsername);
+    await supabase
+      .from("user")
+      .update({ vasl: removeVasl(me.vasl, userUsername) })
+      .eq("username", myUsername);
+    setIsVasl(false);
+  };
 
   return (
     <div className="flex flex-col gap-4 px-8 py-4">
