@@ -7,19 +7,13 @@ import { redirect } from "next/navigation";
 
 const username = async ({ params }) => {
   const supabase = createClient();
-  const { data } = await supabase
-    .from("user")
-    .select()
-    .eq("username", params.username);
+  const { data } = await supabase.from("user").select().eq("username", params.username);
 
   const myAuth = await supabase.auth.getUser();
   let me = await supabase.from("user").select().eq("id", myAuth.data.user.id);
 
-  if (data[0].username === me.data[0].username) redirect("/user");
 
-  const isVasl = data[0].vasl.find(
-    (username) => username === me.data[0].username
-  );
+  // if (data[0].username === me.data[0].username) redirect("/user");
 
   return data.length !== 0 ? (
     <>
@@ -33,12 +27,7 @@ const username = async ({ params }) => {
         <IoReturnUpBackSharp className=" text-orange" />
       </div>
 
-      <Account
-        vasl={data[0].vasl.length}
-        isVasl={isVasl}
-        me={me.data[0]}
-        user={data[0]}
-      />
+      <Account myUsername={me.data[0].username} userUsername={data[0].username} />
     </>
   ) : (
     <h1>NO</h1>
