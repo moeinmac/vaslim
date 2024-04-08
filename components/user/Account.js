@@ -26,12 +26,15 @@ const Account = ({ myUsername, userUsername }) => {
 
   const handleChanges = (paylod) => {
     if (paylod.new.username === myUsername) {
-      setMe(paylod.new);
-      setIsVasl(paylod.new.vasl.find((username) => username === userUsername));
+      getAllData();
+      // setMe(paylod.new);
+      // setIsVasl(paylod.new.vasl.find((username) => username === userUsername));
     }
     if (paylod.new.username === userUsername) {
-      setUser(paylod.new);
-      setIsVasl(paylod.new.vasl.find((username) => username === myUsername));
+      getAllData();
+
+      // setUser(paylod.new);
+      // setIsVasl(paylod.new.vasl.find((username) => username === myUsername));
     }
   };
 
@@ -54,7 +57,7 @@ const Account = ({ myUsername, userUsername }) => {
       .from("user")
       .update({ vasl: [...me.vasl, userUsername] })
       .eq("username", myUsername);
-    setIsVasl(true);
+    // setIsVasl(true);
   };
 
   const confirmUnvasl = () => setconfirm(!confirm);
@@ -68,7 +71,7 @@ const Account = ({ myUsername, userUsername }) => {
       .from("user")
       .update({ vasl: removeVasl(me.vasl, userUsername) })
       .eq("username", myUsername);
-    setIsVasl(false);
+    // setIsVasl(false);
     setconfirm(false);
   };
 
