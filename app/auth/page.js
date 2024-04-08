@@ -1,13 +1,12 @@
 import LoginForm from "@/components/Auth/LoginForm";
-import Button from "@/components/UI/Button";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
-const auth = async ({searchParams}) => {
-
+const auth = async ({ searchParams }) => {
   const supabase = createClient();
   const data = await supabase.auth.getUser();
-  if(data.data.user) redirect("/home");
+  if (data.data.user) redirect("/home");
 
   return (
     <>
@@ -20,15 +19,17 @@ const auth = async ({searchParams}) => {
             </strong>{" "}
             خود شــوید
           </h1>
-          <LoginForm message={searchParams.message}/>
+          <LoginForm message={searchParams.message} />
         </div>
         <div className="flex flex-col gap-y-4">
           <p className="text-lg text-gray font-alibaba">
             هنوز در وصلیم حساب نداری؟ منتظر چی هستی پس؟
           </p>
-          <Button className={"bg-orange text-black"} path={"auth/signup"}>
+          <Link
+            className="text-4xl font-kalameh text-black rounded-xl px-8 py-4 bg-orange text-center"
+            href="/auth/signup">
             ثبت نام سریع
-          </Button>
+          </Link>
         </div>
       </div>
     </>

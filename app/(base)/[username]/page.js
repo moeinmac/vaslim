@@ -23,15 +23,16 @@ const username = async ({ params }) => {
 
   return data.length !== 0 ? (
     <>
-      <div className="flex w-full justify-between items-center text-4xl p-6 pr-5 text-orange">
-        <HiMiniEllipsisVertical />
-        <IoReturnUpBackSharp />
+      <div className="flex w-full justify-between items-start text-4xl pt-8 pl-6 pr-5">
+        <HiMiniEllipsisVertical className=" text-orange" />
+        <Profile
+          profile={data[0].profile}
+          fullname={data[0].fullname}
+          username={data[0].username}
+        />
+        <IoReturnUpBackSharp className=" text-orange" />
       </div>
-      <Profile
-        profile={data[0].profile}
-        fullname={data[0].fullname}
-        username={data[0].username}
-      />
+
       <Account
         vasl={data[0].vasl.length}
         isVasl={isVasl}

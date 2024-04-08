@@ -1,6 +1,6 @@
-import Button from "@/components/UI/Button";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 const welcome = async () => {
   
@@ -21,9 +21,9 @@ const welcome = async () => {
         <p className="text-right  px-10 text-gray font-alibaba">
           با وصلیم شما به همه جا وصلین.
         </p>
-        <Button className={"mx-8 bg-blue"} path="/auth">
+        <Link className={"text-4xl font-kalameh rounded-xl px-8 py-4 mx-8 bg-blue text-center"} href="/auth">
           ورود / ثبت نام
-        </Button>
+        </Link>
       </div>
     </>
   );

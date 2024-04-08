@@ -2,12 +2,12 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import SignupCircle from "@/components/Auth/SignupCircle";
 import Image from "next/image";
-import Button from "@/components/UI/Button";
+import Link from "next/link";
 
 const signupWelcome = async () => {
   const supabase = createClient();
   const { data } = await supabase.auth.getUser();
-  if(!data.user) redirect("/auth");
+  if (!data.user) redirect("/auth");
 
   let user = await supabase.from("user").select().eq("id", data.user.id);
 
@@ -29,10 +29,15 @@ const signupWelcome = async () => {
           <span>{data.user.email.split("@")[0]}</span>
         </div>
         <div className="flex flex-col gap-8">
-          <p className="text-alibaba">شما همیشه میتوانید اطلاعات پروفایل خود را به روز رسانی کنید</p>
-          <Button path={"/home"} className="bg-blue text-white">
+          <p className="text-alibaba">
+            شما همیشه میتوانید اطلاعات پروفایل خود را به روز رسانی کنید
+          </p>
+          <Link
+            href={"/home"}
+            className="font-kalameh rounded-xl text-4xl bg-blue text-white"
+          >
             تو وصلیم چه خبره؟
-          </Button>
+          </Link>
         </div>
       </div>
       <SignupCircle />
