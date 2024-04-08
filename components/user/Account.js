@@ -16,7 +16,9 @@ const Account = ({ myUsername, userUsername }) => {
     const userRes = await supabase.from("user").select().eq("username", userUsername);
     const meRes = await supabase.from("user").select().eq("username", myUsername);
     if (userRes && meRes) {
-      setIsVasl(meRes.data[0].vasl.find((username) => username === userRes.data[0].username));
+      const check1 = meRes.data[0].vasl.find((username) => username === userUsername);
+      const check2 = userRes.data[0].vasl.find((username) => username === myUsername);
+      setIsVasl(check1 && check2);
       setMe(meRes.data[0]);
       setUser(userRes.data[0]);
       return;
@@ -25,8 +27,7 @@ const Account = ({ myUsername, userUsername }) => {
   };
 
   const handleChanges = (paylod) => {
-    console.log(paylod);
-    if ((paylod.new.username === myUsername) || (paylod.new.username === userUsername)) {
+    if (paylod.new.username === myUsername || paylod.new.username === userUsername) {
       getAllData();
     }
   };
@@ -41,22 +42,21 @@ const Account = ({ myUsername, userUsername }) => {
   }, []);
 
   const vaslshimHandler = async () => {
+
     // nedd to add request to vasl first . {#fix_later}
     await supabase
       .from("user")
-      .update({ vasl: [...user.vasl, myUsername] })
+      .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
       .eq("username", userUsername);
     await supabase
       .from("user")
-      .update({ vasl: [...me.vasl, userUsername] })
+      .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
       .eq("username", myUsername);
-    // setIsVasl(true);
   };
 
   const confirmUnvasl = () => setconfirm(!confirm);
 
   const unVaslHandler = async () => {
-    console.log(me,user);
     await supabase
       .from("user")
       .update({ vasl: removeVasl(user.vasl, myUsername) })
@@ -65,7 +65,6 @@ const Account = ({ myUsername, userUsername }) => {
       .from("user")
       .update({ vasl: removeVasl(me.vasl, userUsername) })
       .eq("username", myUsername);
-    // setIsVasl(false);
     setconfirm(false);
   };
 
