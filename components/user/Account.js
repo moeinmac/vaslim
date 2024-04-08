@@ -27,9 +27,11 @@ const Account = ({ myUsername, userUsername }) => {
   const handleChanges = (paylod) => {
     if (paylod.new.username === myUsername) {
       setMe(paylod.new);
+      setIsVasl(paylod.new.vasl.find((username) => username === userUsername));
     }
     if (paylod.new.username === userUsername) {
       setUser(paylod.new);
+      setIsVasl(paylod.new.vasl.find((username) => username === myUsername));
     }
   };
 
@@ -67,6 +69,7 @@ const Account = ({ myUsername, userUsername }) => {
       .update({ vasl: removeVasl(me.vasl, userUsername) })
       .eq("username", myUsername);
     setIsVasl(false);
+    setconfirm(false);
   };
 
   return (
