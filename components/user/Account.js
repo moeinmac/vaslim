@@ -25,16 +25,9 @@ const Account = ({ myUsername, userUsername }) => {
   };
 
   const handleChanges = (paylod) => {
-    if (paylod.new.username === myUsername) {
+    console.log(paylod);
+    if ((paylod.new.username === myUsername) || (paylod.new.username === userUsername)) {
       getAllData();
-      // setMe(paylod.new);
-      // setIsVasl(paylod.new.vasl.find((username) => username === userUsername));
-    }
-    if (paylod.new.username === userUsername) {
-      getAllData();
-
-      // setUser(paylod.new);
-      // setIsVasl(paylod.new.vasl.find((username) => username === myUsername));
     }
   };
 
@@ -63,6 +56,7 @@ const Account = ({ myUsername, userUsername }) => {
   const confirmUnvasl = () => setconfirm(!confirm);
 
   const unVaslHandler = async () => {
+    console.log(me,user);
     await supabase
       .from("user")
       .update({ vasl: removeVasl(user.vasl, myUsername) })
