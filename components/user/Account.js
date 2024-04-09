@@ -8,6 +8,7 @@ const Account = ({ myUsername, userUsername }) => {
   const [me, setMe] = useState([]);
   const [user, setUser] = useState([]);
   const [isVasl, setIsVasl] = useState(false);
+  const [isReq, setReq] = useState(false);
 
   const [confirm, setconfirm] = useState();
 
@@ -16,11 +17,16 @@ const Account = ({ myUsername, userUsername }) => {
     const userRes = await supabase.from("user").select().eq("username", userUsername);
     const meRes = await supabase.from("user").select().eq("username", myUsername);
     if (userRes && meRes) {
+      setMe(meRes.data[0]);
+      setUser(userRes.data[0]);
+      const checkReq = meRes.data[0].reqOut.find((username) => username === userUsername);
+      if (checkReq) {
+        setReq(checkReq);
+        return;
+      }
       const check1 = meRes.data[0].vasl.find((username) => username === userUsername);
       const check2 = userRes.data[0].vasl.find((username) => username === myUsername);
       setIsVasl(check1 && check2);
-      setMe(meRes.data[0]);
-      setUser(userRes.data[0]);
       return;
     }
     // Throw new Error {#fix_later}
@@ -42,14 +48,21 @@ const Account = ({ myUsername, userUsername }) => {
   }, []);
 
   const vaslshimHandler = async () => {
-    // nedd to add request to vasl first . {#fix_later}
+    // await supabase
+    //   .from("user")
+    //   .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
+    //   .eq("username", myUsername);
+    // await supabase
+    //   .from("user")
+    //   .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
+    //   .eq("username", userUsername);
     await supabase
       .from("user")
-      .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
+      .update({ reqOut: Array.from(new Set([...me.reqOut, userUsername])) })
       .eq("username", myUsername);
     await supabase
       .from("user")
-      .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
+      .update({ reqIn: Array.from(new Set([...user.reqIn, myUsername])) })
       .eq("username", userUsername);
   };
 
@@ -67,6 +80,18 @@ const Account = ({ myUsername, userUsername }) => {
     setconfirm(false);
   };
 
+  const unReqHandler = async () => {
+    await supabase
+      .from("user")
+      .update({ reqIn: removeVasl(user.reqIn, myUsername) })
+      .eq("username", userUsername);
+    await supabase
+      .from("user")
+      .update({ reqOut: removeVasl(me.reqOut, userUsername) })
+      .eq("username", myUsername);
+    setReq(false)
+  };
+
   return (
     <div className="flex flex-col gap-4 px-8 py-4">
       {confirm && (
@@ -77,12 +102,20 @@ const Account = ({ myUsername, userUsername }) => {
           <span className="text-center">{user.vasl ? user.vasl.length : 0}</span>
           <span className="font-alibaba text-base">متصل</span>
         </p>
-        {!isVasl && (
+        {!isVasl && !isReq && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
             onClick={vaslshimHandler}
           >
             وصــــــل شیم
+          </button>
+        )}
+        {!isVasl && isReq && (
+          <button
+            className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
+            onClick={unReqHandler}
+          >
+            درخواست داده شده
           </button>
         )}
         {isVasl && !confirm && (
