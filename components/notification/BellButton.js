@@ -1,12 +1,30 @@
 "use client";
 
+import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
-import { TbBellCheck } from "react-icons/tb";
+import { useState } from "react";
+import { TbBellCheck ,TbBellBolt} from "react-icons/tb";
 
-const BellButton = () => {
-  return <Link href="/home/notification/">
-    <TbBellCheck className="text-4xl"/>
-  </Link>;
+const BellButton = ({ myUsername }) => {
+  const supabase = createClient();
+  const [isNotif , setisNotif] = useState();
+
+  const handleChanges = (paylod) => {
+    if (paylod.new.username === myUsername) {
+      setisNotif(true);
+    }
+  };
+
+  supabase
+    .channel("reqUser")
+    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
+    .subscribe();
+  return (
+    <Link href="/home/notification/">
+      {!isNotif && <TbBellCheck className="text-4xl" />}
+      {isNotif && <TbBellBolt  className="text-4xl" />}
+    </Link>
+  );
 };
 
-export default BellButton
+export default BellButton;
