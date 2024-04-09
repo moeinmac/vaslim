@@ -109,7 +109,14 @@ const Account = ({ myUsername, userUsername }) => {
       .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
       .eq("username", userUsername);
 
-    unReqHandler();
+    await supabase
+      .from("user")
+      .update({ reqOut: removeVasl(user.reqOut, myUsername) })
+      .eq("username", userUsername);
+    await supabase
+      .from("user")
+      .update({ reqIn: removeVasl(me.reqIn, userUsername) })
+      .eq("username", myUsername);
   };
 
   const denyReqHandler = async () => {
