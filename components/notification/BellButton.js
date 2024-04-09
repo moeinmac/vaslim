@@ -14,7 +14,10 @@ const BellButton = ({ myUsername }) => {
 
   const getReqData = async () => {
     const myAuth = await supabase.auth.getUser();
-    const { data } = await supabase.from("user").select("reqIn").eq("id", myAuth.data.user.id);
+    const { data } = await supabase
+      .from("user")
+      .select("reqIn")
+      .eq("id", myAuth.data.user.id);
     setReqData(data[0].reqIn);
   };
 
@@ -38,7 +41,11 @@ const BellButton = ({ myUsername }) => {
   };
   supabase
     .channel("reqUser")
-    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
+    .on(
+      "postgres_changes",
+      { event: "UPDATE", schema: "public", table: "user" },
+      handleChanges
+    )
     .subscribe();
   return (
     <Link href="/home/notification/">
