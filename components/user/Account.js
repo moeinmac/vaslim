@@ -42,16 +42,15 @@ const Account = ({ myUsername, userUsername }) => {
   }, []);
 
   const vaslshimHandler = async () => {
-
     // nedd to add request to vasl first . {#fix_later}
-    await supabase
-      .from("user")
-      .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
-      .eq("username", userUsername);
     await supabase
       .from("user")
       .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
       .eq("username", myUsername);
+    await supabase
+      .from("user")
+      .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
+      .eq("username", userUsername);
   };
 
   const confirmUnvasl = () => setconfirm(!confirm);

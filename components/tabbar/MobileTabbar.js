@@ -102,6 +102,12 @@ const MobileTabbar = () => {
           left: homeRef.current.getBoundingClientRect().left,
         });
         break;
+      case "/home/notification":
+        dispatchTabbar({
+          type: "HOME",
+          left: homeRef.current.getBoundingClientRect().left,
+        });
+        break;
       case "/search":
         dispatchTabbar({
           type: "SEARCH",
@@ -181,33 +187,23 @@ const MobileTabbar = () => {
       <ul>
         <li onClick={homeSwitchHandler} ref={homeRef}>
           {!tabbar.home && <GoHome className={styles.icon} />}
-          {tabbar.home && (
-            <GoHomeFill className={`${styles.icon} ${styles.active}`} />
-          )}
+          {tabbar.home && <GoHomeFill className={`${styles.icon} ${styles.active}`} />}
         </li>
         <li onClick={searchSwitchHandler} ref={searchRef}>
           {!tabbar.search && <MdOutlinePersonSearch className={styles.icon} />}
-          {tabbar.search && (
-            <MdPersonSearch className={`${styles.icon} ${styles.active}`} />
-          )}
+          {tabbar.search && <MdPersonSearch className={`${styles.icon} ${styles.active}`} />}
         </li>
         <li onClick={penSwitchHandler} ref={penRef}>
           {!tabbar.pen && <TbPencil className={styles.icon} />}
-          {tabbar.pen && (
-            <BiSolidPencil className={`${styles.icon} ${styles.active}`} />
-          )}
+          {tabbar.pen && <BiSolidPencil className={`${styles.icon} ${styles.active}`} />}
         </li>
         <li onClick={messageSwitchHandler} ref={messageRef}>
           {!tabbar.message && <RiMessage3Line className={styles.icon} />}
-          {tabbar.message && (
-            <RiMessage3Fill className={`${styles.icon} ${styles.active}`} />
-          )}
+          {tabbar.message && <RiMessage3Fill className={`${styles.icon} ${styles.active}`} />}
         </li>
         <li onClick={userSwitchHandler} ref={userRef}>
           {!tabbar.user && <RiUser3Line className={styles.icon} />}
-          {tabbar.user && (
-            <RiUser3Fill className={`${styles.icon} ${styles.active}`} />
-          )}
+          {tabbar.user && <RiUser3Fill className={`${styles.icon} ${styles.active}`} />}
         </li>
       </ul>
       <div className={styles.tubelight} style={{ left: tabbar.light }}>
