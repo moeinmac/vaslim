@@ -34,7 +34,7 @@ const signupWelcome = async () => {
           </p>
           <Link
             href={"/home"}
-            className="font-kalameh rounded-xl text-4xl bg-blue text-white"
+            className="font-kalameh rounded-xl text-4xl bg-blue px-8 py-4 text-center text-white"
           >
             تو وصلیم چه خبره؟
           </Link>

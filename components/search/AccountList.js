@@ -19,9 +19,9 @@ const AccountItem = ({ profile, fullname, username, motasel }) => {
   );
 };
 
-const AccountList = ({ accounts }) => {
+const AccountList = ({ accounts ,suggest}) => {
   if (accounts.length === 1 && accounts[0] === "clear") return;
-  if (accounts.length === 0) {
+  if (accounts.length === 0 && !suggest) {
     return (
       <p className="p-4 font-alibaba">
         نام کاربری وارد شده هیچ حسابی در وصـــلیم ندارد ، شما میتوانید دوستتان را به وصــــلیم دعوت
