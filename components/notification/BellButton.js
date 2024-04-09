@@ -1,10 +1,10 @@
 "use client";
 
-import isChangedArray from "@/lib/isChangedArray";
 import { createClient } from "@/lib/supabase/client";
+import styles from "./BellButton.module.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { TbBellCheck, TbBellBolt } from "react-icons/tb";
+import { HiMiniBell, HiMiniBellAlert } from "react-icons/hi2";
 
 const BellButton = ({ myUsername }) => {
   const supabase = createClient();
@@ -42,8 +42,13 @@ const BellButton = ({ myUsername }) => {
     .subscribe();
   return (
     <Link href="/home/notification/">
-      {!isNotif && <TbBellCheck className="text-4xl" />}
-      {isNotif && <TbBellBolt className="text-4xl" />}
+      {!isNotif && <HiMiniBell className="text-4xl" />}
+      {isNotif && (
+        <div className="flex items-center">
+          <div className={styles.blob}></div>
+          <HiMiniBellAlert className="text-4xl" />
+        </div>
+      )}
     </Link>
   );
 };

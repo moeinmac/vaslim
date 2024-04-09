@@ -7,6 +7,7 @@ const Profile = ({ profile, fullname, username }) => {
         width={100}
         height={100}
         src={profile}
+        priority
         alt={fullname}
         className="rounded-lg outline-8 outline-blue outline-double "
       />
