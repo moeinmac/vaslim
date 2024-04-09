@@ -1,20 +1,41 @@
 "use client";
 
+import isChangedArray from "@/lib/isChangedArray";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
-import { useState } from "react";
-import { TbBellCheck ,TbBellBolt} from "react-icons/tb";
+import { useState, useEffect } from "react";
+import { TbBellCheck, TbBellBolt } from "react-icons/tb";
 
 const BellButton = ({ myUsername }) => {
   const supabase = createClient();
-  const [isNotif , setisNotif] = useState();
+
+  const [isNotif, setisNotif] = useState();
+  const [reqData, setReqData] = useState([]);
+
+  const getReqData = async () => {
+    const myAuth = await supabase.auth.getUser();
+    const { data } = await supabase.from("user").select("reqIn").eq("id", myAuth.data.user.id);
+    setReqData(data[0].reqIn);
+  };
+
+  useEffect(() => {
+    getReqData();
+  }, []);
 
   const handleChanges = (paylod) => {
     if (paylod.new.username === myUsername) {
-      setisNotif(true);
+      if (paylod.new.reqIn.length > reqData.length) {
+        setReqData(paylod.new.reqIn);
+        setisNotif(true);
+        return;
+      }
+      if (paylod.new.reqIn.length === 0) {
+        setReqData(paylod.new.reqIn);
+        setisNotif(false);
+        return;
+      }
     }
   };
-
   supabase
     .channel("reqUser")
     .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
@@ -22,7 +43,7 @@ const BellButton = ({ myUsername }) => {
   return (
     <Link href="/home/notification/">
       {!isNotif && <TbBellCheck className="text-4xl" />}
-      {isNotif && <TbBellBolt  className="text-4xl" />}
+      {isNotif && <TbBellBolt className="text-4xl" />}
     </Link>
   );
 };
