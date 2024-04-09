@@ -3,12 +3,14 @@
 import removeVasl from "@/lib/removeVasl";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
+import { TbUserCancel } from "react-icons/tb";
 
 const Account = ({ myUsername, userUsername }) => {
   const [me, setMe] = useState([]);
   const [user, setUser] = useState([]);
   const [isVasl, setIsVasl] = useState(false);
-  const [isReq, setReq] = useState(false);
+  const [isReqOut, setReqOut] = useState(false);
+  const [isReqIn, setReqIn] = useState(false);
 
   const [confirm, setconfirm] = useState();
 
@@ -19,11 +21,18 @@ const Account = ({ myUsername, userUsername }) => {
     if (userRes && meRes) {
       setMe(meRes.data[0]);
       setUser(userRes.data[0]);
-      const checkReq = meRes.data[0].reqOut.find((username) => username === userUsername);
-      if (checkReq) {
-        setReq(checkReq);
+      const checkReqOut = meRes.data[0].reqOut.find((username) => username === userUsername);
+      if (checkReqOut) {
+        setReqOut(checkReqOut);
         return;
       }
+      const checkReqIn = meRes.data[0].reqIn.find((username) => username === userUsername);
+      if (checkReqIn) {
+        setReqIn(checkReqIn);
+        return;
+      }
+      setReqIn(false);
+      setReqOut(false);
       const check1 = meRes.data[0].vasl.find((username) => username === userUsername);
       const check2 = userRes.data[0].vasl.find((username) => username === myUsername);
       setIsVasl(check1 && check2);
@@ -67,7 +76,6 @@ const Account = ({ myUsername, userUsername }) => {
   };
 
   const confirmUnvasl = () => setconfirm(!confirm);
-
   const unVaslHandler = async () => {
     await supabase
       .from("user")
@@ -89,7 +97,30 @@ const Account = ({ myUsername, userUsername }) => {
       .from("user")
       .update({ reqOut: removeVasl(me.reqOut, userUsername) })
       .eq("username", myUsername);
-    setReq(false)
+  };
+
+  const acseptReqHandler = async () => {
+    await supabase
+      .from("user")
+      .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
+      .eq("username", myUsername);
+    await supabase
+      .from("user")
+      .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
+      .eq("username", userUsername);
+
+    unReqHandler();
+  };
+
+  const denyReqHandler = async () => {
+    await supabase
+      .from("user")
+      .update({ reqOut: removeVasl(user.reqOut, myUsername) })
+      .eq("username", userUsername);
+    await supabase
+      .from("user")
+      .update({ reqIn: removeVasl(me.reqIn, userUsername) })
+      .eq("username", myUsername);
   };
 
   return (
@@ -102,7 +133,7 @@ const Account = ({ myUsername, userUsername }) => {
           <span className="text-center">{user.vasl ? user.vasl.length : 0}</span>
           <span className="font-alibaba text-base">متصل</span>
         </p>
-        {!isVasl && !isReq && (
+        {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
             onClick={vaslshimHandler}
@@ -110,13 +141,29 @@ const Account = ({ myUsername, userUsername }) => {
             وصــــــل شیم
           </button>
         )}
-        {!isVasl && isReq && (
+        {!isVasl && isReqOut && (
           <button
             className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
             onClick={unReqHandler}
           >
             درخواست داده شده
           </button>
+        )}
+        {!isVasl && isReqIn && (
+          <div className="flex w-full gap-3">
+            <button
+              className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
+              onClick={acseptReqHandler}
+            >
+              قبولش کن
+            </button>
+            <button
+              className="bg-red-600 text-black py-2 px-1 text-4xl font-kalameh rounded-xl"
+              onClick={denyReqHandler}
+            >
+              <TbUserCancel className="text-white text-red-600" />
+            </button>
+          </div>
         )}
         {isVasl && !confirm && (
           <button
