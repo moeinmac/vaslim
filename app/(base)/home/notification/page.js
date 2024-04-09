@@ -6,7 +6,6 @@ const notification = async () => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
   const { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
-  console.log(data);
   return (
     <>
       <header className="flex justify-between items-center px-8 py-4">
