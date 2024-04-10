@@ -4,6 +4,8 @@ import removeVasl from "@/lib/removeVasl";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import { TbUserCancel } from "react-icons/tb";
+import { acceptHandler } from "@/lib/req/acceptHandler";
+import { denyHandler } from "@/lib/req/denyHandler";
 
 const Account = ({ myUsername, userUsername }) => {
   const [me, setMe] = useState([]);
@@ -57,14 +59,6 @@ const Account = ({ myUsername, userUsername }) => {
   }, []);
 
   const vaslshimHandler = async () => {
-    // await supabase
-    //   .from("user")
-    //   .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
-    //   .eq("username", myUsername);
-    // await supabase
-    //   .from("user")
-    //   .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
-    //   .eq("username", userUsername);
     await supabase
       .from("user")
       .update({ reqOut: Array.from(new Set([...me.reqOut, userUsername])) })
@@ -100,34 +94,11 @@ const Account = ({ myUsername, userUsername }) => {
   };
 
   const acceptReqHandler = async () => {
-    await supabase
-      .from("user")
-      .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
-      .eq("username", myUsername);
-    await supabase
-      .from("user")
-      .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
-      .eq("username", userUsername);
-
-    await supabase
-      .from("user")
-      .update({ reqOut: removeVasl(user.reqOut, myUsername) })
-      .eq("username", userUsername);
-    await supabase
-      .from("user")
-      .update({ reqIn: removeVasl(me.reqIn, userUsername) })
-      .eq("username", myUsername);
+    acceptHandler(user, me);
   };
 
   const denyReqHandler = async () => {
-    await supabase
-      .from("user")
-      .update({ reqOut: removeVasl(user.reqOut, myUsername) })
-      .eq("username", userUsername);
-    await supabase
-      .from("user")
-      .update({ reqIn: removeVasl(me.reqIn, userUsername) })
-      .eq("username", myUsername);
+    denyHandler(user, me);
   };
 
   return (

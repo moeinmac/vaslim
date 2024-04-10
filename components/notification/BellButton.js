@@ -30,6 +30,7 @@ const BellButton = ({ myUsername }) => {
         setisNotif(false);
         return;
       }
+      setReqData(false);
     }
   };
   supabase

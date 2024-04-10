@@ -16,7 +16,7 @@ const ReqItem = ({ user, me }) => {
   };
 
   const denyReqHandler = async () => {
-    denyHandler();
+    denyHandler(user, me);
     setDelReqItem(true);
   };
 
