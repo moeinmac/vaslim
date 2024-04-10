@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
-import { ImBell } from "react-icons/im";
-import ReqItem from "@/components/notification/ReqItem";
+import BackButton from "@/components/user/BackButton";
+import ReqList from "@/components/notification/ReqList";
 
 const notification = async () => {
   const supabase = createClient();
@@ -8,15 +8,11 @@ const notification = async () => {
   const { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
   return (
     <>
-      <header className="flex justify-between items-center px-8 py-4">
-        <h1 className="font-kalameh text-4xl ">اعــلان های شما</h1>
-        <ImBell className="text-3xl" />
+      <header className="flex justify-between items-center px-6 py-4">
+        <h1 className="font-kalameh text-5xl ">اعــلان های شما</h1>
+        <BackButton path={"/home"} className={"text-4xl"} />
       </header>
-      <div className="flex flex-col p-4 gap-4">
-        {data[0].reqIn.map((username) => (
-          <ReqItem myUsername={data[0].username} userUsername={username} key={username} />
-        ))}
-      </div>
+      <ReqList myUsername={data[0].username} reqIn={data[0].reqIn} />
     </>
   );
 };

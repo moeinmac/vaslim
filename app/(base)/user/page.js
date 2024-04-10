@@ -12,8 +12,9 @@ const user = async () => {
         profile={data[0].profile}
         fullname={data[0].fullname}
         username={data[0].username}
+        path={"/home"}
       />
-      <MyAccount meData={data[0]}/>
+      <MyAccount meData={data[0]} />
     </>
   );
 };

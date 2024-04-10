@@ -19,6 +19,7 @@ const username = async ({ params }) => {
         profile={data[0].profile}
         fullname={data[0].fullname}
         username={data[0].username}
+        path={"/search"}
       />
 
       <Account myUsername={me.data[0].username} userUsername={data[0].username} />
