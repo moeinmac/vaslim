@@ -8,6 +8,7 @@ import { acceptHandler } from "@/lib/req/acceptHandler";
 import { denyHandler } from "@/lib/req/denyHandler";
 import { sendHandler } from "@/lib/req/sendHandler";
 import { reclaimHandler } from "@/lib/req/reclaimHandler";
+import VaslButton from "./VaslButton";
 
 const Account = ({ myUsername, userUsername }) => {
   const [me, setMe] = useState([]);
@@ -106,10 +107,7 @@ const Account = ({ myUsername, userUsername }) => {
         <p className="font-alibaba">مطمئنی که میخوای این کاربر رو از لیست متصل هات حذف کنی؟</p>
       )}
       <div className="flex items-center gap-8  w-full">
-        <p className="font-kalameh text-3xl flex flex-col">
-          <span className="text-center">{user.vasl ? user.vasl.length : 0}</span>
-          <span className="font-alibaba text-base">متصل</span>
-        </p>
+        <VaslButton vasl={user.vasl ? user.vasl.length : 0}/>
         {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"

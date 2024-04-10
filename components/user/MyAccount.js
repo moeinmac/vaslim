@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
+import VaslButton from "./VaslButton";
 
 const MyAccount = ({ meData }) => {
   const [me, setMe] = useState(meData);
@@ -20,10 +21,7 @@ const MyAccount = ({ meData }) => {
 
   return (
     <div className="flex items-center gap-8  w-full px-8 py-4">
-      <p className="font-kalameh text-3xl flex flex-col">
-        <span className="text-center">{me.vasl ? me.vasl.length : 0}</span>
-        <span className="font-alibaba text-base">متصل</span>
-      </p>
+      <VaslButton vasl={me.vasl ? me.vasl.length : 0}/>
       <button className="bg-blue py-2 w-full text-4xl font-kalameh rounded-xl">
         ویرایش صــفحه
       </button>
