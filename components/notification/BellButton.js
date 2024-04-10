@@ -20,6 +20,8 @@ const BellButton = ({ myUsername }) => {
     setisNotif(false);
   };
 
+  console.log({ isNotif });
+
   useEffect(() => {
     getIsCheckedNotif(myUsername);
   }, []);

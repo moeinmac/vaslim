@@ -6,6 +6,12 @@ const notification = async () => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
   const { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
+  await supabase
+    .from("user")
+    .update({
+      notification: { isChecked: true, data: data[0].notification["data"] },
+    })
+    .eq("username", myAuth.data.user.id);
   return (
     <>
       <header className="flex justify-between items-center px-6 py-4">
