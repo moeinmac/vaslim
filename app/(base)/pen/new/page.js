@@ -1,14 +1,14 @@
-"use client";
+import { createClient } from "@/lib/supabase/server";
 
-import { createClient } from "@/lib/supabase/client";
-
-const newPen = () => {
+const newPen = async () => {
   const supabase = createClient();
-  const roomOne = supabase.channel("room_01");
+  const { data } = await supabase.auth.getUser();
+
+  const roomOne = supabase.channel("state");
 
   const userStatus = {
-    user: "user-1",
-    online_at: new Date().toISOString(),
+    user: `${data.user.email}`,
+    online_at: new Date().toLocaleString(),
   };
 
   roomOne.subscribe(async (status) => {
@@ -17,9 +17,13 @@ const newPen = () => {
     }
 
     const presenceTrackStatus = await roomOne.track(userStatus);
-    console.log(presenceTrackStatus);
+    console.log({ presenceTrackStatus });
   });
-  return <h1>new Pen</h1>;
+
+  const unsub = () => {
+    supabase.channel("state").unsubscribe(roomOne);
+  };
+  return <button onClick={unsub}>unsubscribe</button>;
 };
 
 export default newPen;

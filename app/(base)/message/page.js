@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/client";
 
 const message = () => {
   const supabase = createClient();
-  const roomOne = supabase.channel("room_01");
+  const roomOne = supabase.channel("state");
 
   roomOne
     .on("presence", { event: "sync" }, () => {
