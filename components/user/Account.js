@@ -35,12 +35,11 @@ const Account = ({ myUsername, userUsername }) => {
         setReqIn(checkReqIn);
         return;
       }
-      setReqIn(false);
-      setReqOut(false);
       const check1 = meRes.data[0].vasl.find((username) => username === userUsername);
       const check2 = userRes.data[0].vasl.find((username) => username === myUsername);
+      setReqIn(false);
+      setReqOut(false);
       setIsVasl(check1 && check2);
-      return;
     }
     // Throw new Error {#fix_later}
   };
@@ -74,12 +73,12 @@ const Account = ({ myUsername, userUsername }) => {
   };
 
   const sendReqHandler = async () => {
-    sendHandler(user,me)
-  }
+    sendHandler(user, me);
+  };
 
   const reclaimReqHandler = async () => {
-    reclaimHandler(user,me)
-  }
+    reclaimHandler(user, me);
+  };
 
   const acceptReqHandler = async () => {
     acceptHandler(user, me);
@@ -89,6 +88,18 @@ const Account = ({ myUsername, userUsername }) => {
     denyHandler(user, me);
   };
 
+  if (me.length === 0 && user.length === 0) {
+    return (
+      <div className="flex flex-col gap-4 px-8 py-4">
+        <div className="py-2 w-full text-4xl font-kalameh rounded-xl bg-white text-black text-center">
+          در حال بارگذاری...
+        </div>
+        <button className="font-kalameh text-3xl py-2 rounded-xl w-full border-4 border-white">
+          پیام دهید
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-4 px-8 py-4">
       {confirm && (
@@ -102,14 +113,16 @@ const Account = ({ myUsername, userUsername }) => {
         {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
-            onClick={sendReqHandler}>
+            onClick={sendReqHandler}
+          >
             وصــــــل شیم
           </button>
         )}
         {!isVasl && isReqOut && (
           <button
             className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
-            onClick={reclaimReqHandler}>
+            onClick={reclaimReqHandler}
+          >
             درخواست داده شده
           </button>
         )}
@@ -117,20 +130,23 @@ const Account = ({ myUsername, userUsername }) => {
           <div className="flex w-full gap-3">
             <button
               className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
-              onClick={acceptReqHandler}>
+              onClick={acceptReqHandler}
+            >
               قبولش کن
             </button>
             <button
               className="bg-red-600 text-black py-2 px-1 text-4xl font-kalameh rounded-xl"
-              onClick={denyReqHandler}>
+              onClick={denyReqHandler}
+            >
               <TbUserCancel className="text-white text-red-600" />
             </button>
           </div>
         )}
-        {isVasl && !confirm && (
+        {isVasl && !confirm && !isReqIn && (
           <button
             className="bg-blue w-full py-2 text-4xl font-kalameh rounded-xl"
-            onClick={confirmUnvasl}>
+            onClick={confirmUnvasl}
+          >
             متصـــــــل هستید
           </button>
         )}
