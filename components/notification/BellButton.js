@@ -4,46 +4,50 @@ import { createClient } from "@/lib/supabase/client";
 import styles from "./BellButton.module.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { HiMiniBell, HiMiniBellAlert } from "react-icons/hi2";
-import { getReqData } from "@/lib/req/getReqData";
+import { PiBellFill, PiBellLight } from "react-icons/pi";
 
 const BellButton = ({ myUsername }) => {
   const supabase = createClient();
 
-  const [isNotif, setisNotif] = useState();
-  const [reqData, setReqData] = useState([]);
+  const [isNotif, setisNotif] = useState(false);
+
+  const getIsCheckedNotif = async (username) => {
+    const { data } = await supabase.from("user").select("notification").eq("username", username);
+    if (!data[0].notification["isChecked"]) {
+      setisNotif(true);
+      return;
+    }
+    setisNotif(false);
+  };
 
   useEffect(() => {
-    const data = getReqData();
-    setReqData(data);
+    getIsCheckedNotif(myUsername);
   }, []);
 
   const handleChanges = (paylod) => {
     if (paylod.new.username === myUsername) {
-      if (paylod.new.reqIn.length > reqData.length) {
-        setReqData(paylod.new.reqIn);
+      if (!paylod.new.notification["isChecked"]) {
         setisNotif(true);
         return;
       }
-      if (paylod.new.reqIn.length === 0) {
-        setReqData(paylod.new.reqIn);
+
+      if (paylod.new.reqIn.length === 0 || paylod.new.notification["isChecked"]) {
         setisNotif(false);
         return;
       }
-      setReqData(false);
     }
   };
   supabase
-    .channel("reqUser")
+    .channel("notification")
     .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
     .subscribe();
   return (
     <Link href="/home/notification/">
-      {!isNotif && <HiMiniBell className="text-4xl" />}
+      {!isNotif && <PiBellFill className="text-4xl" />}
       {isNotif && (
-        <div className="flex items-center">
+        <div className="relative">
           <div className={styles.blob}></div>
-          <HiMiniBellAlert className="text-4xl" />
+          <PiBellLight className="text-4xl" />
         </div>
       )}
     </Link>

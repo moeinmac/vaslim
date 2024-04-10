@@ -58,14 +58,17 @@ const Account = ({ myUsername, userUsername }) => {
     getAllData();
   }, []);
 
-  const vaslshimHandler = async () => {
+  const setReqHandler = async () => {
     await supabase
       .from("user")
       .update({ reqOut: Array.from(new Set([...me.reqOut, userUsername])) })
       .eq("username", myUsername);
     await supabase
       .from("user")
-      .update({ reqIn: Array.from(new Set([...user.reqIn, myUsername])) })
+      .update({
+        reqIn: Array.from(new Set([...user.reqIn, myUsername])),
+        notification: { isChecked: false, data: user.notification["data"] },
+      })
       .eq("username", userUsername);
   };
 
@@ -114,7 +117,7 @@ const Account = ({ myUsername, userUsername }) => {
         {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
-            onClick={vaslshimHandler}>
+            onClick={setReqHandler}>
             وصــــــل شیم
           </button>
         )}
