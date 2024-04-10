@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { TbUserCancel } from "react-icons/tb";
 import { acceptHandler } from "@/lib/req/acceptHandler";
 import { denyHandler } from "@/lib/req/denyHandler";
+import { sendHandler } from "@/lib/req/sendHandler";
+import { reclaimHandler } from "@/lib/req/reclaimHandler";
 
 const Account = ({ myUsername, userUsername }) => {
   const [me, setMe] = useState([]);
@@ -58,20 +60,6 @@ const Account = ({ myUsername, userUsername }) => {
     getAllData();
   }, []);
 
-  const setReqHandler = async () => {
-    await supabase
-      .from("user")
-      .update({ reqOut: Array.from(new Set([...me.reqOut, userUsername])) })
-      .eq("username", myUsername);
-    await supabase
-      .from("user")
-      .update({
-        reqIn: Array.from(new Set([...user.reqIn, myUsername])),
-        notification: { isChecked: false, data: user.notification["data"] },
-      })
-      .eq("username", userUsername);
-  };
-
   const confirmUnvasl = () => setconfirm(!confirm);
   const unVaslHandler = async () => {
     await supabase
@@ -85,16 +73,13 @@ const Account = ({ myUsername, userUsername }) => {
     setconfirm(false);
   };
 
-  const unReqHandler = async () => {
-    await supabase
-      .from("user")
-      .update({ reqIn: removeVasl(user.reqIn, myUsername) })
-      .eq("username", userUsername);
-    await supabase
-      .from("user")
-      .update({ reqOut: removeVasl(me.reqOut, userUsername) })
-      .eq("username", myUsername);
-  };
+  const sendReqHandler = async () => {
+    sendHandler(user,me)
+  }
+
+  const reclaimReqHandler = async () => {
+    reclaimHandler(user,me)
+  }
 
   const acceptReqHandler = async () => {
     acceptHandler(user, me);
@@ -117,14 +102,14 @@ const Account = ({ myUsername, userUsername }) => {
         {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
-            onClick={setReqHandler}>
+            onClick={sendReqHandler}>
             وصــــــل شیم
           </button>
         )}
         {!isVasl && isReqOut && (
           <button
             className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
-            onClick={unReqHandler}>
+            onClick={reclaimReqHandler}>
             درخواست داده شده
           </button>
         )}
