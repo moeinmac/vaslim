@@ -5,6 +5,7 @@ import styles from "./BellButton.module.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { HiMiniBell, HiMiniBellAlert } from "react-icons/hi2";
+import { getReqData } from "@/lib/req/getReqData";
 
 const BellButton = ({ myUsername }) => {
   const supabase = createClient();
@@ -12,17 +13,9 @@ const BellButton = ({ myUsername }) => {
   const [isNotif, setisNotif] = useState();
   const [reqData, setReqData] = useState([]);
 
-  const getReqData = async () => {
-    const myAuth = await supabase.auth.getUser();
-    const { data } = await supabase
-      .from("user")
-      .select("reqIn")
-      .eq("id", myAuth.data.user.id);
-    setReqData(data[0].reqIn);
-  };
-
   useEffect(() => {
-    getReqData();
+    const data = getReqData();
+    setReqData(data);
   }, []);
 
   const handleChanges = (paylod) => {
@@ -41,11 +34,7 @@ const BellButton = ({ myUsername }) => {
   };
   supabase
     .channel("reqUser")
-    .on(
-      "postgres_changes",
-      { event: "UPDATE", schema: "public", table: "user" },
-      handleChanges
-    )
+    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
     .subscribe();
   return (
     <Link href="/home/notification/">
