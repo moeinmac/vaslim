@@ -107,7 +107,7 @@ const Account = ({ myUsername, userUsername }) => {
         <p className="font-alibaba">مطمئنی که میخوای این کاربر رو از لیست متصل هات حذف کنی؟</p>
       )}
       <div className="flex items-center gap-8  w-full">
-        <VaslButton vasl={user.vasl ? user.vasl.length : 0}/>
+        <VaslButton vasl={user.vasl ? user.vasl.length : 0} username={userUsername}/>
         {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
