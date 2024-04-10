@@ -11,7 +11,7 @@ const notification = async () => {
     .update({
       notification: { isChecked: true, data: data[0].notification["data"] },
     })
-    .eq("username", myAuth.data.user.id);
+    .eq("username", data[0].username);
   return (
     <>
       <header className="flex justify-between items-center px-6 py-4">
