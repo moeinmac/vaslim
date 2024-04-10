@@ -2,46 +2,21 @@
 
 import Image from "next/image";
 import { MdOutlineCancel } from "react-icons/md";
-import removeVasl from "@/lib/removeVasl";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { acceptHandler } from "@/lib/req/acceptHandler";
+import { denyHandler } from "@/lib/req/denyHandler";
 
-const ReqItem = ({ user, me, myUsername, userUsername }) => {
-  const supabase = createClient();
-
+const ReqItem = ({ user, me }) => {
   const [delReqItem, setDelReqItem] = useState();
 
-  const acseptHandler = async () => {
-    await supabase
-      .from("user")
-      .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
-      .eq("username", myUsername);
-    await supabase
-      .from("user")
-      .update({ vasl: Array.from(new Set([...user.vasl, myUsername])) })
-      .eq("username", userUsername);
-
-    await supabase
-      .from("user")
-      .update({ reqOut: removeVasl(user.reqOut, myUsername) })
-      .eq("username", userUsername);
-    await supabase
-      .from("user")
-      .update({ reqIn: removeVasl(me.reqIn, userUsername) })
-      .eq("username", myUsername);
+  const acceptReqHandler = async () => {
+    acceptHandler(user, me);
     setDelReqItem(true);
   };
 
-  const denyHandler = async () => {
-    await supabase
-      .from("user")
-      .update({ reqOut: removeVasl(user.reqOut, myUsername) })
-      .eq("username", userUsername);
-    await supabase
-      .from("user")
-      .update({ reqIn: removeVasl(me.reqIn, userUsername) })
-      .eq("username", myUsername);
+  const denyReqHandler = async () => {
+    denyHandler();
     setDelReqItem(true);
   };
 
@@ -57,10 +32,10 @@ const ReqItem = ({ user, me, myUsername, userUsername }) => {
         <div className="flex gap-3 items-center">
           <button
             className="bg-gray text-black py-1 px-2 w-full text-2xl font-kalameh rounded-lg"
-            onClick={acseptHandler}>
+            onClick={acceptReqHandler}>
             وصـــل شیم
           </button>
-          <button onClick={denyHandler}>
+          <button onClick={denyReqHandler}>
             <MdOutlineCancel className="text-red-600 text-2xl" />
           </button>
         </div>

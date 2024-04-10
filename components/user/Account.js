@@ -99,7 +99,7 @@ const Account = ({ myUsername, userUsername }) => {
       .eq("username", myUsername);
   };
 
-  const acseptReqHandler = async () => {
+  const acceptReqHandler = async () => {
     await supabase
       .from("user")
       .update({ vasl: Array.from(new Set([...me.vasl, userUsername])) })
@@ -143,16 +143,14 @@ const Account = ({ myUsername, userUsername }) => {
         {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
-            onClick={vaslshimHandler}
-          >
+            onClick={vaslshimHandler}>
             وصــــــل شیم
           </button>
         )}
         {!isVasl && isReqOut && (
           <button
             className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
-            onClick={unReqHandler}
-          >
+            onClick={unReqHandler}>
             درخواست داده شده
           </button>
         )}
@@ -160,14 +158,12 @@ const Account = ({ myUsername, userUsername }) => {
           <div className="flex w-full gap-3">
             <button
               className="bg-gray text-black py-2 w-full text-4xl font-kalameh rounded-xl"
-              onClick={acseptReqHandler}
-            >
+              onClick={acceptReqHandler}>
               قبولش کن
             </button>
             <button
               className="bg-red-600 text-black py-2 px-1 text-4xl font-kalameh rounded-xl"
-              onClick={denyReqHandler}
-            >
+              onClick={denyReqHandler}>
               <TbUserCancel className="text-white text-red-600" />
             </button>
           </div>
@@ -175,8 +171,7 @@ const Account = ({ myUsername, userUsername }) => {
         {isVasl && !confirm && (
           <button
             className="bg-blue w-full py-2 text-4xl font-kalameh rounded-xl"
-            onClick={confirmUnvasl}
-          >
+            onClick={confirmUnvasl}>
             متصـــــــل هستید
           </button>
         )}

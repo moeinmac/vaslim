@@ -5,14 +5,7 @@ const GetReqItem = async ({ myUsername, userUsername }) => {
   const supabase = createClient();
   const meRes = await supabase.from("user").select().eq("username", myUsername);
   const userRes = await supabase.from("user").select().eq("username", userUsername);
-  return (
-    <ReqItem
-      user={userRes.data[0]}
-      me={meRes.data[0]}
-      myUsername={meRes.data[0].username}
-      userUsername={userRes.data[0].username}
-    />
-  );
+  return <ReqItem user={userRes.data[0]} me={meRes.data[0]} />;
 };
 
 const ReqList = ({ myUsername, reqIn }) => {
