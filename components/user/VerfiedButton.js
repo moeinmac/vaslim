@@ -3,7 +3,7 @@ const VerifiedButton = ({ isVerified, username, className, small }) => {
     <>
       {!isVerified && <p className={`${className} font-alibaba`}>{username}@</p>}
       {isVerified && (
-        <p className={`${className} font-alibaba text-sm w-full flex items-center gap-1`}>
+        <p className={`${className} font-alibaba w-full flex items-center gap-1`}>
           <svg
             aria-label="Verified"
             fill="rgb(0, 149, 246)"

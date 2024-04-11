@@ -20,6 +20,7 @@ const username = async ({ params }) => {
         fullname={data[0].fullname}
         username={data[0].username}
         path={"/search"}
+        isVerified={data[0].isVerified}
       />
 
       <Account myUsername={me.data[0].username} userUsername={data[0].username} />
