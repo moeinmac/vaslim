@@ -15,7 +15,7 @@ const edit = async () => {
         </div>
         <p className="font-alibaba">اطلاعات کـاربری تان را تغییر دهید</p>
       </header>
-      <EditProfile profile={data[0].profile} />
+      <EditProfile profile={data[0].profile} id={myAuth.data.user.id}/>
     </>
   );
 };
