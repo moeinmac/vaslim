@@ -5,6 +5,7 @@ import { BsFillCameraFill } from "react-icons/bs";
 import { sendProfileHandler } from "@/lib/sendProfileHandler";
 import { useState } from "react";
 
+
 const EditProfile = ({ profile, id }) => {
   const [updatedProfile, setProfile] = useState(profile);
   const changeProfileHandler = async (event) => {

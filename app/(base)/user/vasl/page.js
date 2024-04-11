@@ -23,6 +23,7 @@ const Myvasl = async () => {
       </header>
       <h1 className="text-5xl px-6 py-2 font-kalameh">لیسـت متصـــــل ها</h1>
       <div className="flex flex-col gap-2 py-2 pb-[5.5rem]">
+        {data[0].vasl.length === 0 && <p className="px-6 font-alibaba text-lg">شما به هیچکــس متصـــل نیستی! از قسمت جستجو میتوانید با افراد جدید آشنا شوید</p>}
         {data[0].vasl.map((username) => (
           <VaslItem username={username} key={username} />
         ))}
