@@ -1,39 +1,43 @@
 "use client";
 import Image from "next/image";
-import { useRef } from "react";
 import { BsFillCameraFill } from "react-icons/bs";
-import Cropper from "cropperjs";
+import Compressor from "compressorjs";
+import { createClient } from "@/lib/supabase/client";
 
 const EditProfile = ({ profile }) => {
-  const imageRef = useRef();
   const changeProfileHandler = async (event) => {
-    // const file = event.target.files[0];
-    const cropper = new Cropper(imageRef.current, {
-      ready() {
-        // this.cropper[method](argument1, , argument2, ..., argumentN);
-        this.cropper.move(1, -1);
-
-        // Allows chain composition
-        this.cropper.move(1, -1).rotate(45).scale(1, -1);
-      },
-    });
-  };
-
-  const sendProfileHandler = async (event) => {
     const file = event.target.files[0];
+    const supabase = createClient();
     const { data, error } = await supabase.storage
       .from("profile")
-      .upload(`${props.user.id}/${Math.floor(Math.random() * 1000)}.png`, file, {
+      .upload(`hhhhhh/${Math.floor(Math.random() * 1000)}.jpg`, file, {
         cacheControl: "3600",
         upsert: true,
       });
-    dispatch(UpdateUser(props.user.id, { profile: data.Key }));
+    console.log({ data, error });
+    // const file = event.target.files[0];
+    // new Compressor(event.target.files[0], {
+    //   quality: 0.5,
+    //   success(result) {
+    //     sendProfileHandler(result);
+    //   },
+    // });
+  };
+
+  const sendProfileHandler = async (event) => {
+    const supabase = createClient();
+    const file = event.target.files[0];
+    const { data, error } = await supabase.storage.from("profile").upload(`test/1.png`, file, {
+      contentType: "image/jpeg",
+      cacheControl: "3600",
+      upsert: true,
+    });
+    console.log(data);
   };
   return (
     <div className="flex justify-center ">
       <label htmlFor="change" className="relative">
         <Image
-          ref={imageRef}
           src={profile}
           width={100}
           height={100}
@@ -45,7 +49,7 @@ const EditProfile = ({ profile }) => {
       </label>
       <input
         className="hidden"
-        onChange={changeProfileHandler}
+        onChange={sendProfileHandler}
         type="file"
         id="change"
         accept="image/*"
