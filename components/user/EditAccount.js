@@ -8,7 +8,9 @@ const AccountItem = ({ name, title, data, readOnly }) => {
       <label className="absolute font-alibaba text-sm px-2 -top-2 right-4 bg-black ">{title}</label>
       <input
         defaultValue={data}
-        className=" bg-transparent w-full font-alibaba text-lg outline-0 border-2 border-gray px-4 pb-2 pt-3 rounded-xl"
+        className={`${
+          readOnly ? "border-orange" : "border-gray"
+        } bg-transparent w-full font-alibaba text-lg outline-0 border-2  px-4 pb-2 pt-3 rounded-xl`}
         type={title === "رمز عبور" ? "password" : "text"}
         dir="auto"
         name={name}
@@ -26,7 +28,7 @@ const EditAccount = ({ username, fullname, email, phone }) => {
 
     const fullname = formData.get("fullname");
     const phone = formData.get("phone");
-    console.log({fullname});
+    console.log({ fullname });
 
     await supabase
       .from("user")
