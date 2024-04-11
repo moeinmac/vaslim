@@ -6,6 +6,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import { useState } from "react";
 import { acceptHandler } from "@/lib/req/acceptHandler";
 import { denyHandler } from "@/lib/req/denyHandler";
+import VerifiedButton from "../user/VerfiedButton";
 
 const ReqItem = ({ user, me }) => {
   const [delReqItem, setDelReqItem] = useState();
@@ -26,8 +27,8 @@ const ReqItem = ({ user, me }) => {
       <Image src={user.profile} alt={user.fullname} width={60} height={60} className="rounded-xl" />
       <div className="flex w-full text-black font-alibaba items-center justify-between">
         <div>
-          <p className="">{user.fullname}</p>
-          <p className="text-sm">{user.username}@</p>
+          <p>{user.fullname}</p>
+          <VerifiedButton username={user.username} isVerified={user.isVerified} className={"text-sm"}/>
         </div>
         <div className="flex gap-3 items-center">
           <button

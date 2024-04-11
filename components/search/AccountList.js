@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import VerifiedButton from "../user/VerfiedButton";
 
-const AccountItem = ({ profile, fullname, username, motasel }) => {
+const AccountItem = ({ profile, fullname, username, motasel,isVerified }) => {
   return (
     <Link href={`/${username}/`}>
       <div className="flex flex-col items-center gap-4 bg-blue p-2 pb-1 rounded-lg">
         <Image width={60} height={60} src={profile} alt={fullname} className="rounded-lg" />
         <div className="flex flex-col items-center">
-          <p className="font-alibaba text-base">{username}@</p>
+          <VerifiedButton isVerified={isVerified} username={username} className={"text-base"}/>
           <p className="font-alibaba text-[0.7rem]">{fullname}</p>
           <p className="flex gap-2">
             <span className="font-kalameh text-2xl">{motasel}</span>
@@ -38,6 +39,7 @@ const AccountList = ({ accounts ,suggest}) => {
           username={account.username}
           motasel={account.vasl.length}
           key={account.username}
+          isVerified={account.isVerified}
         />
       ))}
     </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
+import VerifiedButton from "./VerfiedButton";
 
-const Profile = ({ profile, fullname, username, small }) => {
+const Profile = ({ profile, fullname, username, small, isVerified }) => {
   return (
     <div className={`flex ${small ? "" : "flex-col"} items-center gap-4`}>
       <Image
@@ -13,7 +14,7 @@ const Profile = ({ profile, fullname, username, small }) => {
       />
       <div className={`flex flex-col ${small ? "gap-1" : "items-center"}`}>
         <p className={`font-alibaba ${small ? "text-base" : "text-lg"}`}>{fullname}</p>
-        <p className="font-alibaba text-sm">{username}@</p>
+        <VerifiedButton isVerified={isVerified} username={username} className={"text-lg"}/>
       </div>
     </div>
   );
