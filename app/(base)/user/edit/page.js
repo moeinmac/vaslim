@@ -1,4 +1,5 @@
 import BackButton from "@/components/user/BackButton";
+import EditAccount from "@/components/user/EditAccount";
 import EditProfile from "@/components/user/EditProfile";
 import { createClient } from "@/lib/supabase/server";
 
@@ -15,7 +16,13 @@ const edit = async () => {
         </div>
         <p className="font-alibaba">اطلاعات کـاربری تان را تغییر دهید</p>
       </header>
-      <EditProfile profile={data[0].profile} id={myAuth.data.user.id}/>
+      <EditProfile profile={data[0].profile} id={myAuth.data.user.id} />
+      <EditAccount
+        fullname={data[0].fullname}
+        username={data[0].username}
+        phone={data[0].phone}
+        email={myAuth.data.user.email}
+      />
     </>
   );
 };

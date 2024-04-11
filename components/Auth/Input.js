@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const Input = forwardRef(
-  ({ name, placeholder, focusHandler, blurHandler, hidden }, ref) => {
+  ({ name, placeholder, focusHandler, blurHandler, hidden,readOnly }, ref) => {
     return (
       <input
         ref={ref}
@@ -14,6 +14,7 @@ const Input = forwardRef(
         dir="auto"
         name={name}
         placeholder={placeholder}
+        readOnly={readOnly ? readOnly : false}
       />
     );
   }

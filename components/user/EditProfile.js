@@ -25,7 +25,7 @@ const EditProfile = ({ profile, id }) => {
           alt={"edit profile"}
           className="rounded-lg"
         />
-        <BsFillCameraFill className="-bottom-4 -right-4 absolute text-4xl p-2 bg-black rounded-full" />
+        <BsFillCameraFill className="-bottom-4 -right-3 absolute text-4xl p-2 bg-black rounded-full" />
       </label>
       <input
         className="hidden"
