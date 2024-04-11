@@ -131,6 +131,11 @@ const MobileTabbar = () => {
           type: "USER",
           left: userRef.current.getBoundingClientRect().left,
         });
+      case "/user/vasl":
+        dispatchTabbar({
+          type: "USER",
+          left: userRef.current.getBoundingClientRect().left,
+        });
         break;
 
       default:

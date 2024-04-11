@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
 import VaslButton from "./VaslButton";
+import Link from "next/link";
 
 const MyAccount = ({ meData }) => {
   const [me, setMe] = useState(meData);
@@ -21,10 +22,12 @@ const MyAccount = ({ meData }) => {
 
   return (
     <div className="flex items-center gap-8  w-full px-8 py-4">
-      <VaslButton vasl={me.vasl ? me.vasl.length : 0}/>
-      <button className="bg-blue py-2 w-full text-4xl font-kalameh rounded-xl">
+      <VaslButton vasl={me.vasl ? me.vasl.length : 0} />
+      <Link
+        href={"/user/edit"}
+        className="text-center bg-blue py-2 w-full text-4xl font-kalameh rounded-xl">
         ویرایش صــفحه
-      </button>
+      </Link>
     </div>
   );
 };

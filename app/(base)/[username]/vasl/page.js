@@ -1,9 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import UserHeader from "@/components/user/UserHeader";
 import Profile from "@/components/user/Profile";
 import BackButton from "@/components/user/BackButton";
-import ReqItem from "@/components/notification/ReqItem";
 import VaslItem from "@/components/vasl/VaslItem";
 
 const vasl = async ({ params }) => {
