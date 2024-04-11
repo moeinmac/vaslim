@@ -1,6 +1,7 @@
 import SubmitButton from "../Auth/SubmitButton";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 const AccountItem = ({ name, title, data, readOnly }) => {
   return (
@@ -44,7 +45,7 @@ const EditAccount = ({ username, fullname, email, phone }) => {
     return redirect("/user");
   };
   return (
-    <form className="px-6 py-5 flex flex-col gap-5">
+    <form className="px-6 pt-5 flex flex-col gap-5 pb-[5.5rem]">
       <AccountItem data={username} readOnly title={"نام کــاربری"} />
       <AccountItem data={email} readOnly title={"ایمیل"} />
       <AccountItem data={fullname} name={"fullname"} title={"نام کــامل"} />
@@ -56,6 +57,12 @@ const EditAccount = ({ username, fullname, email, phone }) => {
       >
         ذخــیره تغـــییرات
       </SubmitButton>
+      <Link
+        className="bg-gray text-center text-black text-4xl font-kalameh rounded-xl px-8 py-4"
+        href="/user"
+      >
+        ولش کــن
+      </Link>
     </form>
   );
 };
