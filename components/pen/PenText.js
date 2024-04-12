@@ -38,7 +38,7 @@ const PenText = ({ isLine }) => {
         ref={textRef}
         onChange={changeNewLineHandler}
         className="z-10 relative text-lg rounded-lg leading-8 p-4 font-alibaba resize-none w-full h-72  overflow-auto border-4 bg-transparent border-orange focus:outline-0"
-        placeholder="هیچ آدابی و ترتیبی مـجو هرچه می‌خواهد دل تنگت بگــو"
+        placeholder="هیچ آدابی و ترتیبی مجو هر چه می‌ خواهد دل تنگت بگو"
       ></textarea>
     </div>
   );

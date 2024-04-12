@@ -18,9 +18,9 @@ const NewText = () => {
   return (
     <div className="flex gap-4 flex-col">
       <div className="flex justify-between items-center">
-        <p>
+        <p className="font-alibaba">
           خطوط نوشتن
-          <span className="text-orange cursor-pointer select-none" onClick={howisHandler}>
+          <span className="font-alibaba text-orange cursor-pointer select-none" onClick={howisHandler}>
             (چطوریه؟)
           </span>
         </p>

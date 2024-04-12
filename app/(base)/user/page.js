@@ -1,3 +1,4 @@
+import UserPen from "@/components/pen/UserPen";
 import MyAccount from "@/components/user/MyAccount";
 import UserHeader from "@/components/user/UserHeader";
 import { createClient } from "@/lib/supabase/server";
@@ -16,6 +17,8 @@ const user = async () => {
         path={"/home"}
       />
       <MyAccount meData={data[0]} />
+      <h1 className="font-kalameh text-4xl px-6 py-2">نوشته های من</h1>
+      <UserPen id={myAuth.data.user.id} />
     </>
   );
 };
