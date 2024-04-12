@@ -35,9 +35,15 @@
 input:placeholder-shown {
   direction: rtl;
 }
-.penItem_container{
-  background:  linear-gradient(to right, #232D30 0%, #141D23 31%, #181B22 100%);
-}
+
 .penItem_bg{
   background:  linear-gradient(to right , #222C40 , #3558A3 100%);
+}
+.comment{
+  background-color: #14203a75;
+  box-shadow: inset 1px 0 25px rgba(0, 0, 0,0.25);
+}
+.stamp{
+  box-shadow: inset 1px 0 25px rgba(0, 0, 0,0.25);
+  background:  linear-gradient(to right, #232D30 0%, #141D23 31%, #181B22 100%);
 }
