@@ -1,54 +1,24 @@
-"use client";
-
-import { createClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/server";
 import UserPenItem from "./UserPenItem";
+import Link from "next/link";
 
-const UserPen = ({ username, id }) => {
+const UserPen =async ({ id ,myUsername}) => {
   const supabase = createClient();
-  const fakepens = [
-    {
-      id: 256,
-      author: "ab968741-38ff-4499-9551-5971515da625",
-      pen: "سلام به همه!",
-      stamps: [],
-      created_at : "2024-04-12 17:17:21.10524+00",
-      comments: [],
-    },
-    {
-      id: 25855,
-      author: "ab968741-38ff-4499-9551-5971515da625",
-      pen: "سلامی مجدد" ,
-      stamps: [],
-      created_at : "2024-04-12 17:19:32.624542+00",
-      comments: [],
-    },
-  ];
-
-  const [pens, setAllPens] = useState(fakepens);
-
-  const getAllPen = async () => {
-    if (username) {
-      const id = await supabase.from("user").select("id").eq("username", username);
-      const { data } = await supabase.from("pen").select().eq("author", id);
-      setAllPens(data);
-    }
-    if (id) {
-      const { data } = await supabase.from("pen").select().eq("author", id);
-      setAllPens(data);
-    }
-  };
-  // useEffect(() => {
-  //   getAllPen();
-  // }, []);
-
-  console.log(pens);
-
+  const { data } = await supabase.from("pen").select().eq("author", id);
   return (
-    <div className="flex justify-center flex-col gap-4 px-6 py-4">
-      {pens.map((pen) => (
-        <UserPenItem pen={pen} key={pen.id} />
-      ))}
+    <div className="flex justify-center flex-col gap-4 px-6 pt-4 pb-[5.5rem]">
+      {data.length !== 0 && data.map((pen) => <UserPenItem myUsername={myUsername} pen={pen} key={pen.id} />)}
+      {data.length === 0 && (
+        <div className="flex flex-col gap-4">
+          <p className="font-alibaba">شما هنوز دست به قلم نشدی! همین الان یه چیزی بنویس</p>
+          <Link
+            href="/pen/new"
+            className="w-full text-center bg-blue text-4xl font-kalameh rounded-xl px-8 py-4"
+          >
+            بریم قلم بزنیم 
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
