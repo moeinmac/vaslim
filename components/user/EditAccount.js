@@ -29,7 +29,6 @@ const EditAccount = ({ username, fullname, email, phone }) => {
 
     const fullname = formData.get("fullname");
     const phone = formData.get("phone");
-    console.log({ fullname });
 
     await supabase
       .from("user")
@@ -45,7 +44,7 @@ const EditAccount = ({ username, fullname, email, phone }) => {
     return redirect("/user");
   };
   return (
-    <form className="px-6 pt-5 flex flex-col gap-5 pb-[5.5rem]">
+    <form className="px-6 pt-5 flex flex-col gap-5">
       <AccountItem data={username} readOnly title={"نام کــاربری"} />
       <AccountItem data={email} readOnly title={"ایمیل"} />
       <AccountItem data={fullname} name={"fullname"} title={"نام کــامل"} />

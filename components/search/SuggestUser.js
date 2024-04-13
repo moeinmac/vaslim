@@ -9,7 +9,6 @@ const SuggestUser = async () => {
   const myAuth = await supabase.auth.getUser();
   const me = await supabase.from("user").select().eq("id", myAuth.data.user.id);
   const { data } = await supabase.from("user").select();
-  // console.log(data);
   const available = getAvailableSuggests(data, me.data[0].vasl, me.data[0].username);
   return (
     <>

@@ -6,7 +6,7 @@ const UserPen = async ({ username, myUsername }) => {
   const userID = await supabase.from("user").select("id").eq("username", username);
   const { data } = await supabase.from("pen").select().eq("author", userID.data[0].id);
   return (
-    <div className="flex justify-center flex-col gap-4 px-6 pt-4 pb-[5.5rem]">
+    <div className="flex justify-center flex-col gap-4 px-6 pt-4">
       {data.length !== 0 &&
         data.map((pen) => <UserPenItem myUsername={myUsername} pen={pen} key={pen.id} />)}
       {data.length === 0 && (

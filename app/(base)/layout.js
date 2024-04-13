@@ -7,7 +7,7 @@ const baseLayout = async ({ children }) => {
   const data = await supabase.auth.getUser();
   if (!data.data.user) redirect("/auth");
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col pb-[5.5rem]">
       {children}
       <MobileTabbar />
     </main>

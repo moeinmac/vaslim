@@ -21,7 +21,7 @@ const HomePenItem = ({ pen, myUsername, profile, fullname, username }) => {
           <HiMiniEllipsisVertical className="text-2xl" />
         </div>
       </Link>
-      <div className="penItem_bg rounded-xl flex flex-col p-4 gap-4 pb-2">
+      <div className="penItem_bg rounded-xl flex flex-col p-4 gap-3 pb-2">
         <header className="flex justify-between items-center">
           <p className="font-alibaba text-[0.6rem]">{timeSince(convertedDate)}</p>
           <SlShareAlt />

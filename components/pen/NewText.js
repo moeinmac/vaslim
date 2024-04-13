@@ -27,7 +27,7 @@ const NewText = () => {
         <SwitchButton onSwitch={switchHandler} />
       </div>
       {howIs && (
-        <p className="flex items-center font-alibaba gap-2">
+        <p className="flex items-center font-alibaba flex-wrap gap-1 text-sm">
           با زدن دکمه enter <AiOutlineEnter /> میتوانید وارد خط بعدی شوید
         </p>
       )}

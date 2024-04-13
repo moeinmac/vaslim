@@ -9,7 +9,7 @@ const newPen = ({ searchParams }) => {
         <h1 className="font-kalameh text-5xl">دســـت به قـــلم شوید</h1>
         <p className="font-alibaba">لحظات تان را با دوستان تان در میان بگـذارید</p>
       </header>
-      <form className="px-6 py-4 flex flex-col ">
+      <form className="px-6 py-4 flex flex-col gap-3">
         <NewText />
         <SubmitButton
           formAction={sendNewPen}
