@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import Account from "@/components/user/Account";
 import UserHeader from "@/components/user/UserHeader";
 import { redirect } from "next/navigation";
+import UserPen from "@/components/pen/UserPen";
 
 const username = async ({ params }) => {
   const supabase = createClient();
@@ -24,6 +25,7 @@ const username = async ({ params }) => {
       />
 
       <Account myUsername={me.data[0].username} userUsername={data[0].username} />
+      <UserPen username={data[0].username} myUsername={me.data[0].username} />
     </>
   ) : (
     <h1>NO</h1>
