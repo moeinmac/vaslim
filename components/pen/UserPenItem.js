@@ -1,7 +1,6 @@
 import { timeSince } from "@/lib/timeSince";
 import { SlShareAlt } from "react-icons/sl";
 import { TfiComment } from "react-icons/tfi";
-import { PiStamp } from "react-icons/pi";
 import { persianNumbers } from "@/lib/persianNumbers";
 import StampButton from "./StampButton";
 
