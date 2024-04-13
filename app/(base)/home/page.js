@@ -15,7 +15,11 @@ const Home = async () => {
         <h1 className="font-kalameh text-5xl ">وصـــلیم</h1>
         <BellButton myUsername={data[0].username} />
       </header>
-      <GetDot dotData={FAKEDOTDATA} myProfile={data[0].profile}/>
+      <GetDot
+        dotData={FAKEDOTDATA}
+        myProfile={data[0].profile}
+        isBlur={data[0].vasl.length > 1 ? true : false}
+      />
       <SignOutForm />
       <HomePen vasl={data[0].vasl} myUsername={data[0].username} />
     </>

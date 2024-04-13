@@ -18,11 +18,18 @@ const DotItem = ({ profile, username, isActive }) => {
   );
 };
 
-const GetDot = ({ dotData, myProfile }) => {
+const GetDot = ({ dotData, myProfile, isBlur }) => {
+  console.log(isBlur);
   return (
-    <div className="flex items-center gap-4 overflow-hidden px-6 dot relative scroll">
-      <div className="w-full h-full  absolute top-0 left-0 z-20 back-drop text-center rounded-lg">
-        <h1 className="font-kalameh text-2xl mt-5 show">بخش نقطه هنوز در درست توسعه میباشد</h1>
+    <div className="flex items-center gap-4 overflow-hidden px-6 relative">
+      <div
+        className={`w-full h-full  absolute top-0 left-0 z-20 ${
+          isBlur ? "backdrop-blur-sm" : "back-drop"
+        } text-center rounded-lg`}
+      >
+        <h1 className={`font-kalameh text-2xl mt-5 ${isBlur ? "opacity-100" : "show"}`}>
+          بخش نقطه هنوز در درست توسعه میباشد
+        </h1>
       </div>
       <div className="flex flex-col items-center gap-1">
         <div className="relative w-14 h-14">
