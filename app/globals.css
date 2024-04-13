@@ -18,7 +18,7 @@
   top: 45vh;
   width: 1000px;
   height: 625px;
-  background-image: url('/first.png');
+  background-image: url("/first.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,14 +36,41 @@ input:placeholder-shown {
   direction: rtl;
 }
 
-.penItem_bg{
-  background:  linear-gradient(to right , #222C40 , #3558A3 100%);
+.penItem_bg {
+  background: linear-gradient(to right, #222c40, #3558a3 100%);
 }
-.comment{
+.comment {
   background-color: #14203a75;
-  box-shadow: inset 1px 0 25px rgba(0, 0, 0,0.25);
+  box-shadow: inset 1px 0 25px rgba(0, 0, 0, 0.25);
 }
-.stamp{
-  box-shadow: inset 1px 0 25px rgba(0, 0, 0,0.25);
-  background:  linear-gradient(to right, #232D30 0%, #141D23 31%, #181B22 100%);
+.stamp {
+  box-shadow: inset 1px 0 25px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(to right, #232d30 0%, #141d23 31%, #181b22 100%);
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.back-drop {
+  animation: blur 1.5s ease-in-out 2.5s forwards alternate;
+}
+.show{
+  animation: showtext 1.5s ease-in-out 3s forwards alternate;
+  opacity: 0;
+}
+
+@keyframes blur {
+  100% {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+@keyframes showtext {
+  100% {
+    opacity: 1;
+  }
 }

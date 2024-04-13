@@ -12,8 +12,8 @@ const getRequestedPens = async (usernames, count) => {
 };
 
 const HomePen = async ({ vasl, myUsername }) => {
-  const randomUsers = pickRandom(vasl, vasl.length < 5 ? vasl.length : 5);
-  const allData = await getRequestedPens(randomUsers, 2);
+  const randomUsers = pickRandom(vasl, vasl.length < 7 ? vasl.length : 7);
+  const allData = await getRequestedPens(randomUsers, 3);
   const createPens = [];
   for (const item of allData) {
     createPens.push(...item);

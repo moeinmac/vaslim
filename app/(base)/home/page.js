@@ -1,7 +1,8 @@
 import SignOutForm from "@/components/Auth/SignoutForm";
+import GetDot from "@/components/dot/GetDot";
 import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
-import Link from "next/link";
+import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
 import { createClient } from "@/lib/supabase/server";
 
 const Home = async () => {
@@ -14,7 +15,7 @@ const Home = async () => {
         <h1 className="font-kalameh text-5xl ">وصـــلیم</h1>
         <BellButton myUsername={data[0].username} />
       </header>
-      <div className="font-kalameh bg-orange text-3xl p-6">بخش نقطه(در حال توسعه)</div>
+      <GetDot dotData={FAKEDOTDATA} myProfile={data[0].profile}/>
       <SignOutForm />
       <HomePen vasl={data[0].vasl} myUsername={data[0].username} />
     </>
