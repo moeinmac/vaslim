@@ -12,7 +12,7 @@ const HomePenItem = ({ pen, myUsername, profile, fullname, username }) => {
   return (
     <div className="stamp rounded-xl">
       <Link href={`/${username}`} className="p-3 flex gap-2 items-center">
-        <Image src={profile} width={55} height={55} className="rounded-xl" />
+        <Image src={profile} width={50} height={50} alt={fullname} className="rounded-xl" />
         <div className="flex items-center justify-between w-full">
           <div>
             <p className="font-alibaba">{fullname}</p>
