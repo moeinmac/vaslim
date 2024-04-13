@@ -6,7 +6,7 @@ const HomePen = ({ vasl , myUsername }) => {
   return (
     <div className="flex flex-col gap-4 px-6 pt-4 pb-[5.5rem]">
       {randomUsers.map((username) => (
-        <GetPenByAuthor username={username} myUsername={myUsername}/>
+        <GetPenByAuthor key={username} username={username} myUsername={myUsername}/>
       ))}
     </div>
   );
