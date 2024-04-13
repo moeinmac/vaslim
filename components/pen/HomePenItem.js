@@ -7,16 +7,16 @@ import Image from "next/image";
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
 import Link from "next/link";
 
-const HomePenItem = ({ pen, myUsername, profile, fullname, username }) => {
+const HomePenItem = ({ pen,myUsername}) => {
   const convertedDate = new Date(pen.created_at);
   return (
     <div className="stamp rounded-xl">
-      <Link href={`/${username}`} className="p-3 flex gap-2 items-center">
-        <Image src={profile} width={50} height={50} alt={fullname} className="rounded-xl" />
+      <Link href={`/${pen.username}`} className="p-3 flex gap-2 items-center">
+        <Image src={pen.profile} width={50} height={50} alt={pen.fullname} className="rounded-xl" />
         <div className="flex items-center justify-between w-full">
           <div>
-            <p className="font-alibaba">{fullname}</p>
-            <p className="font-alibaba text-sm">{username}@</p>
+            <p className="font-alibaba">{pen.fullname}</p>
+            <p className="font-alibaba text-sm">{pen.username}@</p>
           </div>
           <HiMiniEllipsisVertical className="text-2xl" />
         </div>
