@@ -5,7 +5,7 @@ const search = () => {
   return (
     <>
       <SearchInput />
-      <SuggestUser />
+      <SuggestUser text={"شما میتوانید افراد زیر را به حـــساب خودتان وصل کنید:"} />
     </>
   );
 };

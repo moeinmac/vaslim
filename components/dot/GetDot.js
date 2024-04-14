@@ -19,7 +19,6 @@ const DotItem = ({ profile, username, isActive }) => {
 };
 
 const GetDot = ({ dotData, myProfile, isBlur }) => {
-  console.log(isBlur);
   return (
     <div className="flex items-center gap-4 overflow-hidden px-6 relative">
       <div

@@ -29,7 +29,7 @@ const signupWelcome = async () => {
           <span>{data.user.email.split("@")[0]}</span>
         </div>
         <div className="flex flex-col gap-8">
-          <p className="text-alibaba">
+          <p className="font-alibaba">
             شما همیشه میتوانید اطلاعات پروفایل خود را به روز رسانی کنید
           </p>
           <Link

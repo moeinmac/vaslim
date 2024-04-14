@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import getAvailableSuggests from "@/lib/getAvailableSuggests";
 import AccountList from "./AccountList";
 
-const SuggestUser = async () => {
+const SuggestUser = async ({ text }) => {
   const supabase = createClient();
 
   const myAuth = await supabase.auth.getUser();
@@ -12,11 +12,7 @@ const SuggestUser = async () => {
   const available = getAvailableSuggests(data, me.data[0].vasl, me.data[0].username);
   return (
     <>
-      {available.length > 0 && (
-        <h1 className="font-kalameh text-3xl p-4">
-          شما میتوانید افراد زیر را به حـــساب خودتان وصل کنید:
-        </h1>
-      )}
+      {available.length > 0 && <h1 className="font-kalameh text-3xl p-4">{text}</h1>}
       <AccountList accounts={available} suggest={true} />
     </>
   );
