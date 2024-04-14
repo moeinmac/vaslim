@@ -2,17 +2,16 @@
 
 import Link from "next/link";
 import SubmitButton from "../Auth/SubmitButton";
+import { useState } from "react";
 import { sendComment } from "@/lib/pen/sendComment";
 
 const PostComment = ({ myUsername, id, userUsername }) => {
   const [commentValue , setCommentValue] = useState("")
   const changeValueHander = (event) => setCommentValue(event.target.value);
-
   const sendNewComment = () => {
     sendComment(commentValue, id, myUsername);
     setCommentValue("")
   };
-  
   return (
     <form className="py-2 px-4 flex flex-col gap-2 fixed bottom-[4.45rem] bg-transparent border-t-2 border-blue z-10 w-full">
       <header className="flex items-center justify-between">
