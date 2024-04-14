@@ -1,9 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { loginHandler } from "@/lib/loginHandler";
 import SubmitButton from "./SubmitButton";
 import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
-import { useState } from "react";
 
 const LoginForm = ({ message }) => {
   const [passVisible, setPassVisible] = useState(false);
@@ -34,13 +34,13 @@ const LoginForm = ({ message }) => {
         />
         {!passVisible && (
           <PiEye
-            className="text-3xl text-black right-2 absolute top-10"
+            className="text-3xl absolute right-4 top-10 text-black"
             onClick={passwordVisibleHandler}
           />
         )}
         {passVisible && (
           <PiEyeClosedDuotone
-            className="text-3xl text-black right-2 absolute top-10"
+            className="text-3xl text-black absolute right-4 top-10"
             onClick={passwordVisibleHandler}
           />
         )}
