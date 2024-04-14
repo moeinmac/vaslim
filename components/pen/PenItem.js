@@ -7,7 +7,7 @@ import HeaderPen from "./HeaderPen";
 
 const PenItem = ({ pen, user, myUsername }) => {
   return (
-    <div className="stamp rounded-xl flex flex-col m-3">
+    <div className="stamp rounded-xl flex flex-col m-3 mb-0">
       <header className="rounded-xl p-2 flex justify-between px-6 py-4">
         <div className={`flex items-center gap-4`}>
           <Image
@@ -15,7 +15,7 @@ const PenItem = ({ pen, user, myUsername }) => {
             height={60}
             src={user.profile}
             priority
-            alt={user.profile}
+            alt={user.fullname}
             className="rounded-lg"
           />
           <div className={`flex flex-col gap-1`}>

@@ -1,7 +1,7 @@
+import CommentList from "@/components/pen/CommentList";
 import PenItem from "@/components/pen/PenItem";
 import PostComment from "@/components/pen/PostComment";
 import { createClient } from "@/lib/supabase/server";
-
 
 const UserPen = async ({ params }) => {
   const supabase = createClient();
@@ -20,6 +20,7 @@ const UserPen = async ({ params }) => {
         myUsername={myUser.data[0].username}
         id={data[0].id}
       />
+      <CommentList comments={data[0].comment} />
     </>
   ) : (
     <h1 className="font-kalameh text-4xl px-6 py-2">همچنین قــلمی وجود نداره</h1>
