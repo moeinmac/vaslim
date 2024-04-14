@@ -36,6 +36,7 @@ input:placeholder-shown {
   direction: rtl;
 }
 
+
 .penItem_bg {
   background: linear-gradient(to right, #222c40, #3558a3 100%);
 }

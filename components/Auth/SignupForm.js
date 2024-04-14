@@ -7,10 +7,16 @@ import Input from "./Input";
 import { IoReturnDownBack } from "react-icons/io5";
 import signupUser from "./SubmitSignupForm";
 
+import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
+
 const SignupForm = () => {
   const [inputFocus, setInputFocus] = useState(false);
   const focusHandler = () => setInputFocus(true);
   const blurHandler = () => setInputFocus(false);
+
+  const [passVisible, setPassVisible] = useState(false);
+  const passwordVisibleHandler = () => setPassVisible(!passVisible);
+  console.log(passVisible);
 
   const [signupLevel, setSignupLevel] = useState({ level: 0 });
 
@@ -38,27 +44,41 @@ const SignupForm = () => {
   return (
     <div className="flex flex-col p-8 justify-between h-[55%]">
       <div className="flex flex-col gap-y-6">
-        <h1 className="font-alibaba text-3xl">
-          {SignupData[signupLevel.level].header}
-        </h1>
-        {inputFocus && (
-          <p className="font-alibaba">{SignupData[signupLevel.level].help}</p>
-        )}
+        <h1 className="font-alibaba text-3xl">{SignupData[signupLevel.level].header}</h1>
+        {inputFocus && <p className="font-alibaba">{SignupData[signupLevel.level].help}</p>}
       </div>
-      <form>
+      <form className="relative">
         <Input
           hidden={signupLevel.level != 0}
           ref={usernameRef}
           placeholder={SignupData[signupLevel.level].input}
           focusHandler={focusHandler}
           blurHandler={blurHandler}
+          passVisible={!passVisible}
         />
+        {signupLevel.level === 1 && (
+          <div className="absolute left-0 -top-9 bg-white p-3 rounded-lg rounded-ee-none rounded-br-none">
+            {!passVisible && (
+              <PiEye
+                className="text-3xl  z-10 text-black"
+                onClick={passwordVisibleHandler}
+              />
+            )}
+            {passVisible && (
+              <PiEyeClosedDuotone
+                className="text-3xl z-10 text-black top-5 right-4"
+                onClick={passwordVisibleHandler}
+              />
+            )}
+          </div>
+        )}
         <Input
           hidden={signupLevel.level != 1}
           ref={passwordRef}
           placeholder={SignupData[signupLevel.level].input}
           focusHandler={focusHandler}
           blurHandler={blurHandler}
+          passVisible={passVisible}
         />
         <Input
           hidden={signupLevel.level != 2}
@@ -66,6 +86,7 @@ const SignupForm = () => {
           placeholder={SignupData[signupLevel.level].input}
           focusHandler={focusHandler}
           blurHandler={blurHandler}
+          passVisible={!passVisible}
         />
         <div className="flex align-center mt-4 gap-4">
           <SubmitButton

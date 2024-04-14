@@ -1,5 +1,5 @@
-import SignupCircle from "@/components/Auth/SignupCircle";
-import SignupForm from "@/components/Auth/SignupForm";
+import SignupCircle from "@/components/auth/SignupCircle";
+import SignupForm from "@/components/auth/SignupForm";
 
 const signup = () => {
   return (
