@@ -16,7 +16,6 @@ const SignupForm = () => {
 
   const [passVisible, setPassVisible] = useState(false);
   const passwordVisibleHandler = () => setPassVisible(!passVisible);
-  console.log(passVisible);
 
   const [signupLevel, setSignupLevel] = useState({ level: 0 });
 

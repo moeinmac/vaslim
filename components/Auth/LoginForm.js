@@ -1,7 +1,14 @@
+"use client";
+
 import { loginHandler } from "@/lib/loginHandler";
 import SubmitButton from "./SubmitButton";
+import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
+import { useState } from "react";
 
 const LoginForm = ({ message }) => {
+  const [passVisible, setPassVisible] = useState(false);
+  const passwordVisibleHandler = () => setPassVisible(!passVisible);
+
   return (
     <form className="w-full flex flex-col gap-6 text-white">
       <label htmlFor="username" className="text-sm font-alibaba">
@@ -15,7 +22,7 @@ const LoginForm = ({ message }) => {
           name="username"
         />
       </label>
-      <label htmlFor="password" className="text-sm font-alibaba">
+      <label htmlFor="password" className="text-sm font-alibaba relative">
         رمز عبور
         <input
           required
@@ -23,8 +30,20 @@ const LoginForm = ({ message }) => {
           id="password"
           dir="ltr"
           className="w-full bg-[#FFC970] text-black font-alibaba text-xl outline-0 border-0 px-4 py-3 rounded-xl mt-2"
-          type="password"
+          type={passVisible ? "text" : "password"}
         />
+        {!passVisible && (
+          <PiEye
+            className="text-3xl text-black right-2 absolute top-10"
+            onClick={passwordVisibleHandler}
+          />
+        )}
+        {passVisible && (
+          <PiEyeClosedDuotone
+            className="text-3xl text-black right-2 absolute top-10"
+            onClick={passwordVisibleHandler}
+          />
+        )}
       </label>
 
       <SubmitButton
