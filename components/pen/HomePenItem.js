@@ -6,7 +6,6 @@ import CommentButton from "./CommentButton";
 import HeaderPen from "./HeaderPen";
 
 const HomePenItem = ({ pen, myUsername }) => {
-  const convertedDate = new Date(pen.created_at);
   return (
     <div className="stamp rounded-xl">
       <Link href={`/${pen.username}`} className="p-3 flex gap-2 items-center">

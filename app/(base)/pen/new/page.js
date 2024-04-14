@@ -1,6 +1,6 @@
 import SubmitButton from "@/components/Auth/SubmitButton";
 import NewText from "@/components/pen/NewText";
-import sendNewPen from "@/lib/sendNewPen";
+import sendNewPen from "@/lib/pen/sendNewPen";
 
 const newPen = ({ searchParams }) => {
   return (
