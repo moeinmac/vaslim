@@ -28,7 +28,7 @@ const username = async ({ params }) => {
       <UserPen username={data[0].username} myUsername={me.data[0].username} />
     </>
   ) : (
-    <h1>NO</h1>
+    <h1 className="font-kalameh text-4xl px-6 py-2">همچنین کاربری وجود نداره</h1>
   );
 };
 
