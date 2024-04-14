@@ -4,7 +4,6 @@ const UserPen = async ({ params }) => {
   const supabase = createClient();
   const { data } = await supabase.from("pen").select().eq("id", params.penID);
   const user = await supabase.from("user").select().eq("id",data[0].author);
-  console.log(data[0].pen.split("\n"));
   return data.length !== 0 ? (
     <>
       <p className="whitespace-pre">{data[0].pen}</p>
