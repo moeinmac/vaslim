@@ -10,7 +10,8 @@ const StampButton = ({ stamp, myUsername, id }) => {
   const [isStamp, setIsStamp] = useState(isStamped);
   const [stampNumber, setStampNumber] = useState(stamp.length);
 
-  const setStampHandler = () => {
+  const setStampHandler = (event) => {
+    event.preventDefault()
     if (!isStamp) {
       const res = sendStamp(id, myUsername);
       res.then((stampNum) => setStampNumber(stampNum));

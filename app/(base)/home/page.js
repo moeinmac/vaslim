@@ -8,7 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 const Home = async () => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
-  let { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
+  const { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
   return (
     <>
       <header className="flex justify-between items-center px-6 py-4">
