@@ -13,7 +13,7 @@ const PostComment = ({ myUsername, id, userUsername }) => {
     setCommentValue("")
   };
   return (
-    <form className="py-2 px-4 flex flex-col gap-2 fixed bottom-[4.45rem] bg-transparent border-t-2 border-blue z-10 w-full">
+    <form className="py-2 px-4 flex flex-col gap-2 fixed bottom-[4.45rem] bg-black border-t-2 border-blue z-10 w-full">
       <header className="flex items-center justify-between">
         <div className="flex font-alibaba items-center gap-2 text-sm">
           <p>در حال ارسال نظر به</p>

@@ -5,7 +5,7 @@ const CommentList = async ({ comments }) => {
   const commentData = await getCommentsData(comments);
 
   return (
-    <div className="flex flex-col m-3 mt-0">
+    <div className="flex flex-col mx-3 mt-0 mb-[8rem]">
       {commentData.map((data) => (
         <CommentItem data={data} key={data.posted_at}/>
       ))}

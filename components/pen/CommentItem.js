@@ -5,7 +5,7 @@ import { timeSince } from "@/lib/timeSince";
 const CommentItem = ({ data }) => {
   const convertedDate = new Date(data.posted_at);
   return (
-    <div className="penItem_bg px-3 py-2 pt-0">
+    <div className="penItem_bg px-3 py-2 pt-0 last:rounded-bl-xl last:rounded-br-xl">
       <div className="stamp p-2 rounded-lg">
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-3">
