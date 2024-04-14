@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import SignupCircle from "@/components/auth/SignupCircle";
+import SignupCircle from "@/components/Auth/SignupCircle";
 import Image from "next/image";
 import Link from "next/link";
 

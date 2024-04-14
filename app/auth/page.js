@@ -1,4 +1,4 @@
-import LoginForm from "@/components/auth/LoginForm";
+import LoginForm from "@/components/Auth/LoginForm";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -13,10 +13,8 @@ const auth = async ({ searchParams }) => {
       <div className="p-8 w-full flex flex-col h-screen justify-between">
         <div className="flex flex-col gap-y-5">
           <h1 className="font-alibaba text-3xl text-white">
-            وارد حــساب{" "}
-            <strong className="text-orange font-kalameh text-5xl">
-              وصـــلیم
-            </strong>{" "}
+            وارد حــساب
+            <strong className="text-orange font-kalameh text-5xl"> وصـــلیم </strong>
             خود شــوید
           </h1>
           <LoginForm message={searchParams.message} />
@@ -27,7 +25,8 @@ const auth = async ({ searchParams }) => {
           </p>
           <Link
             className="text-4xl font-kalameh text-black rounded-xl px-8 py-4 bg-orange text-center"
-            href="/auth/signup">
+            href="/auth/signup"
+          >
             ثبت نام سریع
           </Link>
         </div>

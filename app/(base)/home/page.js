@@ -1,4 +1,4 @@
-import SignOutForm from "@/components/auth/SignoutForm";
+import SignOutForm from "@/components/Auth/SignoutForm";
 import GetDot from "@/components/dot/GetDot";
 import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
