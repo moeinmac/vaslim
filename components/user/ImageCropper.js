@@ -1,6 +1,6 @@
+"use client";
 // from youtube
 
-"use client";
 import { useState, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import ReactCrop, { centerCrop, convertToPixelCrop, makeAspectCrop } from "react-image-crop";
@@ -8,8 +8,9 @@ import setCanvasPreview from "@/lib/setCanvasPreview";
 import "react-image-crop/dist/ReactCrop.css";
 import { dataUrltofile } from "@/lib/dataUrltofile";
 import { sendProfileHandler } from "@/lib/sendProfileHandler";
+import { ImageCompressor } from "image-compressor";
 
-const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile,id }) => {
+const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) => {
   const [imgSrc, setImgSrc] = useState("");
   const [error, setError] = useState("");
   const [crop, setCrop] = useState();
@@ -24,7 +25,6 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile,id }) => 
       onChangeProfile(false);
       return;
     }
-    console.log({ file });
     onChangeProfile(true);
     const reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -61,17 +61,30 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile,id }) => 
     setCrop(centeredCrop);
   };
 
-  const saveProfileHandler =async () => {
+  const saveProfileHandler = async () => {
     setCanvasPreview(
-      imgRef.current, 
-      previewCanvasRef.current, 
+      imgRef.current,
+      previewCanvasRef.current,
       convertToPixelCrop(crop, imgRef.current.width, imgRef.current.height)
     );
     const dataUrl = previewCanvasRef.current.toDataURL();
+    const imageCom = new ImageCompressor();
 
-    const url = await sendProfileHandler(dataUrltofile(dataUrl),id)
-    onSetProfile(url);
-    onChangeProfile(false)
+    const compressorSettings = {
+      toWidth: 1024,
+      toHeight: 1024,
+      mimeType: "image/jpeg",
+      mode: "strict",
+      quality: 0.1,
+      speed: "low",
+    };
+    imageCom.run(dataUrl, compressorSettings, proceedCompressedImage);
+
+    async function proceedCompressedImage(compressedSrc) {
+      const url = await sendProfileHandler(dataUrltofile(compressedSrc), id);
+      onSetProfile(url);
+      onChangeProfile(false);
+    }
   };
 
   return (
