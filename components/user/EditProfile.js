@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { BsFillCameraFill } from "react-icons/bs";
-import { sendProfileHandler } from "@/lib/sendProfileHandler";
 import { useState } from "react";
 import ImageCropper from "./ImageCropper";
 
@@ -12,12 +11,6 @@ const EditProfile = ({ profile, id }) => {
 
   const onChangeProfile = (value) => setIsChanageProfile(value);
   const onSetProfile = (value) => setProfile(value) 
-
-  // const changeProfileHandler = async (event) => {
-  //   const file = event.target.files[0];
-  //   const res = sendProfileHandler(file, id);
-  //   res.then((url) => setProfile(url));
-  // };
   return (
     <div className="flex justify-center ">
       {!isChangeProfile && (
