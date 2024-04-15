@@ -8,7 +8,7 @@ import setCanvasPreview from "@/lib/setCanvasPreview";
 import "react-image-crop/dist/ReactCrop.css";
 import { dataUrltofile } from "@/lib/dataUrltofile";
 import { sendProfileHandler } from "@/lib/sendProfileHandler";
-import { ImageCompressor } from "image-compressor";
+import Compressor from "compressorjs";
 
 const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) => {
   const [imgSrc, setImgSrc] = useState("");
@@ -68,23 +68,21 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) =>
       convertToPixelCrop(crop, imgRef.current.width, imgRef.current.height)
     );
     const dataUrl = previewCanvasRef.current.toDataURL();
-    const imageCom = new ImageCompressor();
+    console.log(dataUrltofile(dataUrl));
+    // onSetProfile(dataUrl);
 
-    const compressorSettings = {
-      toWidth: 1024,
-      toHeight: 1024,
-      mimeType: "image/jpeg",
-      mode: "strict",
-      quality: 0.1,
-      speed: "low",
-    };
-    imageCom.run(dataUrl, compressorSettings, proceedCompressedImage);
-
-    async function proceedCompressedImage(compressedSrc) {
-      const url = await sendProfileHandler(dataUrltofile(compressedSrc), id);
-      onSetProfile(url);
-      onChangeProfile(false);
-    }
+    new Compressor(dataUrltofile(dataUrl), {
+      quality: 0.9,
+      convertSize: 500000,
+      success(result) {
+        console.log(result);
+        const res = sendProfileHandler(result, id);
+        res.then((url) => {
+          onSetProfile(url);
+          onChangeProfile(false);
+        });
+      },
+    });
   };
 
   return (
@@ -124,7 +122,7 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) =>
             <canvas
               ref={previewCanvasRef}
               style={{
-                display: "none",
+                display : "none",
                 objectFit: "contain",
                 width: 150,
                 height: 150,
