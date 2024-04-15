@@ -6,7 +6,7 @@ const StampList = ({ stamp }) => {
       <h1 className="font-kalameh text-3xl bg-black pt-3 px-4 rounded-tl-lg rounded-tr-lg">لیست مُهر کـــننده ها : </h1>
       <div className="bg-black rounded-bl-lg rounded-br-lg py-2">
         {stamp.map((username) => (
-          <VaslItem username={username} />
+          <VaslItem username={username} key={username}/>
         ))}
       </div>
     </div>
