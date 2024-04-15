@@ -4,6 +4,8 @@ import Image from "next/image";
 import VerifiedButton from "../user/VerfiedButton";
 import VaslButton from "@/components/user/VaslButton";
 import HeaderPen from "./HeaderPen";
+import Link from "next/link";
+import { HiUserGroup } from "react-icons/hi";
 
 const PenItem = ({ pen, user, myUsername }) => {
   return (
@@ -41,7 +43,12 @@ const PenItem = ({ pen, user, myUsername }) => {
           }`}
         >
           <StampButton id={pen.id} stamp={pen.stamp} myUsername={myUsername} />
-          <CommentButton comment={pen.comment} />
+          {pen.stamp.length !== 0 && (
+            <Link href={`/pen/${pen.id}?stamplist=${pen.id}`} className="shadow-lg bg-blue py-2 px-3 rounded-lg">
+              <HiUserGroup className="text-2xl"/>
+            </Link>
+          )}
+          <Link href={`/pen/${pen.id}`}><CommentButton comment={pen.comment} /></Link>
         </div>
       </footer>
     </div>
