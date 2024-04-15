@@ -16,7 +16,7 @@ const PostComment = ({ myUsername, id, userUsername }) => {
     <form className="py-2 px-4 flex flex-col gap-2 fixed bottom-[4.45rem] bg-black border-t-2 border-blue z-10 w-full">
       <header className="flex items-center justify-between">
         <div className="flex font-alibaba items-center gap-2 text-sm">
-          <p>در حال ارسال نظر به</p>
+          <p>ارسال نظر به</p>
           <Link href={`/${userUsername}`}>{userUsername}@</Link>
         </div>
         <SubmitButton

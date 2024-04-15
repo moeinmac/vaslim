@@ -9,7 +9,7 @@ import signupUser from "./SubmitSignupForm";
 
 import { PiEyeClosedDuotone, PiEye } from "react-icons/pi";
 
-const SignupForm = () => {
+const SignupForm = ({ message }) => {
   const [inputFocus, setInputFocus] = useState(false);
   const focusHandler = () => setInputFocus(true);
   const blurHandler = () => setInputFocus(false);
@@ -58,10 +58,7 @@ const SignupForm = () => {
         {signupLevel.level === 1 && (
           <div className="absolute left-0 -top-9 bg-white p-3 rounded-lg rounded-ee-none rounded-br-none">
             {!passVisible && (
-              <PiEye
-                className="text-3xl  z-10 text-black"
-                onClick={passwordVisibleHandler}
-              />
+              <PiEye className="text-3xl  z-10 text-black" onClick={passwordVisibleHandler} />
             )}
             {passVisible && (
               <PiEyeClosedDuotone
@@ -107,6 +104,11 @@ const SignupForm = () => {
           )}
         </div>
       </form>
+      {message && (
+        <p className="font-alibaba bg-gray text-red-500 px-3 py-2 rounded-xl">
+          ثبت نام انجام نشد ! لطفا یکــبار دیگر اطلاعات وارد شده را بررسی کــرده و دوباره امتحان کــنید
+        </p>
+      )}
     </div>
   );
 };

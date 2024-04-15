@@ -28,8 +28,8 @@ const CommentItem = ({ data }) => {
           </div>
           <p className="font-alibaba text-[0.6rem]">{timeSince(convertedDate)}</p>
         </header>
-        <p className="px-1 py-2 font-alibaba text-sm">چنین گــفت : </p>
-        <article className="px-3 font-alibaba whitespace-pre-wrap">{data.comment}</article>
+        <p className="px-1 py-2 font-alibaba text-sm text-gray">چنین گــفت : </p>
+        <article className="px-3 font-alibaba whitespace-pre-wrap text-lg">{data.comment}</article>
       </div>
     </div>
   );
