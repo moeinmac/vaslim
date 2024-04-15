@@ -1,5 +1,4 @@
 "use client";
-// from youtube
 
 import { useState, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
@@ -16,11 +15,12 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) =>
   const [crop, setCrop] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const closeChangeProfile = () => onChangeProfile(false); // clear input {#fix_later}
 
   const selectImageHandler = (e) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files[e.target.files.length - 1];
     if (!file) {
       onChangeProfile(false);
       return;
@@ -62,24 +62,23 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) =>
   };
 
   const saveProfileHandler = async () => {
+    setLoading(true);
     setCanvasPreview(
       imgRef.current,
       previewCanvasRef.current,
       convertToPixelCrop(crop, imgRef.current.width, imgRef.current.height)
     );
     const dataUrl = previewCanvasRef.current.toDataURL();
-    console.log(dataUrltofile(dataUrl));
-    // onSetProfile(dataUrl);
 
     new Compressor(dataUrltofile(dataUrl), {
       quality: 0.9,
       convertSize: 500000,
       success(result) {
-        console.log(result);
         const res = sendProfileHandler(result, id);
         res.then((url) => {
           onSetProfile(url);
           onChangeProfile(false);
+          setLoading(false);
         });
       },
     });
@@ -95,41 +94,43 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) =>
         accept="image/*"
       />
       {isChangeProfile && (
-        <div className="stamp w-full rounded-lg p-3 m-3">
+        <div className="stamp w-full rounded-lg p-3 m-3 flex items-center flex-col">
           <header className="w-full">
             <button className="hover:bg-[#f1dfc2] p-1 rounded-xl" onClick={closeChangeProfile}>
               <MdOutlineClose className="text-xl text-orange" />
             </button>
           </header>
-          <ReactCrop
-            crop={crop}
-            onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
-            circularCrop
-            keepSelection
-            aspect={1}
-            minWidth={150}
-          >
-            <img
-              ref={imgRef}
-              src={imgSrc}
-              alt="Upload"
-              style={{ maxHeight: "70vh" }}
-              onLoad={onImageLoad}
-            />
-          </ReactCrop>
+          {!loading && (
+            <ReactCrop
+              crop={crop}
+              onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+              circularCrop
+              keepSelection
+              aspect={1}
+              minWidth={150}
+            >
+              <img
+                ref={imgRef}
+                src={imgSrc}
+                alt="Upload"
+                style={{ maxHeight: "70vh" }}
+                onLoad={onImageLoad}
+              />
+            </ReactCrop>
+          )}
           {error && <p className="text-red-600 text-xs">{error}</p>}
-          {crop && (
+          {crop && !loading && (
             <canvas
               ref={previewCanvasRef}
               style={{
-                display : "none",
+                display: "none",
                 objectFit: "contain",
                 width: 150,
                 height: 150,
               }}
             />
           )}
-          {isChangeProfile && (
+          {isChangeProfile && !loading && (
             <button
               onClick={saveProfileHandler}
               className="mt-3 bg-orange w-full font-kalameh text-4xl px-3 py-2 rounded-xl text-black"
@@ -137,6 +138,7 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) =>
               ذخــیره پــروفایل
             </button>
           )}
+          {loading && isChangeProfile && <div className="profieLoader"></div>}
         </div>
       )}
     </>
