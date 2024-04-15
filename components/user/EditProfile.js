@@ -4,10 +4,14 @@ import Image from "next/image";
 import { BsFillCameraFill } from "react-icons/bs";
 import { sendProfileHandler } from "@/lib/sendProfileHandler";
 import { useState } from "react";
+import ImageCropper from "./ImageCropper";
 
 const EditProfile = ({ profile, id }) => {
   const [updatedProfile, setProfile] = useState(profile);
   const [isChangeProfile, setIsChanageProfile] = useState();
+
+  const onChangeProfile = (value) => setIsChanageProfile(value);
+  const onSetProfile = (value) => setProfile(value) 
 
   // const changeProfileHandler = async (event) => {
   //   const file = event.target.files[0];
@@ -29,14 +33,7 @@ const EditProfile = ({ profile, id }) => {
           <BsFillCameraFill className="-bottom-4 -right-3 absolute text-4xl p-2 bg-black rounded-full" />
         </label>
       )}
-      <input
-        className="hidden"
-        // onChange={changeProfileHandler}
-        type="file"
-        id="change"
-        accept="image/*"
-      />
-      {isChangeProfile && <div></div>}
+      <ImageCropper id={id} onSetProfile={onSetProfile} isChangeProfile={isChangeProfile} onChangeProfile={onChangeProfile} />
     </div>
   );
 };
