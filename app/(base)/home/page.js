@@ -1,4 +1,3 @@
-import SignOutForm from "@/components/Auth/SignoutForm";
 import GetDot from "@/components/dot/GetDot";
 import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
@@ -20,7 +19,6 @@ const Home = async () => {
         myProfile={data[0].profile}
         isBlur={data[0].vasl.length > 1 ? true : false}
       />
-      <SignOutForm />
       <HomePen vasl={data[0].vasl} myUsername={data[0].username} />
     </>
   );

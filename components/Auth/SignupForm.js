@@ -53,7 +53,6 @@ const SignupForm = ({ message }) => {
           placeholder={SignupData[signupLevel.level].input}
           focusHandler={focusHandler}
           blurHandler={blurHandler}
-          passVisible={!passVisible}
         />
         {signupLevel.level === 1 && (
           <div className="absolute left-0 -top-9 bg-white p-3 rounded-lg rounded-ee-none rounded-br-none">
@@ -82,7 +81,6 @@ const SignupForm = ({ message }) => {
           placeholder={SignupData[signupLevel.level].input}
           focusHandler={focusHandler}
           blurHandler={blurHandler}
-          passVisible={!passVisible}
         />
         <div className="flex align-center mt-4 gap-4">
           <SubmitButton

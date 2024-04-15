@@ -14,6 +14,7 @@ const user = async () => {
         fullname={data[0].fullname}
         username={data[0].username}
         isVerified={data[0].isVerified}
+        isLogout
         path={"/home"}
       />
       <MyAccount meData={data[0]} />
