@@ -36,7 +36,6 @@ input:placeholder-shown {
   direction: rtl;
 }
 
-
 .penItem_bg {
   background: linear-gradient(to right, #222c40, #3558a3 100%);
 }
@@ -51,7 +50,7 @@ input:placeholder-shown {
 .back-drop {
   animation: blur 1.5s ease-in-out 2.5s forwards alternate;
 }
-.show{
+.show {
   animation: showtext 1.5s ease-in-out 3s forwards alternate;
   opacity: 0;
 }
@@ -67,62 +66,118 @@ input:placeholder-shown {
     opacity: 1;
   }
 }
+
+.notif {animation: index 1s ease-in-out 1s 1 forwards alternate;}
+@keyframes index {
+  50%{opacity: 0;}
+  100% {
+    opacity: 1;
+    z-index: -10;
+  }
+}
+
 .loader {
   width: 60px;
   aspect-ratio: 1;
-  --c:no-repeat linear-gradient(#fca311 0 0);
-  background:
-    var(--c) 0 38px,
-    var(--c) right 18px bottom 18px,
-    var(--c) right 18px top    18px,
-    var(--c) 18px 18px,
-    var(--c) 18px 100%,
-    var(--c) 100% 100%,
-    var(--c) 100% 0,
-    var(--c) 0 0;
-  animation: 
-    l8-1 2s infinite,
-    l8-2 2s infinite;
+  --c: no-repeat linear-gradient(#fca311 0 0);
+  background: var(--c) 0 38px, var(--c) right 18px bottom 18px, var(--c) right 18px top 18px,
+    var(--c) 18px 18px, var(--c) 18px 100%, var(--c) 100% 100%, var(--c) 100% 0, var(--c) 0 0;
+  animation: l8-1 2s infinite, l8-2 2s infinite;
 }
 @keyframes l8-1 {
-  0%     {background-size: 0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   }
-  6.25%  {background-size: 40px 4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   }
-  12.5%  {background-size: 40px 4px,4px 20px,0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   }
-  18.75% {background-size: 40px 4px,4px 20px,20px 4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   }
-  25%    {background-size: 40px 4px,4px 20px,20px 4px,4px 40px,0    4px,4px 0   ,0    4px,4px 0   }
-  31.25% {background-size: 40px 4px,4px 20px,20px 4px,4px 40px,40px 4px,4px 0   ,0    4px,4px 0   }
-  37.5%  {background-size: 40px 4px,4px 20px,20px 4px,4px 40px,40px 4px,4px 100%,0    4px,4px 0   }
-  43.75% {background-size: 40px 4px,4px 20px,20px 4px,4px 40px,40px 4px,4px 100%,100% 4px,4px 0   }
+  0% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0;
+  }
+  6.25% {
+    background-size: 40px 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0;
+  }
+  12.5% {
+    background-size: 40px 4px, 4px 20px, 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0;
+  }
+  18.75% {
+    background-size: 40px 4px, 4px 20px, 20px 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0;
+  }
+  25% {
+    background-size: 40px 4px, 4px 20px, 20px 4px, 4px 40px, 0 4px, 4px 0, 0 4px, 4px 0;
+  }
+  31.25% {
+    background-size: 40px 4px, 4px 20px, 20px 4px, 4px 40px, 40px 4px, 4px 0, 0 4px, 4px 0;
+  }
+  37.5% {
+    background-size: 40px 4px, 4px 20px, 20px 4px, 4px 40px, 40px 4px, 4px 100%, 0 4px, 4px 0;
+  }
+  43.75% {
+    background-size: 40px 4px, 4px 20px, 20px 4px, 4px 40px, 40px 4px, 4px 100%, 100% 4px, 4px 0;
+  }
   48%,
-  52%    {background-size: 40px 4px,4px 20px,20px 4px,4px 40px,40px 4px,4px 100%,100% 4px,4px 40px}
-  56.25% {background-size: 0    4px,4px 20px,20px 4px,4px 40px,40px 4px,4px 100%,100% 4px,4px 40px}
-  62.5%  {background-size: 0    4px,4px 0   ,20px 4px,4px 40px,40px 4px,4px 100%,100% 4px,4px 40px}
-  68.75% {background-size: 0    4px,4px 0   ,0    4px,4px 40px,40px 4px,4px 100%,100% 4px,4px 40px}
-  75%    {background-size: 0    4px,4px 0   ,0    4px,4px 0   ,40px 4px,4px 100%,100% 4px,4px 40px}
-  81.25% {background-size: 0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 100%,100% 4px,4px 40px}
-  87.5%  {background-size: 0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   ,100% 4px,4px 40px}
-  93.75% {background-size: 0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 40px}
-  100%   {background-size: 0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   ,0    4px,4px 0   }
+  52% {
+    background-size: 40px 4px, 4px 20px, 20px 4px, 4px 40px, 40px 4px, 4px 100%, 100% 4px, 4px 40px;
+  }
+  56.25% {
+    background-size: 0 4px, 4px 20px, 20px 4px, 4px 40px, 40px 4px, 4px 100%, 100% 4px, 4px 40px;
+  }
+  62.5% {
+    background-size: 0 4px, 4px 0, 20px 4px, 4px 40px, 40px 4px, 4px 100%, 100% 4px, 4px 40px;
+  }
+  68.75% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 40px, 40px 4px, 4px 100%, 100% 4px, 4px 40px;
+  }
+  75% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0, 40px 4px, 4px 100%, 100% 4px, 4px 40px;
+  }
+  81.25% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 100%, 100% 4px, 4px 40px;
+  }
+  87.5% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0, 100% 4px, 4px 40px;
+  }
+  93.75% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 40px;
+  }
+  100% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0, 0 4px, 4px 0;
+  }
 }
 @keyframes l8-2 {
-  0%,49.9% {background-position:0 38px, right 18px bottom 18px, right 18px top 18px,18px 18px,18px 100%,100% 100%,100% 0,0 0}
-  50%,100% {background-position:right 18px bottom 18px, right 18px top 18px, 18px 18px,18px 100%,100% 100%,100% 0,0 0,bottom 18px left 0}
+  0%,
+  49.9% {
+    background-position: 0 38px, right 18px bottom 18px, right 18px top 18px, 18px 18px, 18px 100%,
+      100% 100%, 100% 0, 0 0;
+  }
+  50%,
+  100% {
+    background-position: right 18px bottom 18px, right 18px top 18px, 18px 18px, 18px 100%,
+      100% 100%, 100% 0, 0 0, bottom 18px left 0;
+  }
 }
 /* HTML: <div class="loader"></div> */
 .profieLoader {
-  
   width: 50px;
   aspect-ratio: 1;
   background: #006cff;
   border-radius: 50%;
   animation: l1 3s infinite linear;
 }
-@keyframes l1{
-  12.5% {border-radius: 37% 63% 70% 30% / 30% 62% 38% 70%}
-  25%   {border-radius: 50% 50% 70% 30% / 52% 62% 38% 48%}
-  37.5% {border-radius: 33% 67% 18% 82% / 52% 75% 25% 48%}
-  50%   {border-radius: 73% 27% 18% 82% / 52% 32% 68% 48%}
-  62.5% {border-radius: 73% 27% 74% 26% / 64% 32% 68% 36%}
-  75%   {border-radius: 84% 16% 15% 85% / 55% 79% 21% 45%}
-  87.5% {border-radius: 12% 88% 69% 31% / 10% 66% 34% 90%}
+@keyframes l1 {
+  12.5% {
+    border-radius: 37% 63% 70% 30% / 30% 62% 38% 70%;
+  }
+  25% {
+    border-radius: 50% 50% 70% 30% / 52% 62% 38% 48%;
+  }
+  37.5% {
+    border-radius: 33% 67% 18% 82% / 52% 75% 25% 48%;
+  }
+  50% {
+    border-radius: 73% 27% 18% 82% / 52% 32% 68% 48%;
+  }
+  62.5% {
+    border-radius: 73% 27% 74% 26% / 64% 32% 68% 36%;
+  }
+  75% {
+    border-radius: 84% 16% 15% 85% / 55% 79% 21% 45%;
+  }
+  87.5% {
+    border-radius: 12% 88% 69% 31% / 10% 66% 34% 90%;
+  }
 }
