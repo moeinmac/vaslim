@@ -15,14 +15,19 @@ const UserPen = async ({ params, searchParams }) => {
 
   return data.length !== 0 ? (
     <>
-      <PenItem user={user.data[0]} pen={data[0]} myUsername={myUser.data[0].username} />
+      <PenItem
+        user={user.data[0]}
+        pen={data[0]}
+        myUsername={myUser.data[0].username}
+        params={searchParams}
+      />
       <PostComment
         userUsername={user.data[0].username}
         myUsername={myUser.data[0].username}
         id={data[0].id}
       />
-      {!searchParams.stamplist && <CommentList comments={data[0].comment} />}
-      {searchParams.stamplist && <StampList stamp={data[0].stamp} />}
+      {!searchParams.stamplist && !searchParams.close && <CommentList comments={data[0].comment} />}
+      {searchParams.stamplist && !searchParams.close && <StampList stamp={data[0].stamp} />}
     </>
   ) : (
     <h1 className="font-kalameh text-4xl px-6 py-2">همچنین قــلمی وجود نداره</h1>

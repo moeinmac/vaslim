@@ -6,8 +6,11 @@ import VaslButton from "@/components/user/VaslButton";
 import HeaderPen from "./HeaderPen";
 import Link from "next/link";
 import { HiUserGroup } from "react-icons/hi";
+import BackButton from "../user/BackButton";
 
-const PenItem = ({ pen, user, myUsername }) => {
+
+const PenItem = ({ pen, user, myUsername ,params}) => {
+  const commentListPath = params.stamplist || params.close ? `/pen/${pen.id}` : `/pen/${pen.id}?close=true` 
   return (
     <div className="stamp rounded-xl flex flex-col m-3 mb-0">
       <header className="rounded-xl p-2 flex justify-between px-6 py-4">
@@ -29,7 +32,10 @@ const PenItem = ({ pen, user, myUsername }) => {
             />
           </div>
         </div>
+        <div className="flex items-center gap-4">
         <VaslButton vasl={user.vasl.length} username={user.username} />
+        <BackButton className={"text-4xl"}/>
+        </div>
       </header>
       <article className="whitespace-pre-wrap px-6 font-alibaba">{pen.pen}</article>
       <footer className=" flex flex-col pt-2">
@@ -38,7 +44,7 @@ const PenItem = ({ pen, user, myUsername }) => {
         </div>
         <div
           className={`penItem_bg flex items-center justify-between p-4 ${
-            pen.comment.length === 0 ? "rounded-bl-xl rounded-br-xl" : ""
+            pen.comment.length === 0 || params.close ? "rounded-bl-xl rounded-br-xl" : ""
           }`}
         >
           <StampButton id={pen.id} stamp={pen.stamp} myUsername={myUsername} />
@@ -50,7 +56,7 @@ const PenItem = ({ pen, user, myUsername }) => {
               <HiUserGroup className="text-2xl" />
             </Link>
           )}
-          <Link href={`/pen/${pen.id}`}>
+          <Link href={commentListPath}>
             <CommentButton comment={pen.comment} />
           </Link>
         </div>
