@@ -1,11 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
-
-
 import HomePenItem from "./HomePenItem";
 
-
-
-export const ExpolorePen = async ({penData , myUsername}) => {
+const ExpolorePen = ({penData , myUsername}) => {
 
   return (
     <div className="flex flex-col gap-4 px-6">
