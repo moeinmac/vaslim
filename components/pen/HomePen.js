@@ -40,7 +40,7 @@ const HomePen = async ({ vasl, myUsername }) => {
   }
   const sortedPens = createPens.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   return (
-    <div className="flex flex-col gap-4 px-6 pt-4">
+    <div className="flex flex-col gap-4 px-6">
       {sortedPens.map((pen) => (
         <HomePenItem key={pen.id} pen={pen} myUsername={myUsername} />
       ))}

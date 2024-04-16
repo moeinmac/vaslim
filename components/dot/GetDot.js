@@ -9,7 +9,8 @@ const DotItem = ({ profile, username, isActive }) => {
         <Image
           src={profile}
           alt={username}
-          fill
+          width={56}
+          height={56}
           className={`${isActive ? "border-2 border-orange" : ""} rounded-xl`}
         />
       </div>
@@ -32,7 +33,14 @@ const GetDot = ({ dotData, myProfile, isBlur }) => {
       </div>
       <div className="flex flex-col items-center gap-1">
         <div className="relative w-14 h-14">
-          <Image src={myProfile} alt={"نقطه شما"} priority fill className="rounded-xl" />
+          <Image
+            src={myProfile}
+            alt={"نقطه شما"}
+            priority
+            width={56}
+            height={56}
+            className="rounded-xl"
+          />
           <CiCirclePlus className="absolute z-10 text-xl bg-orange rounded-full -bottom-1 -right-2" />
         </div>
         <p className="font-alibaba text-[0.7rem]">{"نقطه شما"}</p>

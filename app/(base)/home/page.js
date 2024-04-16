@@ -1,10 +1,11 @@
 import GetDot from "@/components/dot/GetDot";
 import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
+import SwitchHomePen from "@/components/pen/SwitchHomePen";
 import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
 import { createClient } from "@/lib/supabase/server";
 
-const Home = async () => {
+const Home = async ({ searchParams }) => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
   const { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
@@ -19,7 +20,8 @@ const Home = async () => {
         myProfile={data[0].profile}
         isBlur={data[0].vasl.length > 1 ? true : false}
       />
-      <HomePen vasl={data[0].vasl} myUsername={data[0].username} />
+      <SwitchHomePen params={searchParams} username={data[0].username} />
+      {!searchParams.fayre && <HomePen vasl={data[0].vasl} myUsername={data[0].username} />}
     </>
   );
 };

@@ -54,6 +54,7 @@ input:placeholder-shown {
   animation: showtext 1.5s ease-in-out 3s forwards alternate;
   opacity: 0;
 }
+.switch_home{transition: left right 1s ;}
 
 @keyframes blur {
   100% {
