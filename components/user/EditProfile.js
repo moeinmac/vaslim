@@ -19,7 +19,7 @@ const EditProfile = ({ profile, id }) => {
             src={updatedProfile}
             width={100}
             height={100}
-            priority
+
             alt={"edit profile"}
             className="rounded-lg"
           />

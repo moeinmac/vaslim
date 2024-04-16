@@ -18,7 +18,7 @@ const vasl = async ({ params }) => {
           username={data[0].username}
           small={true}
         />
-        <BackButton path={`/${params.username}`} className={"text-4xl"} />
+        <BackButton className={"text-4xl"} />
       </header>
       <h1 className="text-5xl px-6 py-2 font-kalameh">لیسـت متصـــــل ها</h1>
       <div className="flex flex-col gap-2 py-2">

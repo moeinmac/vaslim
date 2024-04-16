@@ -8,7 +8,6 @@ const Profile = ({ profile, fullname, username, small, isVerified, className }) 
         width={small ? 60 : 100}
         height={small ? 60 : 100}
         src={profile}
-        priority
         alt={fullname}
         className="rounded-lg outline-8 outline-blue outline-double "
       />

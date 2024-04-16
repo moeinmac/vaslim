@@ -36,7 +36,6 @@ const GetDot = ({ dotData, myProfile, isBlur }) => {
           <Image
             src={myProfile}
             alt={"نقطه شما"}
-            priority
             width={56}
             height={56}
             className="rounded-xl"

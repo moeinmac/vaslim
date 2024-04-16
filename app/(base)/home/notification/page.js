@@ -17,7 +17,7 @@ const notification = async () => {
     <>
       <header className="flex justify-between items-center px-6 py-4">
         <h1 className="font-kalameh text-5xl ">اعــلان های شما</h1>
-        <BackButton path={"/home"} className={"text-4xl"} />
+        <BackButton className={"text-4xl"} />
       </header>
       <NotifcationList notification={data[0].notification.data}/>
       <ReqList myUsername={data[0].username} reqIn={data[0].reqIn} />

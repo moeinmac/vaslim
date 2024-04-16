@@ -12,7 +12,7 @@ const edit = async () => {
       <header className="px-6 py-4 flex flex-col gap-1">
         <div className="flex items-center justify-between w-full">
           <h1 className="font-kalameh text-5xl">ویـرایش صفــــحه</h1>
-          <BackButton path={"/user"} className={"text-4xl"} />
+          <BackButton className={"text-4xl"} />
         </div>
         <p className="font-alibaba">اطلاعات کـاربری تان را تغییر دهید</p>
       </header>

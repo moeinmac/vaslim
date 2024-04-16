@@ -15,7 +15,6 @@ const user = async () => {
         username={data[0].username}
         isVerified={data[0].isVerified}
         isLogout
-        path={"/home"}
       />
       <MyAccount meData={data[0]} />
       <h1 className="font-kalameh text-4xl px-6 py-2">نوشته های من</h1>

@@ -20,7 +20,6 @@ const username = async ({ params }) => {
         profile={data[0].profile}
         fullname={data[0].fullname}
         username={data[0].username}
-        path={"/search"}
         isVerified={data[0].isVerified}
       />
 

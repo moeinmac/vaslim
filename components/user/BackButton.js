@@ -1,11 +1,15 @@
-import Link from "next/link";
+"use client";
+
+import { useRouter } from "next/navigation";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 
-const BackButton = ({ path, className }) => {
+const BackButton = ({className }) => {
+  const router = useRouter();
+  const backHandler = () => router.back()
   return (
-    <Link href={`${path}`}>
+    <button onClick={backHandler}>
       <IoReturnUpBackSharp className={className} />
-    </Link>
+    </button>
   );
 };
 
