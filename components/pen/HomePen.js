@@ -1,16 +1,9 @@
 import { pickRandom } from "@/lib/getAvailableSuggests";
-import { getPenByAuthor } from "@/lib/pen/getPenByAuthor";
 import HomePenItem from "./HomePenItem";
 import SuggestUser from "../search/SuggestUser";
+import { getRequestedPens } from "@/lib/pen/getRequestedPens";
 
-const getRequestedPens = async (usernames, count) => {
-  const allData = [];
-  for (const username of usernames) {
-    const response = await getPenByAuthor(username, count);
-    allData.push(response);
-  }
-  return allData;
-};
+
 
 const HomePen = async ({ vasl, myUsername }) => {
   if (vasl.length === 0)
