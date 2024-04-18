@@ -25,8 +25,15 @@ const UserPen = async ({ params, searchParams }) => {
         userUsername={user.data[0].username}
         myUsername={myUser.data[0].username}
         id={data[0].id}
+        isAuthor={myAuth.data.user.id === data[0].author}
+        isReply={searchParams.reply ? searchParams.reply : false}
       />
-      {!searchParams.stamplist && !searchParams.close && <CommentList comments={data[0].comment} />}
+      {!searchParams.stamplist && !searchParams.close && (
+        <CommentList
+          comments={data[0].comment}
+          isAuthor={myAuth.data.user.id === data[0].author}
+        />
+      )}
       {searchParams.stamplist && !searchParams.close && <StampList stamp={data[0].stamp} />}
     </>
   ) : (
