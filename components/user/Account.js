@@ -9,7 +9,8 @@ import { denyHandler } from "@/lib/req/denyHandler";
 import { sendHandler } from "@/lib/req/sendHandler";
 import { reclaimHandler } from "@/lib/req/reclaimHandler";
 import VaslButton from "./VaslButton";
-import Link from "next/link"
+
+import UserMessageButton from "../message/UserMessageButton";
 
 const Account = ({ myUsername, userUsername }) => {
   const [me, setMe] = useState([]);
@@ -96,9 +97,12 @@ const Account = ({ myUsername, userUsername }) => {
         <div className="py-2 w-full text-4xl font-kalameh rounded-xl bg-white text-black text-center">
           در حال بارگذاری...
         </div>
-        <Link href={`/message?id=${userUsername}`} className="font-kalameh text-3xl py-2 rounded-xl w-full border-4 border-white text-center">
-          پیام دهید
-        </Link>
+        <UserMessageButton
+          userMessage={user.message}
+          myMessage={me.message}
+          userid={user.id}
+          myid={me.id}
+        />
       </div>
     );
   }
@@ -108,7 +112,7 @@ const Account = ({ myUsername, userUsername }) => {
         <p className="font-alibaba">مطمئنی که میخوای این کاربر رو از لیست متصل هات حذف کنی؟</p>
       )}
       <div className="flex items-center gap-8  w-full">
-        <VaslButton vasl={user.vasl ? user.vasl.length : 0} username={userUsername}/>
+        <VaslButton vasl={user.vasl ? user.vasl.length : 0} username={userUsername} />
         {!isVasl && !isReqOut && !isReqIn && (
           <button
             className="border-4 border-blue py-2 w-full text-4xl font-kalameh rounded-xl"
@@ -160,9 +164,12 @@ const Account = ({ myUsername, userUsername }) => {
           </div>
         )}
       </div>
-      <Link href={`/message?id=${userUsername}`} className="font-kalameh text-3xl py-2 rounded-xl w-full border-4 border-white text-center">
-          پیام دهید
-        </Link>
+      <UserMessageButton
+        userMessage={user.message}
+        myMessage={me.message}
+        userid={user.id}
+        myid={me.id}
+      />
     </div>
   );
 };
