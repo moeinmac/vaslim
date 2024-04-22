@@ -1,12 +1,10 @@
 import SubmitButton from "@/components/Auth/SubmitButton";
 import NewText from "@/components/pen/NewText";
 import sendNewPen from "@/lib/pen/sendNewPen";
-import NewMessage from "@/components/message/NewMessage";
 
 const newPen = ({ searchParams }) => {
   return (
     <>
-      <NewMessage />
       <header className="px-6 py-4 flex flex-col gap-2">
         <h1 className="font-kalameh text-5xl">دســـت به قـــلم شوید</h1>
         <p className="font-alibaba">لحظات تان را با دوستان تان در میان بگـذارید</p>
