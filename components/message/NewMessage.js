@@ -1,31 +1,38 @@
 "use client";
-// import { createClient } from "@/lib/supabase/client";
-// import { useRef } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { useRef } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
-import { RiSendPlane2Fill, RiSendPlane2Line } from "react-icons/ri";
+import { RiSendPlane2Fill } from "react-icons/ri";
 
-const NewMessage = () => {
-  // const supabase = createClient();
-  // const newChannel = supabase.channel("test-room");
+const NewMessage = ({ myid }) => {
+  const inputRef = useRef();
 
-  // const inputRef = useRef();
+  const supabase = createClient();
+  const newChannel = supabase.channel("test-room");
 
-  // const sendMessage = () => {
-  //   newChannel.send({
-  //     type: "broadcast",
-  //     event: "message",
-  //     payload: { message: inputRef.current.value },
-  //   });
-  //   supabase.removeChannel(newChannel);
-  // };
+  const sendMessageHandler = () => {
+    const now = new Date();
+    newChannel.send({
+      type: "broadcast",
+      event: "message",
+      payload: {
+        text: inputRef.current.value,
+        time: `${now.getMinutes()} : ${now.getHours()}`,
+        send_by: myid,
+      },
+    });
+    supabase.removeChannel(newChannel);
+    inputRef.current.value = ""
+  };
 
   return (
     <div className="flex self-end w-full items-center py-[1.3rem] stamp relative z-30 rounded-tl-xl rounded-tr-xl">
-      <button className="px-4">
+      <button className="px-4" onClick={sendMessageHandler}>
         <RiSendPlane2Fill className="text-3xl text-[#5D85DD]" />
       </button>
       <TextareaAutosize
+        ref={inputRef}
         placeholder="یه چیزی بگــو..."
         minRows={1}
         dir="auto"

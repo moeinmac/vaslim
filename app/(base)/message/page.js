@@ -1,16 +1,8 @@
 // import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
+
 
 const message = () => {
-  const supabase = createClient();
-  const newChannel = supabase.channel("test-room");
-
-  const messageReceived = (payload) => {
-    console.log(payload);
-    supabase.removeChannel(newChannel);
-  };
-
-  newChannel.on("broadcast", { event: "message" }, (payload) => messageReceived(payload)).subscribe();
+  
 
   return (
     <>
