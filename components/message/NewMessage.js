@@ -26,6 +26,8 @@ const NewMessage = ({ myid, id }) => {
       message_id: id,
       message_data: message,
     });
+
+    inputRef.current.value = "";
   };
 
   return (
