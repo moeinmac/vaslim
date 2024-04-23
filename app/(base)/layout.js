@@ -9,7 +9,7 @@ const baseLayout = async ({ children }) => {
   return (
     <main className="flex flex-col">
       {children}
-      {/* <MobileTabbar /> */}
+      <MobileTabbar />
     </main>
   );
 };

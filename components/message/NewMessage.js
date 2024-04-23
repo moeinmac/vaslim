@@ -27,7 +27,7 @@ const NewMessage = ({ myid }) => {
   };
 
   return (
-    <div className="flex self-end w-full items-center py-[1.3rem] stamp relative z-30 rounded-tl-xl rounded-tr-xl">
+    <div className="flex self-end w-full items-center py-[1.3rem] stamp rounded-tl-xl rounded-tr-xl">
       <button className="px-4" onClick={sendMessageHandler}>
         <RiSendPlane2Fill className="text-3xl text-[#5D85DD]" />
       </button>
