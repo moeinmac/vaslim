@@ -32,7 +32,7 @@
   height: 700px;
   overflow: visible;
 }
-input:placeholder-shown {
+input:placeholder-shown, textarea:placeholder-shown {
   direction: rtl;
 }
 

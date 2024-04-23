@@ -15,7 +15,7 @@ const MessageCard = async ({ users, me }) => {
   const userdata = data.find((user) => user.id !== me);
   const mydata = data.find((user) => user.id === me);
   return (
-    <div className="flex flex-col h-screen justify-between pb-[4.6rem]">
+    <div className="flex flex-col h-screen justify-between">
       <MessageHeader data={userdata}/>
       <MessageList />
       <NewMessage />
