@@ -16,13 +16,9 @@ const MessageList = ({ myid, id }) => {
     loadMessages(id);
   }, []);
 
-  const messageReceived = async (payload) => {
+  const messageReceived = (payload) => {
     setMessages((prevState) => [...prevState, payload.payload]);
     supabase.removeChannel(newChannel);
-    // await supabase
-    //   .from("message")
-    //   .update({ messages: [...messages, payload.payload] })
-    //   .eq("id", id);
   };
 
   newChannel
@@ -30,7 +26,7 @@ const MessageList = ({ myid, id }) => {
     .subscribe();
 
   return (
-    <div className="flex-1 flex gap-3 flex-col items-start justify-end py-4">
+    <div className="flex-1 flex gap-3 flex-col items-start py-24">
       {messages.map((message) => (
         <MessageItem message={message} myid={myid} key={Math.random()} />
       ))}

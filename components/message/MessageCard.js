@@ -17,10 +17,8 @@ const MessageCard = async ({ users, me, id }) => {
   return (
     <div className="flex flex-col flex-1 justify-between">
       <MessageHeader data={userdata} />
-      <div className="fixed bottom-0 z-30 w-full">
-        <MessageList myid={mydata.id} id={id} />
-        <NewMessage myid={mydata.id} id={id} />
-      </div>
+      <MessageList myid={mydata.id} id={id} />
+      <NewMessage myid={mydata.id} id={id} />
     </div>
   );
 };
