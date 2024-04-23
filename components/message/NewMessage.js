@@ -10,19 +10,22 @@ const NewMessage = ({ myid, id }) => {
 
   const supabase = createClient();
   const newChannel = supabase.channel(`room-${id}`);
-
-  const sendMessageHandler = () => {
+  const sendMessageHandler = async () => {
+    const message = {
+      text: inputRef.current.value,
+      time: new Date().toISOString(),
+      send_by: myid,
+    };
     newChannel.send({
       type: "broadcast",
       event: "message",
-      payload: {
-        text: inputRef.current.value,
-        time: new Date().toISOString(),
-        send_by: myid,
-      },
+      payload: message,
     });
     supabase.removeChannel(newChannel);
-    inputRef.current.value = "";
+    await supabase.rpc("append_message", {
+      message_id: id,
+      message_data: message,
+    });
   };
 
   return (

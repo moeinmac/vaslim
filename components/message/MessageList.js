@@ -19,10 +19,10 @@ const MessageList = ({ myid, id }) => {
   const messageReceived = async (payload) => {
     setMessages((prevState) => [...prevState, payload.payload]);
     supabase.removeChannel(newChannel);
-    await supabase
-      .from("message")
-      .update({ messages: [...messages, payload.payload] })
-      .eq("id", id);
+    // await supabase
+    //   .from("message")
+    //   .update({ messages: [...messages, payload.payload] })
+    //   .eq("id", id);
   };
 
   newChannel
