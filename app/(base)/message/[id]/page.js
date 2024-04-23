@@ -11,7 +11,7 @@ const messagepage = async ({ params }) => {
   const isMyMessage = data.users.find((user) => user === myAuth.data.user.id);
 
   return data && isMyMessage ? (
-    <MessageCard users={data.users} me={myAuth.data.user.id} />
+    <MessageCard users={data.users} me={myAuth.data.user.id} id={data.id} />
   ) : (
     <div>
       <h1 className="font-kalameh text-4xl p-6">

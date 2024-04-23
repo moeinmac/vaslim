@@ -5,25 +5,24 @@ import TextareaAutosize from "react-textarea-autosize";
 
 import { RiSendPlane2Fill } from "react-icons/ri";
 
-const NewMessage = ({ myid }) => {
+const NewMessage = ({ myid, id }) => {
   const inputRef = useRef();
 
   const supabase = createClient();
-  const newChannel = supabase.channel("test-room");
+  const newChannel = supabase.channel(`room-${id}`);
 
   const sendMessageHandler = () => {
-    const now = new Date();
     newChannel.send({
       type: "broadcast",
       event: "message",
       payload: {
         text: inputRef.current.value,
-        time: `${now.getMinutes()} : ${now.getHours()}`,
+        time: new Date().toISOString(),
         send_by: myid,
       },
     });
     supabase.removeChannel(newChannel);
-    inputRef.current.value = ""
+    inputRef.current.value = "";
   };
 
   return (

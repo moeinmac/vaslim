@@ -1,17 +1,28 @@
 "use client";
 import MessageItem from "./MessageItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-const MessageList = ({ myid }) => {
+const MessageList = ({ myid, id }) => {
   const supabase = createClient();
   const [messages, setMessages] = useState([]);
-  console.log(messages);
-  const newChannel = supabase.channel("test-room");
+  const newChannel = supabase.channel(`room-${id}`);
 
-  const messageReceived = (payload) => {
+  useEffect(() => {
+    const loadMessages = async (id) => {
+      const { data } = await supabase.from("message").select("messages").eq("id", id).single();
+      setMessages(data.messages);
+    };
+    loadMessages(id);
+  }, []);
+
+  const messageReceived = async (payload) => {
     setMessages((prevState) => [...prevState, payload.payload]);
     supabase.removeChannel(newChannel);
+    await supabase
+      .from("message")
+      .update({ messages: [...messages, payload.payload] })
+      .eq("id", id);
   };
 
   newChannel

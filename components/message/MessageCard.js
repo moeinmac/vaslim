@@ -3,7 +3,7 @@ import MessageHeader from "./MessageHeader";
 import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";
 
-const MessageCard = async ({ users, me }) => {
+const MessageCard = async ({ users, me, id }) => {
   const data = await getUsersByPrimary(users, true, [
     "profile",
     "username",
@@ -18,8 +18,8 @@ const MessageCard = async ({ users, me }) => {
     <div className="flex flex-col flex-1 justify-between">
       <MessageHeader data={userdata} />
       <div className="fixed bottom-0 z-30 w-full">
-        <MessageList myid={mydata.id} />
-        <NewMessage myid={mydata.id} />
+        <MessageList myid={mydata.id} id={id} />
+        <NewMessage myid={mydata.id} id={id} />
       </div>
     </div>
   );
