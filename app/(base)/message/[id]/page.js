@@ -20,16 +20,6 @@ const messagepage = async ({ params }) => {
     .from("user")
     .select("profile,username,isVerified,fullname")
     .eq("id", userid).single();
-  // const data = await getUsersByPrimary(users, true, [
-  //   "profile",
-  //   "username",
-  //   "isVerified",
-  //   "fullname",
-  //   "id",
-  // ]);
-
-  // const userdata = data.find((user) => user.id !== me);
-  // const mydata = data.find((user) => user.id === me);
 
   return <MessageCard userdata={userdata.data} myid={myid} id={data.id} />;
 };
