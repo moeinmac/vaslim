@@ -8,7 +8,6 @@ const StampList = async ({ stamp }) => {
     "isVerified",
     "fullname",
   ]);
-  console.log(userdata);
 
   return (
     <div className="flex flex-col penItem_bg p-2 mx-3 mt-0  mb-[8rem] bg-black rounded-bl-lg rounded-br-lg">
