@@ -1,24 +1,14 @@
-import { getUsersByPrimary } from "@/lib/getUsersByPrimary";
+"use client";
 import MessageHeader from "./MessageHeader";
 import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";
 
-const MessageCard = async ({ users, me, id }) => {
-  const data = await getUsersByPrimary(users, true, [
-    "profile",
-    "username",
-    "isVerified",
-    "fullname",
-    "id",
-  ]);
-
-  const userdata = data.find((user) => user.id !== me);
-  const mydata = data.find((user) => user.id === me);
+const MessageCard = ({ userdata, myid, id }) => {
   return (
-    <div className="flex flex-col flex-1 justify-between">
+    <div className="pt-[6rem] pb-[5.5rem] flex flex-col h-screen overflow-y-auto justify-between">
       <MessageHeader data={userdata} />
-      <MessageList myid={mydata.id} id={id} />
-      <NewMessage myid={mydata.id} id={id} />
+      <MessageList myid={myid} id={id} />
+      <NewMessage myid={myid} id={id} />
     </div>
   );
 };

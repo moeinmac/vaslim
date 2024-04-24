@@ -1,3 +1,4 @@
+import BackButton from "../user/BackButton";
 import Profile from "../user/Profile";
 
 const MessageHeader = ({ data }) => {
@@ -10,6 +11,7 @@ const MessageHeader = ({ data }) => {
         isVerified={data.isVerified}
         small={true}
       />
+      <BackButton className={"text-4xl"}/>
     </header>
   );
 };

@@ -10,15 +10,28 @@ const messagepage = async ({ params }) => {
   const myAuth = await supabase.auth.getUser();
   const isMyMessage = data.users.find((user) => user === myAuth.data.user.id);
 
-  return data && isMyMessage ? (
-    <MessageCard users={data.users} me={myAuth.data.user.id} id={data.id} />
-  ) : (
-    <div>
-      <h1 className="font-kalameh text-4xl p-6">
-        همچنین پیامی وجود ندارد و یا شما اجازه دسترسی به آن را ندارید
-      </h1>
-    </div>
-  );
+  if (!isMyMessage) redirect("/message");
+
+  const myid = myAuth.data.user.id;
+
+  const userid = data.users.find((user) => user !== myid);
+
+  const userdata = await supabase
+    .from("user")
+    .select("profile,username,isVerified,fullname")
+    .eq("id", userid).single();
+  // const data = await getUsersByPrimary(users, true, [
+  //   "profile",
+  //   "username",
+  //   "isVerified",
+  //   "fullname",
+  //   "id",
+  // ]);
+
+  // const userdata = data.find((user) => user.id !== me);
+  // const mydata = data.find((user) => user.id === me);
+
+  return <MessageCard userdata={userdata.data} myid={myid} id={data.id} />;
 };
 
 export default messagepage;

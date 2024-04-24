@@ -11,6 +11,7 @@ const NewMessage = ({ myid, id }) => {
   const supabase = createClient();
   const newChannel = supabase.channel(`room-${id}`);
   const sendMessageHandler = async () => {
+    if (inputRef.current.value.trim() === "") return;
     const message = {
       text: inputRef.current.value,
       time: new Date().toISOString(),

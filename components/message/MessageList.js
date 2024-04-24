@@ -26,7 +26,7 @@ const MessageList = ({ myid, id }) => {
     .subscribe();
 
   return (
-    <div className="flex-1 flex gap-3 flex-col items-start py-24">
+    <div className="flex-1 flex gap-3 flex-col items-start justify-end">
       {messages.map((message) => (
         <MessageItem message={message} myid={myid} key={Math.random()} />
       ))}
