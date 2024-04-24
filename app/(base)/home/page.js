@@ -12,23 +12,26 @@ const Home = async ({ searchParams }) => {
   const { data } = await supabase
     .from("user")
     .select("username,profile,vasl")
-    .eq("id", myAuth.data.user.id);
+    .eq("id", myAuth.data.user.id)
+    .single();
 
   return (
     <>
       <header className="flex justify-between items-center px-6 py-4">
         <h1 className="font-kalameh text-5xl ">وصـــلیم</h1>
-        <BellButton myUsername={data[0].username} />
+        <BellButton myUsername={data.username} />
       </header>
       <GetDot
         dotData={FAKEDOTDATA}
-        myProfile={data[0].profile}
-        isBlur={data[0].vasl.length > 1 ? true : false}
+        myProfile={data.profile}
+        isBlur={data.vasl.length > 1 ? true : false}
       />
-      <SwitchHomePen params={searchParams} username={data[0].username} />
-      {!searchParams.explore && <HomePen vasl={data[0].vasl} myUsername={data[0].username} />}
+      <SwitchHomePen params={searchParams} username={data.username} />
+      {!searchParams.explore && (
+        <HomePen vasl={data.vasl} myUsername={data.username} myid={myAuth.data.user.id} />
+      )}
       {searchParams.explore && (
-        <ExpolorePen myUsername={data[0].username} vasl={data[0].vasl} id={myAuth.data.user.id} />
+        <ExpolorePen myUsername={data.username} vasl={data.vasl} id={myAuth.data.user.id} />
       )}
     </>
   );

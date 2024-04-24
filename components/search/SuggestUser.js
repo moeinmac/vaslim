@@ -1,19 +1,20 @@
 import { createClient } from "@/lib/supabase/server";
 
-import getAvailableSuggests from "@/lib/getAvailableSuggests";
 import AccountList from "./AccountList";
 
-const SuggestUser = async ({ text }) => {
+const SuggestUser = async ({ text, myid }) => {
   const supabase = createClient();
 
-  const myAuth = await supabase.auth.getUser();
-  const me = await supabase.from("user").select().eq("id", myAuth.data.user.id);
-  const { data } = await supabase.from("user").select();
-  const available = getAvailableSuggests(data, me.data[0].vasl, me.data[0].username);
+  const mydata = await supabase.from("user").select("vasl,username").eq("id", myid).single();
+  const notWantedUsers = [...mydata.data.vasl, mydata.data.username];
+  const { data } = await supabase.rpc("get_suggest_users", {
+    usernames: notWantedUsers,
+  });
+
   return (
     <>
-      {available.length > 0 && <h1 className="font-kalameh text-3xl p-4">{text}</h1>}
-      <AccountList accounts={available} suggest={true} />
+      {data.length > 0 && text && <h1 className="font-kalameh text-3xl p-4">{text}</h1>}
+      <AccountList accounts={data} suggest={true} />
     </>
   );
 };

@@ -5,14 +5,14 @@ import { getRequestedPens } from "@/lib/pen/getRequestedPens";
 
 
 
-const HomePen = async ({ vasl, myUsername }) => {
+const HomePen = async ({ vasl, myUsername,myid }) => {
   if (vasl.length === 0)
     return (
       <div className="flex flex-col">
         <p className="font-alibaba text-xl px-3">
           هنوز به کسی وصـــل نیستی ، میتونی دوستات رو با جستجو پـیدا کــنی یا
         </p>
-        <SuggestUser text={"لیست پیشــنهادی"} />
+        <SuggestUser myid={myid} text={"لیست پیشــنهادی"} />
       </div>
     );
   const randomUsers = pickRandom(vasl, vasl.length < 7 ? vasl.length : 7);
@@ -27,7 +27,7 @@ const HomePen = async ({ vasl, myUsername }) => {
         <p className="font-alibaba text-xl px-3">
           افرادی که به آن ها وصل هستید خیلی فعال نیستند و از آنها نوشته ای یافت نشد.
         </p>
-        <SuggestUser text={"لیست پیشــنهادی"} />
+        <SuggestUser text={"لیست پیشــنهادی"} myid={myid}/>
       </div>
     );
   }

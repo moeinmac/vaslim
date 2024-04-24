@@ -1,8 +1,7 @@
 import SuggestUser from "@/components/search/SuggestUser";
 import UserItem from "@/components/user/UserItem";
-import { convertUserItems, getUsersByPrimary } from "@/lib/getUsersByPrimary";
+import { convertUserItems } from "@/lib/getUsersByPrimary";
 import { createClient } from "@/lib/supabase/server";
-import Image from "next/image";
 
 const message = async () => {
   const supabase = createClient();
@@ -23,9 +22,11 @@ const message = async () => {
       </header>
       {myMessageItems.length === 0 && (
         <>
-          <p>هنوز به کـــسی پیامی ندادی ، میتونی به افراد زیر پیام بدی</p>
+          <p className="font-alibaba px-6 py-4">هنوز به کـــسی پیامی ندادی ، میتونی به افراد زیر پیام بدی</p>
+          <SuggestUser myid={myAuth.data.user.id}/>
         </>
       )}
+
       {myMessageItems.map((item) => (
         <UserItem data={item} path={`message/${item.id}`} key={item.id} />
       ))}
