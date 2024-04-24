@@ -10,14 +10,18 @@ const MessageCard = ({ userdata, myid, id }) => {
 
   const scrolToBottom = () => {
     if (scrollRef.current) {
-      scrollRef.current.scroll(0, scrollRef.current.scrollHeight);
+      scrollRef.current.scroll({
+        top: scrollRef.current.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
     }
   };
 
   return (
     <div
       ref={scrollRef}
-      className="pt-[6rem] pb-[5.5rem] flex flex-col h-screen overflow-y-auto justify-between"
+      className="noscroll pt-[6rem] pb-[5.5rem] flex flex-col h-screen overflow-y-auto justify-between"
     >
       <MessageHeader data={userdata} />
       <MessageList myid={myid} id={id} scrolToBottom={scrolToBottom} />

@@ -32,7 +32,8 @@
   height: 700px;
   overflow: visible;
 }
-input:placeholder-shown, textarea:placeholder-shown {
+input:placeholder-shown,
+textarea:placeholder-shown {
   direction: rtl;
 }
 
@@ -54,7 +55,9 @@ input:placeholder-shown, textarea:placeholder-shown {
   animation: showtext 1.5s ease-in-out 3s forwards alternate;
   opacity: 0;
 }
-.switch_home{transition: left right 1s ;}
+.switch_home {
+  transition: left right 1s;
+}
 
 @keyframes blur {
   100% {
@@ -68,9 +71,13 @@ input:placeholder-shown, textarea:placeholder-shown {
   }
 }
 
-.notif {animation: index 1s ease-in-out 1s 1 forwards alternate;}
+.notif {
+  animation: index 1s ease-in-out 1s 1 forwards alternate;
+}
 @keyframes index {
-  50%{opacity: 0;}
+  50% {
+    opacity: 0;
+  }
   100% {
     opacity: 1;
     z-index: -10;
@@ -183,19 +190,6 @@ input:placeholder-shown, textarea:placeholder-shown {
   }
 }
 
-/* width */
-.card::-webkit-scrollbar {
-  width: 20px;
-}
-
-/* Track */
-.card::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
-
-/* Handle */
-.card::-webkit-scrollbar-thumb {
-  background: red;
-  border-radius: 10px;
+.noscroll::-webkit-scrollbar {
+  display: none;
 }
