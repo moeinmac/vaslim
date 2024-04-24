@@ -21,7 +21,7 @@ const messagepage = async ({ params }) => {
     .select("profile,username,isVerified,fullname")
     .eq("id", userid).single();
 
-  return <MessageCard userdata={userdata.data} myid={myid} id={data.id} />;
+  return <MessageCard userdata={userdata.data} myid={myid} id={data.id} created_at={data.created_at}/>;
 };
 
 export default messagepage;
