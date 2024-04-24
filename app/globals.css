@@ -151,7 +151,7 @@ input:placeholder-shown, textarea:placeholder-shown {
       100% 100%, 100% 0, 0 0, bottom 18px left 0;
   }
 }
-/* HTML: <div class="loader"></div> */
+
 .profieLoader {
   width: 50px;
   aspect-ratio: 1;
@@ -181,4 +181,21 @@ input:placeholder-shown, textarea:placeholder-shown {
   87.5% {
     border-radius: 12% 88% 69% 31% / 10% 66% 34% 90%;
   }
+}
+
+/* width */
+.card::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+.card::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.card::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
 }

@@ -3,7 +3,7 @@ import MessageItem from "./MessageItem";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-const MessageList = ({ myid, id }) => {
+const MessageList = ({ myid, id, scrolToBottom }) => {
   const supabase = createClient();
   const [messages, setMessages] = useState([]);
   const newChannel = supabase.channel(`room-${id}`);
@@ -15,6 +15,10 @@ const MessageList = ({ myid, id }) => {
     };
     loadMessages(id);
   }, []);
+
+  useEffect(() => {
+    scrolToBottom();
+  }, [messages]);
 
   const messageReceived = (payload) => {
     setMessages((prevState) => [...prevState, payload.payload]);
