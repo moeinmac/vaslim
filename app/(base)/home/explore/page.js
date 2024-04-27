@@ -1,12 +1,10 @@
-import GetDot from "@/components/dot/GetDot";
 import BellButton from "@/components/notification/BellButton";
 import ExpolorePen from "@/components/pen/ExpolorePen";
-import HomePen from "@/components/pen/HomePen";
 import SwitchHomePen from "@/components/pen/SwitchHomePen";
-import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
+
 import { createClient } from "@/lib/supabase/server";
 
-const Home = async ({ searchParams }) => {
+const Explore = async () => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
   const { data } = await supabase
@@ -21,15 +19,10 @@ const Home = async ({ searchParams }) => {
         <h1 className="font-kalameh text-5xl ">وصـــلیم</h1>
         <BellButton myUsername={data.username} />
       </header>
-      <GetDot
-        dotData={FAKEDOTDATA}
-        myProfile={data.profile}
-        isBlur={data.vasl.length > 1 ? true : false}
-      />
-      <SwitchHomePen />
-      <HomePen vasl={data.vasl} myUsername={data.username} myid={myAuth.data.user.id} />
+      <SwitchHomePen explore />
+      <ExpolorePen myUsername={data.username} vasl={data.vasl} id={myAuth.data.user.id} />
     </>
   );
 };
 
-export default Home;
+export default Explore;

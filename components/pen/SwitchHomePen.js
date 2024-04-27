@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-const SwitchHomePen = ({ params, username }) => {
+const SwitchHomePen = ({ explore }) => {
   return (
     <div className="mx-6 my-6 stamp py-4 px-6 rounded-2xl border-2 border-white flex items-center justify-between relative">
       <div
         className={`${
-          params.explore ? "left-[0.8rem] px-[4.5rem]" : "right-3"
+          explore ? "left-[0.8rem] px-[4.5rem]" : "right-3"
         } bg-[#5D85DD] absolute py-6 px-12 rounded-xl
         switch_home
         `}
@@ -13,7 +13,7 @@ const SwitchHomePen = ({ params, username }) => {
       <Link href={"/home"} className={`font-kalameh text-4xl relative z-10`}>
         چـاپــار
       </Link>
-      <Link href={`home?explore=${username}`} className={`font-kalameh text-4xl relative z-10`}>
+      <Link href={`home/explore`} className={`font-kalameh text-4xl relative z-10`}>
         بازار مکــــاره
       </Link>
     </div>
