@@ -5,23 +5,22 @@ import { persianNumbers } from "@/lib/persianNumbers";
 import { useState } from "react";
 import { PiStamp, PiCertificateFill } from "react-icons/pi";
 
-const StampButton = ({ stamp, myUsername, id }) => {
-  const isStamped = stamp.find((username) => username === myUsername);
+const StampButton = ({ stamp, myid, id }) => {
+  const isStampedCheck = stamp.find((id) => id === myid);
 
-  const [isStamp, setIsStamp] = useState(isStamped);
+  const [isStamp, setIsStamp] = useState(isStampedCheck);
   const [stampNumber, setStampNumber] = useState(stamp.length);
 
-  const setStampHandler = (event) => {
+  const setStampHandler = async (event) => {
     event.preventDefault();
     if (!isStamp) {
-      sendStamp(id, myUsername);
-      // const res = sendStamp(id, myUsername);
-      // res.then((stampNum) => setStampNumber(stampNum));
-      // setIsStamp(true);
+      const newstamp = await sendStamp(id, myid);
+      setIsStamp(true);
+      setStampNumber(newstamp);
     }
     if (isStamp) {
-      const res = unsendStamp(id, myUsername);
-      res.then((stampNum) => setStampNumber(stampNum));
+      const stampnum = await unsendStamp(id, myid);
+      setStampNumber(stampnum);
       setIsStamp(false);
     }
   };

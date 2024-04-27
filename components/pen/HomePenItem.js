@@ -6,7 +6,7 @@ import CommentButton from "./CommentButton";
 import HeaderPen from "./HeaderPen";
 import VerifiedButton from "../user/VerfiedButton";
 
-const HomePenItem = ({ pen, myUsername }) => {
+const HomePenItem = ({ pen,myid }) => {
   return (
     <div className="stamp rounded-xl">
       <Link href={`/${pen.user.username}`} className="p-3 flex gap-2 items-center">
@@ -31,7 +31,7 @@ const HomePenItem = ({ pen, myUsername }) => {
         </header>
         <article className="px-2 font-alibaba whitespace-pre-wrap">{pen.pen}</article>
         <footer className="flex justify-between items-center mt-2">
-          <StampButton id={pen.id} stamp={pen.stamp} myUsername={myUsername} />
+          <StampButton id={pen.id} myid={myid} stamp={pen.stamp} />
           <CommentButton comment={pen.comment} />
         </footer>
       </Link>

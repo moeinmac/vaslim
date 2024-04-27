@@ -4,7 +4,7 @@ import SuggestUser from "../search/SuggestUser";
 import { getRequestedPens } from "@/lib/pen/getRequestedPens";
 import { getUsersByPrimary } from "@/lib/getUsersByPrimary";
 
-const HomePen = async ({ vasl, myUsername, myid }) => {
+const HomePen = async ({ vasl, myid }) => {
   if (vasl.length === 0)
     return (
       <div className="flex flex-col">
@@ -14,7 +14,7 @@ const HomePen = async ({ vasl, myUsername, myid }) => {
         <SuggestUser myid={myid} text={"لیست پیشــنهادی"} />
       </div>
     );
-  const randomUsers = pickRandom(vasl, vasl.length < 8 ? vasl.length :8);
+  const randomUsers = pickRandom(vasl, vasl.length < 8 ? vasl.length : 8);
   const randomUsersID = await getUsersByPrimary(randomUsers, false, ["id"]);
 
   const allData = await getRequestedPens(randomUsersID, 3);
@@ -29,13 +29,11 @@ const HomePen = async ({ vasl, myUsername, myid }) => {
       </div>
     );
   }
-  const sortedPens = allData.sort(
-    (a, b) => new Date(b.created_at) - new Date(a.created_at)
-  );
+  const sortedPens = allData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   return (
     <div className="flex flex-col gap-4 px-6">
       {sortedPens.map((pen) => (
-        <HomePenItem key={pen.id} pen={pen} myUsername={myUsername} />
+        <HomePenItem key={pen.id} pen={pen} myid={myid} />
       ))}
     </div>
   );

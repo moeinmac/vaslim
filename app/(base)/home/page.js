@@ -1,12 +1,11 @@
 import GetDot from "@/components/dot/GetDot";
 import BellButton from "@/components/notification/BellButton";
-import ExpolorePen from "@/components/pen/ExpolorePen";
 import HomePen from "@/components/pen/HomePen";
 import SwitchHomePen from "@/components/pen/SwitchHomePen";
 import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
 import { createClient } from "@/lib/supabase/server";
 
-const Home = async ({ searchParams }) => {
+const Home = async () => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
   const { data } = await supabase

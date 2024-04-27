@@ -20,7 +20,7 @@ const Explore = async () => {
         <BellButton myUsername={data.username} />
       </header>
       <SwitchHomePen explore />
-      <ExpolorePen myUsername={data.username} vasl={data.vasl} id={myAuth.data.user.id} />
+      <ExpolorePen vasl={data.vasl} id={myAuth.data.user.id} />
     </>
   );
 };
