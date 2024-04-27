@@ -1,41 +1,25 @@
-import CommentList from "@/components/pen/CommentList";
-import PenItem from "@/components/pen/PenItem";
-import PostComment from "@/components/pen/PostComment";
-import StampList from "@/components/pen/StampList";
+import PenCard from "@/components/pen/PenCard";
 import { createClient } from "@/lib/supabase/server";
 
-const UserPen = async ({ params, searchParams }) => {
+const UserPen = async ({ params }) => {
   const supabase = createClient();
 
   const myAuth = await supabase.auth.getUser();
-  const myUser = await supabase.from("user").select().eq("id", myAuth.data.user.id);
 
-  const { data } = await supabase.from("pen").select().eq("id", params.penID);
-  const user = await supabase.from("user").select().eq("id", data[0].author);
+  const myUsername = await supabase
+    .from("user")
+    .select("username")
+    .eq("id", myAuth.data.user.id)
+    .single();
+
+  const { data } = await supabase
+    .from("pen")
+    .select("*, user(profile,username,fullname,isVerified,vasl)")
+    .eq("id", params.penID)
+    .single();
 
   return data.length !== 0 ? (
-    <>
-      <PenItem
-        user={user.data[0]}
-        pen={data[0]}
-        myid={myAuth.data.user.id}
-        params={searchParams}
-      />
-      <PostComment
-        userUsername={user.data[0].username}
-        myUsername={myUser.data[0].username}
-        id={data[0].id}
-        isAuthor={myAuth.data.user.id === data[0].author}
-        isReply={searchParams.reply ? searchParams.reply : false}
-      />
-      {!searchParams.stamplist && !searchParams.close && (
-        <CommentList
-          comments={data[0].comment}
-          isAuthor={myAuth.data.user.id === data[0].author}
-        />
-      )}
-      {searchParams.stamplist && !searchParams.close && <StampList stamp={data[0].stamp} />}
-    </>
+    <PenCard data={data} myid={myAuth.data.user.id} myUsername={myUsername.data.username} />
   ) : (
     <h1 className="font-kalameh text-4xl px-6 py-2">همچنین قــلمی وجود نداره</h1>
   );
