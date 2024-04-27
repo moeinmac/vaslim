@@ -2,7 +2,7 @@ import { getUsersByPrimary } from "@/lib/getUsersByPrimary";
 import UserItem from "../user/UserItem";
 
 const StampList = async ({ stamp }) => {
-  const userdata = await getUsersByPrimary(stamp, false, [
+  const userdata = await getUsersByPrimary(stamp, true, [
     "profile",
     "username",
     "isVerified",

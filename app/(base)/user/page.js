@@ -18,7 +18,7 @@ const user = async () => {
       />
       <MyAccount meData={data[0]} />
       <h1 className="font-kalameh text-4xl px-6 py-2">نوشته های من</h1>
-      <MyPen id={myAuth.data.user.id} myUsername={data[0].username} />
+      <MyPen id={myAuth.data.user.id} myid={myAuth.data.user.id} />
     </>
   );
 };

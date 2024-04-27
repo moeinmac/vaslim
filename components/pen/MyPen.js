@@ -2,13 +2,13 @@ import { createClient } from "@/lib/supabase/server";
 import UserPenItem from "./UserPenItem";
 import Link from "next/link";
 
-const MyPen = async ({ id, myUsername }) => {
+const MyPen = async ({ id, myid }) => {
   const supabase = createClient();
   const { data } = await supabase.from("pen").select().eq("author", id).order("created_at",{ascending : false});
   return (
     <div className="flex justify-center flex-col gap-4 px-6 pt-4">
       {data.length !== 0 &&
-        data.map((pen) => <UserPenItem myUsername={myUsername} pen={pen} key={pen.id} />)}
+        data.map((pen) => <UserPenItem myid={myid} pen={pen} key={pen.id} />)}
       {data.length === 0 && (
         <div className="flex flex-col gap-4">
           <p className="font-alibaba">شما هنوز دست به قلم نشدی! همین الان یه چیزی بنویس</p>

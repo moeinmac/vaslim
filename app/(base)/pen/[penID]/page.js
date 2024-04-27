@@ -18,7 +18,7 @@ const UserPen = async ({ params, searchParams }) => {
       <PenItem
         user={user.data[0]}
         pen={data[0]}
-        myUsername={myUser.data[0].username}
+        myid={myAuth.data.user.id}
         params={searchParams}
       />
       <PostComment

@@ -24,7 +24,7 @@ const username = async ({ params }) => {
       />
 
       <Account myUsername={me.data[0].username} userUsername={data[0].username} />
-      <UserPen username={data[0].username} myUsername={me.data[0].username} />
+      <UserPen username={data[0].username} myid={myAuth.data.user.id} />
     </>
   ) : (
     <h1 className="font-kalameh text-4xl px-6 py-2">همچنین کاربری وجود نداره</h1>
