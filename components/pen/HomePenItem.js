@@ -4,16 +4,24 @@ import { HiMiniEllipsisVertical } from "react-icons/hi2";
 import Link from "next/link";
 import CommentButton from "./CommentButton";
 import HeaderPen from "./HeaderPen";
+import VerifiedButton from "../user/VerfiedButton";
 
 const HomePenItem = ({ pen, myUsername }) => {
   return (
     <div className="stamp rounded-xl">
-      <Link href={`/${pen.username}`} className="p-3 flex gap-2 items-center">
-        <Image src={pen.profile} width={50} height={50} alt={pen.fullname} className="rounded-xl" />
+      <Link href={`/${pen.user.username}`} className="p-3 flex gap-2 items-center">
+        <Image
+          src={pen.user.profile}
+          width={50}
+          height={50}
+          alt={pen.user.fullname}
+          className="rounded-xl"
+        />
         <div className="flex items-center justify-between w-full">
           <div>
-            <p className="font-alibaba">{pen.fullname}</p>
-            <p className="font-alibaba text-sm">{pen.username}@</p>
+            <p className="font-alibaba">{pen.user.fullname}</p>
+            {/* <p className="font-alibaba text-sm">{pen.user.username}@</p> */}
+            <VerifiedButton isVerified={pen.user.idVerfied} username={pen.user.username}/>
           </div>
           <HiMiniEllipsisVertical className="text-2xl" />
         </div>

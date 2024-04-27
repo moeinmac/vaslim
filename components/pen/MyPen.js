@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const MyPen = async ({ id, myUsername }) => {
   const supabase = createClient();
-  const { data } = await supabase.from("pen").select().eq("author", id);
+  const { data } = await supabase.from("pen").select().eq("author", id).order("created_at",{ascending : false});
   return (
     <div className="flex justify-center flex-col gap-4 px-6 pt-4">
       {data.length !== 0 &&
@@ -14,7 +14,8 @@ const MyPen = async ({ id, myUsername }) => {
           <p className="font-alibaba">شما هنوز دست به قلم نشدی! همین الان یه چیزی بنویس</p>
           <Link
             href="/pen/new"
-            className="w-full text-center bg-blue text-4xl font-kalameh rounded-xl px-8 py-4">
+            className="w-full text-center bg-blue text-4xl font-kalameh rounded-xl px-8 py-4"
+          >
             بریم قلم بزنیم
           </Link>
         </div>

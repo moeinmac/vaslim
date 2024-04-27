@@ -3,8 +3,13 @@ import UserPenItem from "./UserPenItem";
 
 const UserPen = async ({ username, myUsername }) => {
   const supabase = createClient();
-  const userID = await supabase.from("user").select("id").eq("username", username);
-  const { data } = await supabase.from("pen").select().eq("author", userID.data[0].id);
+  const userID = await supabase.from("user").select("id").eq("username", username).single();
+  const { data } = await supabase
+    .from("pen")
+    .select()
+    .eq("author", userID.data.id)
+    .order("created_at", { ascending: false });
+
   return (
     <div className="flex justify-center flex-col gap-4 px-6 pt-4">
       {data.length !== 0 &&
