@@ -7,15 +7,17 @@ import { PiStamp, PiCertificateFill } from "react-icons/pi";
 
 const StampButton = ({ stamp, myUsername, id }) => {
   const isStamped = stamp.find((username) => username === myUsername);
+
   const [isStamp, setIsStamp] = useState(isStamped);
   const [stampNumber, setStampNumber] = useState(stamp.length);
 
   const setStampHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!isStamp) {
-      const res = sendStamp(id, myUsername);
-      res.then((stampNum) => setStampNumber(stampNum));
-      setIsStamp(true);
+      sendStamp(id, myUsername);
+      // const res = sendStamp(id, myUsername);
+      // res.then((stampNum) => setStampNumber(stampNum));
+      // setIsStamp(true);
     }
     if (isStamp) {
       const res = unsendStamp(id, myUsername);

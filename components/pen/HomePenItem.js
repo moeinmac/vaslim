@@ -20,7 +20,6 @@ const HomePenItem = ({ pen, myUsername }) => {
         <div className="flex items-center justify-between w-full">
           <div>
             <p className="font-alibaba">{pen.user.fullname}</p>
-            {/* <p className="font-alibaba text-sm">{pen.user.username}@</p> */}
             <VerifiedButton isVerified={pen.user.idVerfied} username={pen.user.username}/>
           </div>
           <HiMiniEllipsisVertical className="text-2xl" />
