@@ -21,7 +21,7 @@ const MessageCard = ({ userdata, myid, id, created_at }) => {
   return (
     <div
       ref={scrollRef}
-      className="noscroll pt-[6rem] pb-[5.5rem] flex flex-col h-screen overflow-y-auto justify-between"
+      className="noscroll mt-[6rem] flex flex-col h-[80vh] overflow-y-auto justify-between"
     >
       <MessageHeader data={userdata} />
       <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">

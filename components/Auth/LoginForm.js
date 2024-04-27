@@ -10,7 +10,7 @@ const LoginForm = ({ message }) => {
   const passwordVisibleHandler = () => setPassVisible(!passVisible);
 
   return (
-    <Form className="w-full flex flex-col gap-6 text-white">
+    <form className="w-full flex flex-col gap-6 text-white">
       <label htmlFor="username" className="text-sm font-alibaba">
         نام کاربری (ایمیل)
         <input
@@ -58,7 +58,7 @@ const LoginForm = ({ message }) => {
           ورود ناموفق بود ، اطلاعات ورود را چک کنید و دوبار امتحان کنید
         </p>
       )}
-    </Form>
+    </form>
   );
 };
 
