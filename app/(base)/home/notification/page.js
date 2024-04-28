@@ -17,7 +17,7 @@ const notification = async () => {
         <h1 className="font-kalameh text-5xl ">اعــلان های شما</h1>
         <BackButton path={"/home"} className={"text-4xl"} />
       </header>
-      <NotifcationList notification={data.notification} />
+      <NotifcationList notification={data.notification} myid={myAuth.data.user.id} />
       <ReqList myUsername={data.username} reqIn={data.reqIn} />
     </>
   );
