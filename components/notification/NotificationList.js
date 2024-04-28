@@ -1,5 +1,5 @@
 import { getNotificationData } from "@/lib/notification/getNotificationData";
-import NotificationItem from "./NotificationItem";
+import NotifcationItem from "./NotificationItem";
 
 const NotifcationList = async ({ notification }) => {
   const allData = await getNotificationData(notification);
@@ -19,7 +19,7 @@ const NotifcationList = async ({ notification }) => {
       {stampNotif.length > 0 && (
         <div className="flex flex-col gap-5 px-4">
           {stampNotif.map((data) => (
-            <NotificationItem data={data} key={data.id} />
+            <NotifcationItem data={data} key={data.id} />
           ))}
         </div>
       )}

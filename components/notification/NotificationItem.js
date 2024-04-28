@@ -6,7 +6,7 @@ import { LiaCommentDotsSolid } from "react-icons/lia";
 import Link from "next/link";
 import { limitData } from "@/lib/limitData";
 
-const NotificationItem = ({ data }) => {
+const NotifcationItem = ({ data }) => {
   return (
     <Link
       href={`/pen/${data.id}`}
@@ -56,4 +56,4 @@ const NotificationItem = ({ data }) => {
   );
 };
 
-export default NotificationItem;
+export default NotifcationItem;
