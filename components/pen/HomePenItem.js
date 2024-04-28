@@ -6,7 +6,7 @@ import CommentButton from "./CommentButton";
 import HeaderPen from "./HeaderPen";
 import VerifiedButton from "../user/VerfiedButton";
 
-const HomePenItem = ({ pen,myid }) => {
+const HomePenItem = ({ pen, myid }) => {
   return (
     <div className="stamp rounded-xl">
       <Link href={`/${pen.user.username}`} className="p-3 flex gap-2 items-center">
@@ -20,14 +20,14 @@ const HomePenItem = ({ pen,myid }) => {
         <div className="flex items-center justify-between w-full">
           <div>
             <p className="font-alibaba">{pen.user.fullname}</p>
-            <VerifiedButton isVerified={pen.user.idVerfied} username={pen.user.username}/>
+            <VerifiedButton isVerified={pen.user.idVerfied} username={pen.user.username} />
           </div>
           <HiMiniEllipsisVertical className="text-2xl" />
         </div>
       </Link>
       <Link href={`/pen/${pen.id}`} className="penItem_bg rounded-xl flex flex-col p-4 gap-3 pb-2">
         <header className="flex justify-between items-center">
-          <HeaderPen created_at={pen.created_at} />
+          <HeaderPen created_at={pen.created_at} pen_id={pen.id} />
         </header>
         <article className="px-2 font-alibaba whitespace-pre-wrap">{pen.pen}</article>
         <footer className="flex justify-between items-center mt-2">

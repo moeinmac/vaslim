@@ -11,6 +11,7 @@ const notification = async () => {
     .select("username,reqIn,notification")
     .eq("id", myAuth.data.user.id)
     .single();
+  
   return (
     <>
       <header className="flex justify-between items-center px-6 py-4">

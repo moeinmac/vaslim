@@ -35,7 +35,7 @@ const PenItem = ({ data}) => {
       <article className="whitespace-pre-wrap px-6 font-alibaba">{data.pen}</article>
       <footer className=" flex flex-col pt-2">
         <div className="flex items-center justify-between p-4">
-          <HeaderPen created_at={data.created_at} />
+          <HeaderPen created_at={data.created_at} pen_id={data.id}/>
         </div>
       </footer>
     </div>
