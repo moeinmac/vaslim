@@ -1,12 +1,17 @@
-import NotifcationItem from "./NotificationItem";
+import { getNotificationData } from "@/lib/notification/getNotificationData";
+import NotificationItem from "./NotificationItem";
 
-const NotifcationList = ({ notification }) => {
-  const stampNotif = notification.filter((data) => {
+const NotifcationList = async ({ notification }) => {
+  const allData = await getNotificationData(notification);
+  console.log(allData);
+  const stampNotif = allData.filter((data) => {
     if (data.type === "stamp") return data;
   });
-  const commentNotif = notification.filter((data) => {
+
+  const commentNotif = allData.filter((data) => {
     if (data.type === "comment") return data;
   });
+
   return (
     <div className="flex flex-col gap-4">
       <h2 className="font-kalameh text-4xl py-1 px-4">مـُــهر ها</h2>
@@ -14,7 +19,7 @@ const NotifcationList = ({ notification }) => {
       {stampNotif.length > 0 && (
         <div className="flex flex-col gap-5 px-4">
           {stampNotif.map((data) => (
-            <NotifcationItem data={data} key={data.id} />
+            <NotificationItem data={data} key={data.id} />
           ))}
         </div>
       )}
