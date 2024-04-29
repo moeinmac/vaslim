@@ -7,9 +7,7 @@ import NewMessage from "./NewMessage";
 
 const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const scrollRef = useRef();
-  const [online, setOnline] = useState(false);
-  console.log(online);
-  const onlineHandler = (value) => setOnline(value);
+
 
   const scrolToBottom = () => {
     if (scrollRef.current) {
@@ -30,8 +28,6 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
         data={userdata}
         userid={userid}
         myid={myid}
-        onlineHandler={onlineHandler}
-        online={online}
       />
 
       <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
