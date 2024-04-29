@@ -1,12 +1,23 @@
 "use client";
+import { createClient } from "@/lib/supabase/client";
 import MessageItem from "./MessageItem";
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 
 const MessageList = ({ myid, id, scrolToBottom }) => {
   const supabase = createClient();
   const [messages, setMessages] = useState([]);
-  const newChannel = supabase.channel(`room-${id}`);
+
+  const messageChannel = supabase.channel(`room-${id}`);
+
+  const messageReceived = (payload) => {
+    setMessages((prevState) => [...prevState, payload.payload]);
+    supabase.removeChannel(messageChannel);
+  };
+
+  messageChannel
+    .on("broadcast", { event: "message" }, (payload) => messageReceived(payload))
+    .subscribe();
+
 
   useEffect(() => {
     const loadMessages = async (id) => {
@@ -19,15 +30,6 @@ const MessageList = ({ myid, id, scrolToBottom }) => {
   useEffect(() => {
     scrolToBottom();
   }, [messages]);
-
-  const messageReceived = (payload) => {
-    setMessages((prevState) => [...prevState, payload.payload]);
-    supabase.removeChannel(newChannel);
-  };
-
-  newChannel
-    .on("broadcast", { event: "message" }, (payload) => messageReceived(payload))
-    .subscribe();
 
   return (
     <div className="flex-1 flex gap-3 flex-col items-start justify-end">

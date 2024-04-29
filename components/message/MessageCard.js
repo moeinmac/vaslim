@@ -5,7 +5,7 @@ import MessageHeader from "./MessageHeader";
 import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";
 
-const MessageCard = ({ userdata, myid, id, created_at }) => {
+const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const scrollRef = useRef();
 
   const scrolToBottom = () => {
@@ -23,9 +23,10 @@ const MessageCard = ({ userdata, myid, id, created_at }) => {
       ref={scrollRef}
       className="noscroll mt-[6rem] flex flex-col h-[80vh] overflow-y-auto justify-between"
     >
-      <MessageHeader data={userdata} />
+      <MessageHeader data={userdata} userid={userid} />
       <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
-        این مکالمه در تاریخ {new Date(created_at).toLocaleString("fa-IR", { dateStyle: "medium" })} ایجاد شد.
+        این مکالمه در تاریخ {new Date(created_at).toLocaleString("fa-IR", { dateStyle: "medium" })}{" "}
+        ایجاد شد.
       </div>
       <MessageList myid={myid} id={id} scrolToBottom={scrolToBottom} />
       <NewMessage myid={myid} id={id} />
