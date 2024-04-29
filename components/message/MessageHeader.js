@@ -2,13 +2,13 @@ import { createClient } from "@/lib/supabase/client";
 import BackButton from "../user/BackButton";
 import Profile from "../user/Profile";
 
-const MessageHeader = ({ data, id, userid }) => {
+const MessageHeader = ({ data, id, userid , myid }) => {
   const supabase = createClient();
 
   const roomOne = supabase.channel("room-562938");
 
   const userStatus = {
-    user: userid,
+    user: myid,
     online_at: new Date().toISOString(),
   };
 
