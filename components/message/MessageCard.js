@@ -1,16 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import MessageHeader from "./MessageHeader";
 import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";
 import MessageItem from "./MessageItem";
-import { createClient } from "@/lib/supabase/client";
+import useNewMessage from "@/lib/message/useNewMessage";
 
 const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const scrollRef = useRef();
-  const [lodingMessage, setLoadingMessage] = useState(false);
-  console.log(lodingMessage);
+
   const scrolToBottom = () => {
     if (scrollRef.current) {
       scrollRef.current.scroll({
@@ -20,25 +19,11 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
       });
     }
   };
-
-  const supabase = createClient();
-  const messageChannel = supabase.channel(`room-${id}`);
+  const { loadingMessage, sendNewMessage } = useNewMessage(id, userid);
 
   const sendMessageHandler = async (message) => {
-    setLoadingMessage(message);
-    await supabase.rpc("append_message", {
-      message_id: id,
-      message_data: message,
-    });
-    messageChannel.send({
-      type: "broadcast",
-      event: "message",
-      payload: message,
-    });
-    await supabase.removeChannel(messageChannel);
-    return setLoadingMessage(false);
+    await sendNewMessage(message);
   };
-
   return (
     <div
       ref={scrollRef}
@@ -52,7 +37,7 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
       </div>
 
       <MessageList myid={myid} id={id} scrolToBottom={scrolToBottom} />
-      {lodingMessage && <MessageItem message={lodingMessage} myid={myid} isLoading />}
+      {loadingMessage && <MessageItem message={loadingMessage} myid={myid} isLoading />}
       <NewMessage myid={myid} id={id} sendMessageHandler={sendMessageHandler} />
     </div>
   );

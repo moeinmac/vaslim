@@ -5,7 +5,7 @@ const MessageItem = ({ message, myid ,isLoading}) => {
   const time = new Date(message.time);
   return (
     <div
-      className={` ${isLoading ? "flex-grow-0 flex ml-auto mr-4 mt-3" : "flex"} ${
+      className={`max-w-[80vw] ${isLoading ? "flex-grow-0 flex ml-auto mr-4 mt-3" : "flex"} ${
         me ? "bg-[#5D85DD] rounded-tr-sm rounded-br-3xl" : "bg-[#6e7178] rounded-bl-3xl rounded-tl-sm self-end"
       } items-center gap-4 px-4 py-2 rounded-xl `}
     >

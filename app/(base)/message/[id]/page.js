@@ -1,4 +1,5 @@
 import MessageCard from "@/components/message/MessageCard";
+import { clearUnreadMessage } from "@/lib/message/clearUnreadMessage";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -13,15 +14,25 @@ const messagepage = async ({ params }) => {
   if (!isMyMessage) redirect("/message");
 
   const myid = myAuth.data.user.id;
+  await clearUnreadMessage(data.id, myid, true);
 
   const userid = data.users.find((user) => user !== myid);
 
   const userdata = await supabase
     .from("user")
     .select("profile,username,isVerified,fullname")
-    .eq("id", userid).single();
+    .eq("id", userid)
+    .single();
 
-  return <MessageCard userdata={userdata.data} userid={userid} myid={myid} id={data.id} created_at={data.created_at}/>;
+  return (
+    <MessageCard
+      userdata={userdata.data}
+      userid={userid}
+      myid={myid}
+      id={data.id}
+      created_at={data.created_at}
+    />
+  );
 };
 
 export default messagepage;
