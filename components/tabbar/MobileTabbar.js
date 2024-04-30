@@ -29,9 +29,7 @@ const MobileTabbar = () => {
   const messageRef = useRef();
   const userRef = useRef();
 
-  const [tabbar, setTabbar] = useState({ type: "home", left: "" });
-  console.log(tabbar);
-  console.log(path.startsWith("/home"));
+  const [tabbar, setTabbar] = useState({ type: "home", left: "" }); 
 
   useEffect(() => {
     if (path.startsWith("/home")) {
