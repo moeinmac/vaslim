@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import MessageHeader from "./MessageHeader";
 import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";
@@ -21,22 +21,31 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   };
   const { loadingMessage, sendNewMessage } = useNewMessage(id, userid);
 
+  const [isOnline, setIsOnline] = useState(false);
+  const onlineUserHandler = (value) => setIsOnline(value);
+  console.log(isOnline);
+
   const sendMessageHandler = async (message) => {
-    await sendNewMessage(message);
+    await sendNewMessage(message, isOnline);
   };
   return (
     <div
       ref={scrollRef}
       className="noscroll mt-[6rem] flex flex-col h-[80vh] overflow-y-auto justify-between"
     >
-      <MessageHeader data={userdata} userid={userid} myid={myid} />
+      <MessageHeader data={userdata} userid={userid} myid={myid} message_id={id} />
 
       <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
         این مکالمه در تاریخ {new Date(created_at).toLocaleString("fa-IR", { dateStyle: "medium" })}{" "}
         ایجاد شد.
       </div>
 
-      <MessageList myid={myid} id={id} scrolToBottom={scrolToBottom} />
+      <MessageList
+        myid={myid}
+        id={id}
+        scrolToBottom={scrolToBottom}
+        setOnlineUser={onlineUserHandler}
+      />
       {loadingMessage && <MessageItem message={loadingMessage} myid={myid} isLoading />}
       <NewMessage myid={myid} id={id} sendMessageHandler={sendMessageHandler} />
     </div>
