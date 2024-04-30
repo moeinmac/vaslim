@@ -26,7 +26,6 @@ const BellButton = ({ myid }) => {
 
   const handleChanges = (paylod) => {
     if (paylod.new.id === myid) {
-      console.log(paylod);
       if (paylod.new.notification.length >= 1) {
         setisNotif(true);
         return;

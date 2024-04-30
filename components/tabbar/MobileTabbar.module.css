@@ -15,12 +15,11 @@
   list-style: none;
   justify-content:  space-evenly;
 }
-.tabbar ul li{
+.tabbar ul a{
   padding: 1.2rem;
-  cursor: pointer;
 }
 .icon {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
 }
 .active{
   animation: show .7s;

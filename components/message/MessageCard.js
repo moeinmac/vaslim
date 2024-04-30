@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import MessageHeader from "./MessageHeader";
 import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";

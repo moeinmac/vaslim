@@ -1,13 +1,11 @@
 "use client";
 import useOnline from "@/lib/message/useOnline";
-import BackButton from "../user/BackButton";
 import Profile from "../user/Profile";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
 const MessageHeader = ({ data, id, userid, myid }) => {
   const { isOnline, untrackHandler } = useOnline(id, myid, userid);
-  console.log(isOnline);
   
   const router = useRouter();
   const backHandler = () => {
@@ -29,8 +27,6 @@ const MessageHeader = ({ data, id, userid, myid }) => {
           <div className="absolute -bottom-2 -right-2 bg-green-500 w-5 h-5 rounded-full"></div>
         )}
       </div>
-      {/* <BackButton className={"text-4xl"} />
-       */}
       <IoReturnUpBackSharp className="text-4xl" onClick={backHandler} />
     </header>
   );
