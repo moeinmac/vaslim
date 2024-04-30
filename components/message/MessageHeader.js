@@ -6,7 +6,9 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
 const MessageHeader = ({ data, id, userid, myid }) => {
-  const {isOnline,untrackHandler} = useOnline(id, myid, userid);
+  const { isOnline, untrackHandler } = useOnline(id, myid, userid);
+  console.log(isOnline);
+  
   const router = useRouter();
   const backHandler = () => {
     untrackHandler();
