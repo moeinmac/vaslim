@@ -1,10 +1,10 @@
 "use client";
 
 import { createClient } from "@/lib/supabase/client";
-import styles from "./BellButton.module.css";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { PiBellFill, PiBellLight } from "react-icons/pi";
+import Pulse from "./Pulse";
 
 const BellButton = ({ myid }) => {
   const supabase = createClient();
@@ -46,7 +46,11 @@ const BellButton = ({ myid }) => {
       {!isNotif && <PiBellFill className="text-4xl" />}
       {isNotif && (
         <div className="relative">
-          <div className={styles.blob}></div>
+          <Pulse
+            className={
+              "w-[10px] h-[10px] bg-orange top-[3px] left-[18.5px] shadow-none shadow-[#ff793f]"
+            }
+          />
           <PiBellLight className="text-4xl" />
         </div>
       )}

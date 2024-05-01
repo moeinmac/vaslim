@@ -37,7 +37,9 @@ const MessageHeader = ({ data, myid, message_id, online }) => {
           isVerified={data.isVerified}
           small={true}
         />
-        {online && <div className="absolute -right-2 -bottom-2 w-4 h-4 rounded-full bg-green-500"></div>}
+        {online && (
+          <div className="absolute -right-2 -bottom-2 w-4 h-4 rounded-full bg-green-500"></div>
+        )}
       </div>
       <IoReturnUpBackSharp className="text-4xl" onClick={backToMessageHandler} />
     </header>
