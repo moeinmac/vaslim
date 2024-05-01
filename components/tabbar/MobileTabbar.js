@@ -10,15 +10,13 @@ import { GoHomeFill } from "react-icons/go";
 import { MdOutlinePersonSearch } from "react-icons/md";
 import { MdPersonSearch } from "react-icons/md";
 
-import { RiMessage3Line } from "react-icons/ri";
-import { RiMessage3Fill } from "react-icons/ri";
-
 import { RiUser3Line } from "react-icons/ri";
 import { RiUser3Fill } from "react-icons/ri";
 
 import { TbPencil } from "react-icons/tb";
 import { BiSolidPencil } from "react-icons/bi";
 import Link from "next/link";
+import MessageTabbar from "./MessageTabbar";
 
 const MobileTabbar = () => {
   const path = usePathname();
@@ -29,7 +27,7 @@ const MobileTabbar = () => {
   const messageRef = useRef();
   const userRef = useRef();
 
-  const [tabbar, setTabbar] = useState({ type: "home", left: "" }); 
+  const [tabbar, setTabbar] = useState({ type: "home", left: "" });
 
   useEffect(() => {
     if (path.startsWith("/home")) {
@@ -65,10 +63,7 @@ const MobileTabbar = () => {
           {tabbar.type === "pen" && <BiSolidPencil className={`${styles.icon} ${styles.active}`} />}
         </Link>
         <Link href={"/message"} ref={messageRef}>
-          {tabbar.type !== "message" && <RiMessage3Line className={styles.icon} />}
-          {tabbar.type === "message" && (
-            <RiMessage3Fill className={`${styles.icon} ${styles.active}`} />
-          )}
+          <MessageTabbar active={tabbar.type} activeStyle={styles.active} />
         </Link>
         <Link href={"/user"} ref={userRef}>
           {tabbar.type !== "user" && <RiUser3Line className={styles.icon} />}
