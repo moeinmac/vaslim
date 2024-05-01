@@ -2,9 +2,9 @@ import { getNotificationData } from "@/lib/notification/getNotificationData";
 import NotifcationItem from "./NotificationItem";
 import { isUniqueNotification } from "@/lib/notification/isUniqueNotification";
 
-const NotifcationList = async ({ notification ,myid}) => {
+const NotifcationList = async ({ notification, myid }) => {
   const uniqueNotif = isUniqueNotification(notification);
-  const allData = await getNotificationData(uniqueNotif,myid);
+  const allData = await getNotificationData(uniqueNotif, myid);
   const stampNotif = allData.filter((data) => {
     if (data.type === "stamp") return data;
   });
