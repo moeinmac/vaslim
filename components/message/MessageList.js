@@ -10,13 +10,15 @@ const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
   const messageChannel = supabase.channel(`room-${id}`);
 
   const messageReceived = (payload) => {
-    if (payload.payload.type && payload.payload.type === "join" && payload.payload.id !== myid) {
-      setOnlineUser(true);
-      return;
-    }
-    if (payload.payload.type && payload.payload.type === "leave" && payload.payload.id !== myid) {
-      setOnlineUser(false);
-      return;
+    if (payload.payload.type) {
+      if (payload.payload.type === "join" && payload.payload.id !== myid) {
+        setOnlineUser(true);
+        return;
+      }
+      if (payload.payload.type === "leave" && payload.payload.id !== myid) {
+        setOnlineUser(false);
+        return;
+      }
     }
     setMessages((prevState) => [...prevState, payload.payload]);
     supabase.removeChannel(messageChannel);

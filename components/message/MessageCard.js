@@ -23,7 +23,6 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
 
   const [isOnline, setIsOnline] = useState(false);
   const onlineUserHandler = (value) => setIsOnline(value);
-  console.log(isOnline);
 
   const sendMessageHandler = async (message) => {
     await sendNewMessage(message, isOnline);
@@ -33,7 +32,13 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
       ref={scrollRef}
       className="noscroll mt-[6rem] flex flex-col h-[80vh] overflow-y-auto justify-between"
     >
-      <MessageHeader data={userdata} userid={userid} myid={myid} message_id={id} />
+      <MessageHeader
+        data={userdata}
+        userid={userid}
+        myid={myid}
+        message_id={id}
+        online={isOnline}
+      />
 
       <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
         این مکالمه در تاریخ {new Date(created_at).toLocaleString("fa-IR", { dateStyle: "medium" })}{" "}
