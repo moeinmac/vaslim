@@ -4,25 +4,25 @@ import BackButton from "@/components/user/BackButton";
 import { getUsersByPrimary } from "@/lib/getUsersByPrimary";
 import UserItem from "@/components/user/UserItem";
 
-const Myvasl = async () => {
-  const supabase = createClient();
-  const myAuth = await supabase.auth.getUser();
-  const { data } = await supabase
-    .from("user")
-    .select("profile,fullname,username,isVerified,vasl")
-    .eq("id", myAuth.data.user.id)
-    .single();
+const Myvasl =  () => {
+  // const supabase = createClient();
+  // const myAuth = await supabase.auth.getUser();
+  // const { data } = await supabase
+  //   .from("user")
+  //   .select("profile,fullname,username,isVerified,vasl")
+  //   .eq("id", myAuth.data.user.id)
+  //   .single();
 
-  const vasldata = await getUsersByPrimary(data.vasl, false, [
-    "profile",
-    "username",
-    "isVerified",
-    "fullname",
-  ]);
+  // const vasldata = await getUsersByPrimary(data.vasl, false, [
+  //   "profile",
+  //   "username",
+  //   "isVerified",
+  //   "fullname",
+  // ]);
 
   return (
     <>
-      <header className="px-6 py-4 flex items-center justify-between">
+      {/* <header className="px-6 py-4 flex items-center justify-between">
         <Profile
           profile={data.profile}
           fullname={data.fullname}
@@ -41,7 +41,7 @@ const Myvasl = async () => {
         {vasldata.map((data) => (
           <UserItem data={data} key={data.username} path={data.username} small />
         ))}
-      </div>
+      </div> */}
     </>
   );
 };

@@ -13,7 +13,7 @@ const SwitchHomePen = ({ explore }) => {
       <Link href={"/home"} className={`font-kalameh text-4xl relative z-10`}>
         چـاپــار
       </Link>
-      <Link prefetch={false} href={`home/explore`} className={`font-kalameh text-4xl relative z-10`}>
+      <Link href={`home/explore`} className={`font-kalameh text-4xl relative z-10`}>
         بازار مکــــاره
       </Link>
     </div>

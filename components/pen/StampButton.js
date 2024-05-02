@@ -14,14 +14,14 @@ const StampButton = ({ stamp, myid, id }) => {
   const setStampHandler = async (event) => {
     event.preventDefault();
     if (!isStamp) {
-      const newstamp = await sendStamp(id, myid);
       setIsStamp(true);
-      setStampNumber(newstamp);
+      setStampNumber((prevState) => prevState + 1);
+      await sendStamp(id, myid);
     }
     if (isStamp) {
-      const stampnum = await unsendStamp(id, myid);
-      setStampNumber(stampnum);
       setIsStamp(false);
+      setStampNumber((prevState) => prevState - 1);
+      await unsendStamp(id, myid);
     }
   };
 
