@@ -1,40 +1,40 @@
-import { pickRandom } from "@/lib/getAvailableSuggests";
+"use client";
+
+import { fetchHomePen } from "@/lib/pen/fetchHomePen";
 import HomePenItem from "./HomePenItem";
-import SuggestUser from "../search/SuggestUser";
-import { getRequestedPens } from "@/lib/pen/getRequestedPens";
-import { getUsersByPrimary } from "@/lib/getUsersByPrimary";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
-const HomePen = async ({ vasl, myid }) => {
-  if (vasl.length === 0)
-    return (
-      <div className="flex flex-col">
-        <p className="font-alibaba text-xl px-3">
-          هنوز به کسی وصـــل نیستی ، میتونی دوستات رو با جستجو پـیدا کــنی یا
-        </p>
-        <SuggestUser myid={myid} text={"لیست پیشــنهادی"} />
-      </div>
-    );
-  const randomUsers = pickRandom(vasl, vasl.length < 8 ? vasl.length : 8);
-  const randomUsersID = await getUsersByPrimary(randomUsers, false, ["id"]);
+const HomePen = ({ vasl, myid, initPens }) => {
+  const [pens, setPens] = useState(initPens);
+  const [page, setPage] = useState(1);
+  const [ref, isView] = useInView();
+  const loadMorePens = async () => {
+    if (page === -1) return;
+    const nextpage = page + 1;
+    const data = await fetchHomePen(vasl, nextpage);
+    if (data.length > 0) {
+      setPens((prevPens) => [...prevPens, ...data]);
+      setPage(nextpage);
+    } else setPage(-1);
+  };
+  useEffect(() => {
+    if (isView) {
+      loadMorePens();
+    }
+  }, [isView]);
 
-  const allData = await getRequestedPens(randomUsersID, 3);
-
-  if (allData.length === 0) {
-    return (
-      <div className="flex flex-col">
-        <p className="font-alibaba text-xl px-3">
-          افرادی که به آن ها وصل هستید خیلی فعال نیستند و از آنها نوشته ای یافت نشد.
-        </p>
-        <SuggestUser text={"لیست پیشــنهادی"} myid={myid} />
-      </div>
-    );
-  }
-  const sortedPens = allData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   return (
     <div className="flex flex-col gap-4 px-6">
-      {sortedPens.map((pen) => (
+      {pens.map((pen) => (
         <HomePenItem key={pen.id} pen={pen} myid={myid} />
       ))}
+      {page !== -1 && (
+        <div className="flex justify-center">
+          <div ref={ref} className="penloader"></div>
+        </div>
+      )}
+      {page === -1 && <div className="flex justify-center font-alibaba">قلم جدیدی برای نمایش نیست</div>}
     </div>
   );
 };

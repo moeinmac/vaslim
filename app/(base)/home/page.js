@@ -3,6 +3,7 @@ import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
 import SwitchHomePen from "@/components/pen/SwitchHomePen";
 import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
+import { fetchHomePen } from "@/lib/pen/fetchHomePen";
 import { createClient } from "@/lib/supabase/server";
 
 const Home = async () => {
@@ -14,6 +15,7 @@ const Home = async () => {
     .eq("id", myAuth.data.user.id)
     .single();
 
+  const firstPagePen = await fetchHomePen(data.vasl, 1);
   return (
     <>
       <header className="flex justify-between items-center px-6 py-4">
@@ -26,7 +28,7 @@ const Home = async () => {
         isBlur={data.vasl.length > 1 ? true : false}
       />
       <SwitchHomePen />
-      <HomePen vasl={data.vasl} myUsername={data.username} myid={myAuth.data.user.id} />
+      <HomePen initPens={firstPagePen} vasl={data.vasl} myid={myAuth.data.user.id} />
     </>
   );
 };
