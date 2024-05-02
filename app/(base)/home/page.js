@@ -2,6 +2,7 @@ import GetDot from "@/components/dot/GetDot";
 import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
 import SwitchHomePen from "@/components/pen/SwitchHomePen";
+import SuggestUser from "@/components/search/SuggestUser";
 import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
 import { fetchHomePen } from "@/lib/pen/fetchHomePen";
 import { createClient } from "@/lib/supabase/server";
@@ -28,7 +29,16 @@ const Home = async () => {
         isBlur={data.vasl.length > 1 ? true : false}
       />
       <SwitchHomePen />
-      <HomePen initPens={firstPagePen} vasl={data.vasl} myid={myAuth.data.user.id} />
+      {firstPagePen.length > 0 ? (
+        <HomePen initPens={firstPagePen} vasl={data.vasl} myid={myAuth.data.user.id} />
+      ) : (
+        <div className="flex flex-col">
+          <p className="font-alibaba text-xl px-3">
+            هنوز به کـــسی وصـــل نیسیتی میتونی از لیست زیر به افـرادی رو انتخاب کنی : 
+          </p>
+          <SuggestUser myid={myAuth.data.user.id} text={"لیست پیشــنهادی"} />
+        </div>
+      )}
     </>
   );
 };

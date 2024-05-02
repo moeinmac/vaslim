@@ -29,7 +29,7 @@ const HomePen = ({ vasl, myid, initPens }) => {
       {pens.map((pen) => (
         <HomePenItem key={pen.id} pen={pen} myid={myid} />
       ))}
-      {page !== -1 && (
+      {page !== -1 && initPens.length >= 3 && (
         <div className="flex justify-center items-center gap-2">
           <div ref={ref} className="penloader"></div> <p className="font-alibaba">صبر کــنید</p>
         </div>
