@@ -30,11 +30,13 @@ const HomePen = ({ vasl, myid, initPens }) => {
         <HomePenItem key={pen.id} pen={pen} myid={myid} />
       ))}
       {page !== -1 && (
-        <div className="flex justify-center">
-          <div ref={ref} className="penloader"></div>
+        <div className="flex justify-center items-center gap-2">
+          <div ref={ref} className="penloader"></div> <p className="font-alibaba">صبر کــنید</p>
         </div>
       )}
-      {page === -1 && <div className="flex justify-center font-alibaba">قلم جدیدی برای نمایش نیست</div>}
+      {page === -1 && (
+        <div className="flex justify-center font-alibaba">قلم جدیدی برای نمایش نیست</div>
+      )}
     </div>
   );
 };

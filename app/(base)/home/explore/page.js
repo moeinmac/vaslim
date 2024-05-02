@@ -1,6 +1,7 @@
 import BellButton from "@/components/notification/BellButton";
 import ExpolorePen from "@/components/pen/ExpolorePen";
 import SwitchHomePen from "@/components/pen/SwitchHomePen";
+import { fetchExplorePen } from "@/lib/pen/fetchExplorePen";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -13,6 +14,7 @@ const Explore = async () => {
     .eq("id", myAuth.data.user.id)
     .single();
 
+  const firstPagePen = await fetchExplorePen(data.vasl, myAuth.data.user.id, 1);
   return (
     <>
       <header className="flex justify-between items-center px-6 py-4">
@@ -20,7 +22,7 @@ const Explore = async () => {
         <BellButton myid={myAuth.data.user.id} />
       </header>
       <SwitchHomePen explore />
-      <ExpolorePen vasl={data.vasl} id={myAuth.data.user.id} />
+      <ExpolorePen vasl={data.vasl} myid={myAuth.data.user.id} initPens={firstPagePen} />
     </>
   );
 };

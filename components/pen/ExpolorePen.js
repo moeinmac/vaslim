@@ -1,13 +1,42 @@
-import { createExplorePen } from "@/lib/pen/createExplorePen";
-import HomePenItem from "./HomePenItem";
+"use client";
 
-const ExpolorePen = async ({ vasl, id }) => {
-  const allData = await createExplorePen(vasl, id);
+import { fetchExplorePen } from "@/lib/pen/fetchExplorePen";
+import HomePenItem from "./HomePenItem";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+
+const ExpolorePen = ({ vasl, myid, initPens }) => {
+  const [pens, setPens] = useState(initPens);
+  const [page, setPage] = useState(1);
+  const [ref, isView] = useInView();
+  const loadMorePens = async () => {
+    if (page === -1) return;
+    const nextpage = page + 1;
+    const data = await fetchExplorePen(vasl, myid, nextpage);
+    if (data.length > 0) {
+      setPens((prevPens) => [...prevPens, ...data]);
+      setPage(nextpage);
+    } else setPage(-1);
+  };
+  useEffect(() => {
+    if (isView) {
+      loadMorePens();
+    }
+  }, [isView]);
+
   return (
     <div className="flex flex-col gap-4 px-6">
-      {allData.map((pen) => (
-        <HomePenItem pen={pen} myid={id} key={pen.id} />
+      {pens.map((pen) => (
+        <HomePenItem key={pen.id} pen={pen} myid={myid} />
       ))}
+      {page !== -1 && (
+        <div className="flex justify-center items-center gap-2">
+          <div ref={ref} className="penloader"></div> <p className="font-alibaba">صبر کــنید</p>
+        </div>
+      )}
+      {page === -1 && (
+        <div className="flex justify-center font-alibaba">قلم جدیدی برای نمایش نیست</div>
+      )}
     </div>
   );
 };
