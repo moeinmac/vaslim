@@ -6,17 +6,17 @@ import { createClient } from "@/lib/supabase/server";
 const user = async () => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
-  let { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
+  let { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id).single();
   return (
     <>
       <UserHeader
-        profile={data[0].profile}
-        fullname={data[0].fullname}
-        username={data[0].username}
-        isVerified={data[0].isVerified}
+        profile={data.profile}
+        fullname={data.fullname}
+        username={data.username}
+        isVerified={data.isVerified}
         isLogout
       />
-      <MyAccount meData={data[0]} />
+      <MyAccount meData={data} />
       <h1 className="font-kalameh text-4xl px-6 py-2">نوشته های من</h1>
       <MyPen id={myAuth.data.user.id} myid={myAuth.data.user.id} />
     </>

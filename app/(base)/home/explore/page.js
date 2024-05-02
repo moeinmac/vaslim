@@ -17,7 +17,7 @@ const Explore = async () => {
     <>
       <header className="flex justify-between items-center px-6 py-4">
         <h1 className="font-kalameh text-5xl ">وصـــلیم</h1>
-        <BellButton myUsername={data.username} />
+        <BellButton myid={myAuth.data.user.id} />
       </header>
       <SwitchHomePen explore />
       <ExpolorePen vasl={data.vasl} id={myAuth.data.user.id} />

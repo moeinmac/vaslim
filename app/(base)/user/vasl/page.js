@@ -1,5 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 import Profile from "@/components/user/Profile";
 import BackButton from "@/components/user/BackButton";
 import { getUsersByPrimary } from "@/lib/getUsersByPrimary";
@@ -13,8 +12,6 @@ const Myvasl = async () => {
     .select("profile,fullname,username,isVerified,vasl")
     .eq("id", myAuth.data.user.id)
     .single();
-
-  if (!data) redirect("/home");
 
   const vasldata = await getUsersByPrimary(data.vasl, false, [
     "profile",
