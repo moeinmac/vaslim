@@ -6,7 +6,9 @@ import { persianNumbers } from "@/lib/persianNumbers";
 const UserItem = ({ data, path, small }) => {
   return (
     <Link
-      className="py-2 px-6 flex items-center gap-2 transition-transform duration-100 active:scale-90 active:bg-[#06171d] focus:bg-[#06171d]"
+      className={`py-2 px-6 flex items-center gap-2 transition-transform duration-100 ${
+        small ? "active:bg-[#06171d] focus:bg-[#06171d] active:scale-90" : "w-full"
+      }`}
       href={`/${path}`}
     >
       <Image

@@ -13,7 +13,7 @@ const MyPen = async ({ id, myid }) => {
   return (
     <div className="flex justify-center flex-col gap-4 px-6 pt-4">
       {data.length !== 0 &&
-        data.map((pen) => <UserPenItem ismypen myid={myid} pen={pen} key={pen.id} />)}
+        data.map((pen) => <UserPenItem isMyPen myid={myid} pen={pen} key={pen.id} />)}
       {data.length === 0 && (
         <div className="flex flex-col gap-4">
           <p className="font-alibaba">شما هنوز دست به قلم نشدی! همین الان یه چیزی بنویس</p>

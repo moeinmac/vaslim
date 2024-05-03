@@ -1,5 +1,5 @@
+import UserMessageList from "@/components/message/UserMessagesList";
 import SuggestUser from "@/components/search/SuggestUser";
-import UserItem from "@/components/user/UserItem";
 import { convertUserItems } from "@/lib/getUsersByPrimary";
 import { createClient } from "@/lib/supabase/server";
 
@@ -30,9 +30,7 @@ const message = async () => {
         </>
       )}
 
-      {soretedMessages.map((item) => (
-        <UserItem data={item} path={`message/${item.id}`} key={item.id} />
-      ))}
+      <UserMessageList messageList={soretedMessages} />
     </div>
   );
 };
