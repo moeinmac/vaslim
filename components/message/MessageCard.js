@@ -6,6 +6,7 @@ import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";
 import MessageItem from "./MessageItem";
 import useNewMessage from "@/lib/message/useNewMessage";
+import { BsSend } from "react-icons/bs";
 
 const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const scrollRef = useRef();
@@ -51,7 +52,12 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
         scrolToBottom={scrolToBottom}
         setOnlineUser={onlineUserHandler}
       />
-      {loadingMessage && <MessageItem message={loadingMessage} myid={myid} isLoading />}
+      {loadingMessage && (
+        <div className="flex items-center gap-3 mr-3">
+          <BsSend className="text-lg"/>
+          <MessageItem message={loadingMessage} myid={myid} isLoading />
+        </div>
+      )}
       <NewMessage myid={myid} id={id} sendMessageHandler={sendMessageHandler} />
     </div>
   );

@@ -4,6 +4,7 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import Profile from "../user/Profile";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import { clearUnreadMessage } from "@/lib/message/clearUnreadMessage";
 
 const MessageHeader = ({ data, myid, message_id, online }) => {
   const supabase = createClient();
@@ -18,12 +19,13 @@ const MessageHeader = ({ data, myid, message_id, online }) => {
     });
   }, []);
 
-  const backToMessageHandler = () => {
+  const backToMessageHandler =async () => {
     messageChannel.send({
       type: "broadcast",
       event: "message",
       payload: { type: "leave", id: myid },
     });
+    await clearUnreadMessage(message_id, myid, true);
     router.back();
   };
 

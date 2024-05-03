@@ -6,7 +6,7 @@ import { useState } from "react";
 import { sendComment, sendReply } from "@/lib/pen/sendComment";
 import { FaTimes } from "react-icons/fa";
 
-const PostComment = ({ myUsername, id, userUsername, isReply , cancelReplyHandler }) => {
+const PostComment = ({ myUsername, id, userUsername, isReply, cancelReplyHandler }) => {
   const [commentValue, setCommentValue] = useState("");
   const changeValueHander = (event) => setCommentValue(event.target.value);
   const sendNewComment = () => {
@@ -22,7 +22,9 @@ const PostComment = ({ myUsername, id, userUsername, isReply , cancelReplyHandle
             <>
               <p>ارسال پاسخ به</p>
               <Link href={`/${isReply.username}`}>{isReply.username}@</Link>
-              <div onClick={cancelReplyHandler}><FaTimes /></div>
+              <div onClick={cancelReplyHandler}>
+                <FaTimes />
+              </div>
             </>
           )}
           {!isReply && (
@@ -43,7 +45,7 @@ const PostComment = ({ myUsername, id, userUsername, isReply , cancelReplyHandle
       <textarea
         value={commentValue}
         onChange={changeValueHander}
-        className="p-2 rounded-lg stamp focus:outline-0 resize-none"
+        className="p-2 rounded-lg stamp focus:outline-0 resize-none font-alibaba"
       ></textarea>
     </form>
   );

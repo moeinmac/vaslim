@@ -1,17 +1,23 @@
 import { TbLoader } from "react-icons/tb";
 
-const MessageItem = ({ message, myid ,isLoading}) => {
+const MessageItem = ({ message, myid, isLoading }) => {
   const me = myid === message.send_by;
   const time = new Date(message.time);
+  const currentTime = `${
+    time.getMinutes() <= 9 ? `0${time.getMinutes()}` : `${time.getMinutes()}`
+  } : ${time.getHours() <= 9 ? `0${time.getHours()}` : `${time.getHours()}`}`;
   return (
     <div
-      className={`max-w-[80vw] ${isLoading ? "flex-grow-0 flex ml-auto mr-4 mt-3" : "flex"} ${
-        me ? "bg-[#5D85DD] rounded-tr-sm rounded-br-3xl" : "bg-[#6e7178] rounded-bl-3xl rounded-tl-sm self-end"
-      } items-center gap-4 px-4 py-2 rounded-xl `}
+      className={`max-w-[85vw]  px-4 py-2 rounded-xl ${
+        isLoading ? "flex mt-3 items-center gap-4" : ""
+      } ${
+        me
+          ? "bg-[#5D85DD] rounded-tr-sm rounded-br-3xl"
+          : "bg-[#6e7178] rounded-bl-3xl rounded-tl-sm self-end"
+      }`}
     >
       {isLoading && <TbLoader />}
-      <span className="text-[#cfcfcf] text-xs pt-1 order-1">{`${time.getMinutes()} : ${time.getHours()}`}</span>
-      <p className={` ${me ? "order-2" : "order-0"} font-alibaba`}>{message.text}</p>
+      <p className={` ${me ? "order-2" : "order-0"} font-alibaba`}><span className="text-[#cfcfcf] text-xs pl-2 order-1 text-nowrap">{currentTime}</span> {message.text}</p>
     </div>
   );
 };

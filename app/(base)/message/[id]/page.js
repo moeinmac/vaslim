@@ -1,5 +1,4 @@
-import MessageCard from "@/components/message/MessageCard";
-import { clearUnreadMessage } from "@/lib/message/clearUnreadMessage";
+import MessageCard from "@/components/message/MessageCard";;
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -14,7 +13,6 @@ const messagepage = async ({ params }) => {
   if (!isMyMessage) redirect("/message");
 
   const myid = myAuth.data.user.id;
-  await clearUnreadMessage(data.id, myid, true);
 
   const userid = data.users.find((user) => user !== myid);
 
