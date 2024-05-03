@@ -38,7 +38,7 @@ const BellButton = ({ myid }) => {
     }
   };
   supabase
-    .channel("notification")
+    .channel("updateUser")
     .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
     .subscribe();
   return (

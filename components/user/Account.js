@@ -54,7 +54,7 @@ const Account = ({ myUsername, userUsername }) => {
   };
 
   supabase
-    .channel("updateVaslUser")
+    .channel("updateUser")
     .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
     .subscribe();
 

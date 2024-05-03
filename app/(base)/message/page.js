@@ -15,7 +15,7 @@ const message = async () => {
 
   const myMessageItems = await convertUserItems(data.message, "with");
   const soretedMessages = myMessageItems.sort((a, b) => b.unread - a.unread);
-  console.log(soretedMessages);
+
   return (
     <div className="flex flex-col">
       <header>

@@ -7,12 +7,12 @@ import Pulse from "../notification/Pulse";
 
 const MessageTabbar = ({ active, activeStyle }) => {
   const supabase = createClient();
+  let myid;
 
   const [isUnRead, setIsUnRead] = useState(false);
-
   const getIsUnreadMessage = async () => {
-    let unread = false;
     const myAuth = await supabase.auth.getUser();
+    let unread = false;
     const { data } = await supabase
       .from("user")
       .select("message")
@@ -27,7 +27,17 @@ const MessageTabbar = ({ active, activeStyle }) => {
 
   useEffect(() => {
     getIsUnreadMessage();
+    // myid = JSON.parse(localStorage.getItem("sb-dhqnztxmteoptdxbvbbl-auth-token")).user.id;
   }, []);
+
+  // const handleChanges = (paylod) => {
+  //   console.log(paylod);
+  //   // if (paylod.new.id === myid) getIsUnreadMessage();
+  // };
+  // supabase
+  //   .channel("updateUser")
+  //   .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
+  //   .subscribe();
 
   return active !== "message" ? (
     <div className="relative">
