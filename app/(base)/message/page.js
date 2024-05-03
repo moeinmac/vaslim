@@ -14,20 +14,23 @@ const message = async () => {
     .single();
 
   const myMessageItems = await convertUserItems(data.message, "with");
-
+  const soretedMessages = myMessageItems.sort((a, b) => b.unread - a.unread);
+  console.log(soretedMessages);
   return (
     <div className="flex flex-col">
       <header>
         <h1 className="font-kalameh px-6 py-4 text-5xl">لیست پــیام های شما</h1>
       </header>
-      {myMessageItems.length === 0 && (
+      {soretedMessages.length === 0 && (
         <>
-          <p className="font-alibaba px-6 py-4">هنوز به کـــسی پیامی ندادی ، میتونی به افراد زیر پیام بدی</p>
-          <SuggestUser myid={myAuth.data.user.id}/>
+          <p className="font-alibaba px-6 py-4">
+            هنوز به کـــسی پیامی ندادی ، میتونی به افراد زیر پیام بدی
+          </p>
+          <SuggestUser myid={myAuth.data.user.id} />
         </>
       )}
 
-      {myMessageItems.map((item) => (
+      {soretedMessages.map((item) => (
         <UserItem data={item} path={`message/${item.id}`} key={item.id} />
       ))}
     </div>
