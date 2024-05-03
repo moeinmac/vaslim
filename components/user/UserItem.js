@@ -29,8 +29,8 @@ const UserItem = ({ data, path, small }) => {
           />
         </div>
       </div>
-      {data.unread >= 1 && (
-        <div className="font-alibaba text-orange text-xl">{persianNumbers(data.unread)}+</div>
+      {data.unread && data.unread >= 1 && (
+        <div className="font-alibaba bg-orange text-black rounded-lg px-1 text-xl">{persianNumbers(data.unread)}+</div>
       )}
     </Link>
   );

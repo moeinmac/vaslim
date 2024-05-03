@@ -33,12 +33,12 @@ const UserMessageList = ({ messageList }) => {
       )}
       {messageList.map((item) => (
         <div
-          className="active:bg-[#06171d] focus:bg-[#06171d] active:scale-90 flex items-center justify-between relative"
+          className="active:bg-[#06171d] focus:bg-[#06171d] active:scale-90 flex items-center justify-between"
           key={item.id}
         >
           <UserItem data={item} path={`message/${item.id}`} />
           <button
-            className="absolute left-0 pl-6"
+            className="pl-6"
             onClick={() => {
               confirmDeleteHandler(item.id);
             }}
