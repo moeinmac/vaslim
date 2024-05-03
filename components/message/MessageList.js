@@ -42,9 +42,27 @@ const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
 
   return (
     <div className="flex-1 flex gap-3 flex-col items-start justify-end">
-      {messages.map((message) => (
-        <MessageItem message={message} myid={myid} key={Math.random()} />
-      ))}
+      {messages.map((message, index) => {
+        if (index !== 0) {
+          const timeDiff =
+            new Date(messages[index].time).getDay() - new Date(messages[index - 1].time).getDay();
+          if (timeDiff >= 1) {
+            return (
+              <>
+                <div
+                  key={message.time}
+                  className="font-alibaba inline text-sm text-center mt-3 self-center text-zinc-400 "
+                >
+                  {new Date(message.time).toLocaleString("fa-IR", { dateStyle: "medium" })}
+                </div>
+                <MessageItem message={message} myid={myid} key={Math.random()} />
+              </>
+            );
+          }
+        }
+
+        return <MessageItem message={message} myid={myid} key={Math.random()} />;
+      })}
     </div>
   );
 };
