@@ -2,6 +2,7 @@
 import { createClient } from "@/lib/supabase/client";
 import MessageItem from "./MessageItem";
 import { useEffect, useState } from "react";
+import { sendOnlineUser } from "@/lib/message/sendOnlineUser";
 
 const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
   const supabase = createClient();
@@ -9,9 +10,11 @@ const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
 
   const messageChannel = supabase.channel(`room-${id}`);
 
+
   const messageReceived = (payload) => {
     if (payload.payload.type) {
       if (payload.payload.type === "join" && payload.payload.id !== myid) {
+        sendOnlineUser(id,myid,"join")
         setOnlineUser(true);
         return;
       }

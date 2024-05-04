@@ -23,6 +23,7 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const { loadingMessage, sendNewMessage } = useNewMessage(id, userid);
 
   const [isOnline, setIsOnline] = useState(false);
+  console.log(isOnline);
   const onlineUserHandler = (value) => setIsOnline(value);
 
   const sendMessageHandler = async (message) => {
@@ -58,7 +59,7 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
           <MessageItem message={loadingMessage} myid={myid} isLoading />
         </div>
       )}
-      <NewMessage myid={myid} id={id} sendMessageHandler={sendMessageHandler} />
+      <NewMessage myid={myid} sendMessageHandler={sendMessageHandler} />
     </div>
   );
 };

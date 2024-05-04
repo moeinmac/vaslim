@@ -4,7 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 
 import { RiSendPlane2Fill } from "react-icons/ri";
 
-const NewMessage = ({ myid, id, sendMessageHandler }) => {
+const NewMessage = ({ myid, sendMessageHandler }) => {
   const inputRef = useRef();
 
   const createNewMessageHandler = async () => {

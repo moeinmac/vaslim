@@ -5,26 +5,17 @@ import Profile from "../user/Profile";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { clearUnreadMessage } from "@/lib/message/clearUnreadMessage";
+import { sendOnlineUser } from "@/lib/message/sendOnlineUser";
 
 const MessageHeader = ({ data, myid, message_id, online }) => {
-  const supabase = createClient();
-  const messageChannel = supabase.channel(`room-${message_id}`);
   const router = useRouter();
 
   useEffect(() => {
-    messageChannel.send({
-      type: "broadcast",
-      event: "message",
-      payload: { type: "join", id: myid },
-    });
+    sendOnlineUser(message_id, myid, "join");
   }, []);
 
-  const backToMessageHandler =async () => {
-    messageChannel.send({
-      type: "broadcast",
-      event: "message",
-      payload: { type: "leave", id: myid },
-    });
+  const backToMessageHandler = async () => {
+    sendOnlineUser(message_id, myid, "leave");
     await clearUnreadMessage(message_id, myid, true);
     router.back();
   };
