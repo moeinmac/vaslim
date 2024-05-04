@@ -8,7 +8,6 @@ import { sendOnlineUser } from "@/lib/message/sendOnlineUser";
 
 const MessageHeader = ({ data, myid, message_id, online }) => {
   const router = useRouter();
-  console.log("render");
 
   useEffect(() => {
     sendOnlineUser(message_id, myid, "join");

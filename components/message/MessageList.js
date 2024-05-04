@@ -24,7 +24,6 @@ const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
     } else {
       setMessages((prevState) => [...prevState, payload.payload]);
     }
-    supabase.removeChannel(messageChannel);
   };
 
   messageChannel

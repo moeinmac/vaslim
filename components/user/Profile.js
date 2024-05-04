@@ -1,13 +1,14 @@
 import Image from "next/image";
 import VerifiedButton from "./VerfiedButton";
 
-const Profile = ({ profile, fullname, username, small, isVerified, className }) => {
+const Profile = ({ profile, fullname, username, small, isVerified, className , onClick }) => {
   return (
     <div className={`flex ${small ? "" : "flex-col"} items-center gap-4`}>
       <Image
         width={small ? 60 : 100}
         height={small ? 60 : 100}
         src={profile}
+        onClick={onClick}
         alt={fullname}
         className="rounded-lg outline-8 outline-blue outline-double "
       />
