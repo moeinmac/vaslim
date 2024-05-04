@@ -78,10 +78,16 @@ const UserHeaderPen = ({ created_at, pen_id, pen }) => {
           onClose={confirmDeleteHandler}
         >
           <h2 className="mb-6">آیا مطمئن هستید که این قلم را پاک کنید؟</h2>
-          <button onClick={deletePenHandler} className="bg-red-600  w-full rounded-lg py-2">
+          <button
+            onClick={deletePenHandler}
+            className="bg-red-600  w-full rounded-lg py-2 text-2xl"
+          >
             پاکــــش کن
           </button>
-          <button onClick={confirmDeleteHandler} className="bg-[#5D85DD] w-full rounded-lg py-2">
+          <button
+            onClick={confirmDeleteHandler}
+            className="bg-[#5D85DD] w-full rounded-lg py-2 text-2xl"
+          >
             نه ولـــش کن
           </button>
         </Modal>

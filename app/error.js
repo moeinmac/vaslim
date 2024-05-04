@@ -13,7 +13,7 @@ const Error = ({ error, reset }) => {
     <div className="flex flex-col items-center gap-4 py-4">
       <h2 className="font-kalameh text-9xl text-orange">ای وای!</h2>
       <p className="font-alibaba px-6 text-lg">
-        متاسفم ولی یه خطایی پیش اومد ، یا شاید اینترنتت قطع شده! در هر حال با زدن دکــمه زیر وصلیم
+        متاسفم ولی یه خطایی پیش اومد ، یا شاید اینترنتت قطع شده! در هر حال با زدن دکــمه زیر ، وصلیم
         خود اتصالی میکنه
       </p>
       <div className="flex flex-col gap-4 py-8">
