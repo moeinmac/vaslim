@@ -19,7 +19,7 @@ const UserMessageList = ({ messageList }) => {
     <div>
       {confirmDelete && (
         <Modal
-          className={"bg-blue flex flex-col items-center top-[30vh] gap-2 font-kalameh text-3xl"}
+          className={"w-[90%] left-[5%] rounded-xl bg-blue flex flex-col items-center top-[30vh] gap-2 font-kalameh text-3xl"}
           onClose={confirmDeleteHandler}
         >
           <h2 className="mb-6">آیا مطمئن هستید که میخواهید این گفتگو را دو طرفه پاک کنید؟</h2>

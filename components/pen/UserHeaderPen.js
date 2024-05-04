@@ -44,7 +44,7 @@ const UserHeaderPen = ({ created_at, pen_id, pen }) => {
       {isEditing && (
         <Modal
           onClose={isEditingHandler}
-          className={"top-[15vh] bg-black flex flex-col items-center"}
+          className={"w-[90%] left-[5%] rounded-xl top-[15vh] bg-black flex flex-col items-center"}
         >
           <h1 className={"font-kalameh text-4xl"}>ویــرایش قــلم</h1>
           <form className="flex flex-col gap-4 w-full">
@@ -74,7 +74,7 @@ const UserHeaderPen = ({ created_at, pen_id, pen }) => {
       )}
       {confirmDelete && (
         <Modal
-          className={"bg-blue flex flex-col items-center top-[30vh] gap-2 font-kalameh text-3xl"}
+          className={"w-[90%] left-[5%] rounded-xl bg-blue flex flex-col items-center top-[30vh] gap-2 font-kalameh text-3xl"}
           onClose={confirmDeleteHandler}
         >
           <h2 className="mb-6">آیا مطمئن هستید که این قلم را پاک کنید؟</h2>

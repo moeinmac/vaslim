@@ -16,7 +16,7 @@ const baseLayout = async ({ children }) => {
       <main className="md:hidden flex flex-col min-h-screen pb-[5.5rem]">
         {children}
         <MobileTabbar />
-        <ShakeMobileDevice />
+        <ShakeMobileDevice id={data.data.user.id}/>
       </main>
     </>
   );

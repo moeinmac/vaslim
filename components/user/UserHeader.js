@@ -15,7 +15,7 @@ const UserHeader = ({ profile, fullname, username, isVerified, isLogout }) => {
   return (
     <>
       {isView && (
-        <Modal onClose={viewProfileHandler} className={"top-24"}>
+        <Modal onClose={viewProfileHandler} className={"top-24 w-[90%] left-[5%] rounded-xl"}>
           <ViewProfile src={profile} width={300} height={300} className={"rounded-3xl mx-auto"} />
         </Modal>
       )}
