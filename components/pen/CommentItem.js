@@ -2,6 +2,7 @@ import Image from "next/image";
 import VerifiedButton from "../user/VerfiedButton";
 import { timeSince } from "@/lib/timeSince";
 import { LiaReplyAllSolid } from "react-icons/lia";
+import Link from "next/link";
 
 const ReplyItem = ({ data }) => {
   const convertedDate = new Date(data.replied_at);
@@ -44,7 +45,7 @@ const CommentItem = ({ data, isAuthor, sendReplyData }) => {
     <div className="penItem_bg px-3 py-2 pt-0 last:rounded-bl-xl last:rounded-br-xl">
       <div className="stamp p-2 rounded-lg">
         <header className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link href={`/${data.username}`} className="flex items-center gap-3">
             <Image
               width={45}
               height={45}
@@ -61,7 +62,7 @@ const CommentItem = ({ data, isAuthor, sendReplyData }) => {
                 className="text-[0.7rem]"
               />
             </div>
-          </div>
+          </Link>
           <p className="font-alibaba text-[0.6rem]">{timeSince(convertedDate)}</p>
         </header>
         {isAuthor && !isReply && (

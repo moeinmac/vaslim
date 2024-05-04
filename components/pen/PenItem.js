@@ -4,12 +4,13 @@ import VaslButton from "@/components/user/VaslButton";
 import HeaderPen from "./HeaderPen";
 
 import BackButton from "../user/BackButton";
+import Link from "next/link";
 
-const PenItem = ({ data}) => {
+const PenItem = ({ data }) => {
   return (
     <div className="mx-3 mt-3 stamp rounded-t-xl flex flex-col mb-0">
       <header className="rounded-xl p-2 flex justify-between px-6 py-4">
-        <div className={`flex items-center gap-4`}>
+        <Link href={`/${data.user.username}`} className={`flex items-center gap-4`}>
           <Image
             width={60}
             height={60}
@@ -26,7 +27,7 @@ const PenItem = ({ data}) => {
               className={"text-[0.8rem]"}
             />
           </div>
-        </div>
+        </Link>
         <div className="flex items-center gap-4">
           <VaslButton vasl={data.user.vasl.length} username={data.user.username} />
           <BackButton className={"text-4xl"} />
@@ -35,7 +36,7 @@ const PenItem = ({ data}) => {
       <article className="whitespace-pre-wrap px-6 font-alibaba">{data.pen}</article>
       <footer className=" flex flex-col pt-2">
         <div className="flex items-center justify-between p-4">
-          <HeaderPen created_at={data.created_at} pen_id={data.id}/>
+          <HeaderPen created_at={data.created_at} pen_id={data.id} />
         </div>
       </footer>
     </div>
