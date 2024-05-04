@@ -57,7 +57,7 @@ const UserHeaderPen = ({ created_at, pen_id, pen }) => {
               className="my-3 bg-white text-black rounded-lg px-4 py-2 resize-none outline-0 text-lg overflow-hidden w-full font-alibaba"
             ></TextareaAutosize>
             <SubmitButton
-              className={"bg-orange w-full rounded-lg py-2 font-kalameh"}
+              className={"bg-orange w-full rounded-lg py-2 font-kalameh text-2xl"}
               pendingText={"در حال ارسال..."}
               formAction={editpenHandler}
             >
@@ -65,7 +65,7 @@ const UserHeaderPen = ({ created_at, pen_id, pen }) => {
             </SubmitButton>
             <button
               onClick={isEditingHandler}
-              className="font-kalameh bg-[#5D85DD] w-full rounded-lg py-2"
+              className="font-kalameh bg-[#5D85DD] w-full rounded-lg py-2 text-2xl"
             >
               نه ولـــش کن
             </button>

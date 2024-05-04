@@ -36,7 +36,7 @@ const ReportProblem = ({ isReport, closeReport , id}) => {
             <p>واحد پشتیبانی و توسعه وصــلیم</p>
           </div>
         </div>
-        <form className="flex flex-col gap-4 w-full">
+        <form className="flex flex-col gap-4 w-full mb-4">
           <input type="hidden" defaultValue={id} name="id"/>
           <TextareaAutosize
             name="problem"
