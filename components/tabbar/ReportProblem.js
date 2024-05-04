@@ -16,7 +16,7 @@ const ReportProblem = ({ isReport, closeReport , id}) => {
         className={"bg-blue flex flex-col items-center gap-4 bottom-0 w-full rounded-t-xl"}
       >
         <h2 className="font-kalameh text-4xl">گـــزارش یک مشکــل</h2>
-        <p className="font-alibab mb-8">
+        <p className="font-alibaba mb-8">
           شما میتوانید <strong>انتقادات و پیشنهادات</strong> و یا <strong>مشکلات و خطا هایی</strong>{" "}
           که هنگام استفاده از وب اپلیکیشن وصلیم برای شما پیش آمده را برای تیم پشتیبانی و توسعه وصلیم
           ارسال کنید.

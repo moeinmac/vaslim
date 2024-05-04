@@ -14,9 +14,9 @@ const ShakeMobileDevice = ({id}) => {
     setIsShake(false);
     setIsReport(!isReport);
   };
-  const shakeEventDidOccur = () => setIsShake(true);
+  const shakeEventDidOccur = () => !isReport ? setIsShake(true) : null;
   var myShakeEvent = new Shake({
-    threshold: 5,
+    threshold: 7,
   });
   myShakeEvent.start();
   window.addEventListener("shake", shakeEventDidOccur, false);
