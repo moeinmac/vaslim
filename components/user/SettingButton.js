@@ -1,15 +1,16 @@
-import { logoutHandler } from "@/lib/logoutHandler";
+import { useState } from "react";
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
+import MySetting from "./setting/MySetting";
 
-const SettingButton = ({ isLogout }) => {
-  return isLogout ? (
-    <form action={logoutHandler}>
-      <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-        <HiMiniEllipsisVertical className=" text-orange" />
-      </button>
-    </form>
-  ) : (
-    <HiMiniEllipsisVertical className=" text-orange" />
+const SettingButton = () => {
+  const [open, setOpen] = useState(false);
+  const openHandler = () => setOpen(!open);
+
+  return (
+    <>
+      {open && <MySetting onClose={openHandler} />}
+      <HiMiniEllipsisVertical className=" text-orange" onClick={openHandler} />
+    </>
   );
 };
 export default SettingButton;
