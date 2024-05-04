@@ -1,14 +1,14 @@
 "use client";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { IoReturnUpBackSharp } from "react-icons/io5";
 import Profile from "../user/Profile";
-import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { clearUnreadMessage } from "@/lib/message/clearUnreadMessage";
 import { sendOnlineUser } from "@/lib/message/sendOnlineUser";
 
 const MessageHeader = ({ data, myid, message_id, online }) => {
   const router = useRouter();
+  console.log("render");
 
   useEffect(() => {
     sendOnlineUser(message_id, myid, "join");
@@ -39,4 +39,4 @@ const MessageHeader = ({ data, myid, message_id, online }) => {
   );
 };
 
-export default MessageHeader;
+export default React.memo(MessageHeader);

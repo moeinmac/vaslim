@@ -10,11 +10,10 @@ const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
 
   const messageChannel = supabase.channel(`room-${id}`);
 
-
   const messageReceived = (payload) => {
     if (payload.payload.type) {
       if (payload.payload.type === "join" && payload.payload.id !== myid) {
-        sendOnlineUser(id,myid,"join")
+        sendOnlineUser(id, myid, "join");
         setOnlineUser(true);
         return;
       }
@@ -55,7 +54,7 @@ const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
               <>
                 <div
                   key={message.time}
-                  className="font-alibaba inline text-sm text-center mt-3 self-center text-zinc-400 "
+                  className="font-alibaba inline text-sm text-center mt-3 self-center text-zinc-400"
                 >
                   {new Date(message.time).toLocaleString("fa-IR", { dateStyle: "medium" })}
                 </div>
