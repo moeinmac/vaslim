@@ -7,6 +7,9 @@ import SettingItem from "./SettingItem";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useReducer } from "react";
 import AccountData from "./AccountData";
+import ChangePassowrd from "./ChangePassword";
+import ChangePrivacy from "./ChangePrivacy";
+import ReportProblem from "./ReportProblem";
 
 const settingItemData = [
   { id: "info", text: "اطلاعات حساب کــاربری", icon: <CgUserList /> },
@@ -78,7 +81,6 @@ const initState = {
 
 const MySetting = ({ onClose }) => {
   const [setting, dispatchSetting] = useReducer(settingReducer, initState);
-  console.log(setting);
   const clickItemHandler = (id) => dispatchSetting({ type: id });
   return (
     <Modal
@@ -103,6 +105,8 @@ const MySetting = ({ onClose }) => {
         </div>
       )}
       {setting.info && <AccountData />}
+      {setting.password && <ChangePassowrd />}
+      {setting.privacy && <ChangePrivacy />}
     </Modal>
   );
 };

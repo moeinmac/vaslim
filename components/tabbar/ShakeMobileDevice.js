@@ -4,9 +4,9 @@ import { useState } from "react";
 import Shake from "shake.js";
 
 import Modal from "../Modal/Modal";
-import ReportProblem from "./ReportProblem";
+import ReportProblem from "../user/setting/ReportProblem";
 
-const ShakeMobileDevice = ({id}) => {
+const ShakeMobileDevice = ({ id }) => {
   const [isShake, setIsShake] = useState(false);
   const closeShakeHandler = () => setIsShake(false);
   const [isReport, setIsReport] = useState(false);
@@ -14,7 +14,7 @@ const ShakeMobileDevice = ({id}) => {
     setIsShake(false);
     setIsReport(!isReport);
   };
-  const shakeEventDidOccur = () => !isReport ? setIsShake(true) : null;
+  const shakeEventDidOccur = () => (!isReport ? setIsShake(true) : null);
   var myShakeEvent = new Shake({
     threshold: 7,
   });
@@ -22,10 +22,12 @@ const ShakeMobileDevice = ({id}) => {
   window.addEventListener("shake", shakeEventDidOccur, false);
   return (
     <>
-      <ReportProblem isReport={isReport} id={id} closeReport={reportChangeHandler} />
+      {isReport && <ReportProblem id={id} closeReport={reportChangeHandler} />}
       {isShake && (
         <Modal
-          className={"w-[90%] left-[5%] rounded-xl bg-blue flex flex-col items-center bottom-[2vh] gap-4"}
+          className={
+            "w-[90%] left-[5%] rounded-xl bg-blue flex flex-col items-center bottom-[2vh] gap-4"
+          }
           onClose={closeShakeHandler}
         >
           <h2 className="mb-2 font-kalameh text-4xl text-border-2 text-[#5D85DD]">
