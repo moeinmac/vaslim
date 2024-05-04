@@ -1,4 +1,5 @@
 import MobileTabbar from "@/components/tabbar/MobileTabbar";
+import ShakeMobileDevice from "@/components/tabbar/ShakeMobileDevice";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -15,6 +16,7 @@ const baseLayout = async ({ children }) => {
       <main className="md:hidden flex flex-col min-h-screen pb-[5.5rem]">
         {children}
         <MobileTabbar />
+        <ShakeMobileDevice />
       </main>
     </>
   );
