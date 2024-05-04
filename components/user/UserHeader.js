@@ -6,7 +6,7 @@ import BackButton from "./BackButton";
 import SettingButton from "./SettingButton";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
-import Image from "next/image";
+import ViewProfile from "./ViewProfile";
 
 const UserHeader = ({ profile, fullname, username, isVerified, isLogout }) => {
   const [isView, setIsView] = useState(false);
@@ -16,14 +16,7 @@ const UserHeader = ({ profile, fullname, username, isVerified, isLogout }) => {
     <>
       {isView && (
         <Modal onClose={viewProfileHandler} className={"top-24"}>
-          <Image
-            width={300}
-            height={300}
-            src={profile}
-            className="rounded-3xl mx-auto"
-            alt="profile"
-            // placeholder="blur"
-          />
+          <ViewProfile src={profile} width={300} height={300} className={"rounded-3xl mx-auto"} />
         </Modal>
       )}
       <div className="flex w-full justify-between items-start text-4xl pt-8 pl-6 pr-5">
