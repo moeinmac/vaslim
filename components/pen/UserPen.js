@@ -1,25 +1,41 @@
-import { createClient } from "@/lib/supabase/server";
-import UserPenItem from "./UserPenItem";
+"use client";
 
-const UserPen = async ({ username, myid }) => {
-  const supabase = createClient();
-  const userID = await supabase.from("user").select("id").eq("username", username).single();
-  const { data } = await supabase
-    .from("pen")
-    .select()
-    .eq("author", userID.data.id)
-    .order("created_at", { ascending: false });
+import { fetchUserPen } from "@/lib/pen/fetchUserPen";
+import UserPenItem from "./UserPenItem";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+
+const UserPen = ({ userid, myid, initPens }) => {
+  const [pens, setPens] = useState(initPens);
+  const [page, setPage] = useState(1);
+  const [ref, isView] = useInView();
+  const loadMorePens = async () => {
+    if (page === -1) return;
+    const nextpage = page + 1;
+    const data = await fetchUserPen(userid, nextpage);
+    if (data.length > 0) {
+      setPens((prevPens) => [...prevPens, ...data]);
+      setPage(nextpage);
+    } else setPage(-1);
+  };
+  useEffect(() => {
+    if (isView) {
+      loadMorePens();
+    }
+  }, [isView]);
 
   return (
     <div className="flex justify-center flex-col gap-4 px-6 pt-4">
-      {data.length !== 0 &&
-        data.map((pen) => <UserPenItem myid={myid} pen={pen} key={pen.id} />)}
-      {data.length === 0 && (
-        <div className="flex flex-col">
-          <p className="font-alibaba">
-            این کــاربر هنوز هیچ نوشته ای نداره ، قول میده که به زودی دست به قلم بشه
-          </p>
+      {pens.map((pen) => (
+        <UserPenItem myid={myid} pen={pen} key={pen.id} />
+      ))}
+      {page !== -1 && initPens.length >= 3 && (
+        <div className="flex justify-center items-center gap-2">
+          <div ref={ref} className="penloader"></div> <p className="font-alibaba">صبر کــنید</p>
         </div>
+      )}
+      {page === -1 && (
+        <div className="flex justify-center font-alibaba">قلم جدیدی برای نمایش نیست</div>
       )}
     </div>
   );
