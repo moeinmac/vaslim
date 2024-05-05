@@ -34,7 +34,7 @@ const Home = async () => {
       ) : (
         <div className="flex flex-col">
           <p className="font-alibaba text-xl px-3">
-            هنوز به کـــسی وصـــل نیسیتی میتونی از لیست زیر به افـرادی رو انتخاب کنی : 
+            به وصـــلیم خوش اومدی ، میتونی به افراد زیر وصل شی یا از قسمت جستجو دنبال دوستات بگردی
           </p>
           <SuggestUser myid={myAuth.data.user.id} text={"لیست پیشــنهادی"} />
         </div>
