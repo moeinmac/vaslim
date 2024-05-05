@@ -32,7 +32,7 @@ const Home = async () => {
       {firstPagePen.length > 0 ? (
         <HomePen initPens={firstPagePen} vasl={data.vasl} myid={myAuth.data.user.id} />
       ) : (
-        <div className="flex flex-col">
+        <div className="flex flex-col px-6">
           <p className="font-alibaba text-xl px-3">
             به وصـــلیم خوش اومدی ، میتونی به افراد زیر وصل شی یا از قسمت جستجو دنبال دوستات بگردی
           </p>
