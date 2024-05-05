@@ -8,7 +8,7 @@ import { useState } from "react";
 import Modal from "../Modal/Modal";
 import ViewProfile from "./ViewProfile";
 
-const UserHeader = ({ profile, fullname, username, isVerified , me }) => {
+const UserHeader = ({ profile, fullname, username, isVerified, me }) => {
   const [isView, setIsView] = useState(false);
   const viewProfileHandler = () => setIsView(!isView);
 
@@ -20,7 +20,7 @@ const UserHeader = ({ profile, fullname, username, isVerified , me }) => {
         </Modal>
       )}
       <div className="flex w-full justify-between items-start text-4xl pt-8 pl-6 pr-5">
-        <SettingButton from={username} me={me}/>
+        <SettingButton me={me} user={{ profile, username, fullname, isVerified }} />
         <Profile
           profile={profile}
           fullname={fullname}
