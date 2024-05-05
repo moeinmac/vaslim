@@ -4,13 +4,14 @@ import UserHeader from "@/components/user/UserHeader";
 import { redirect } from "next/navigation";
 import UserPen from "@/components/pen/UserPen";
 import { fetchUserPen } from "@/lib/pen/fetchUserPen";
+import AccountMain from "@/components/user/AccountMain";
 
 const username = async ({ params }) => {
   const supabase = createClient();
   const { data } = await supabase.from("user").select().eq("username", params.username).single();
 
   const myAuth = await supabase.auth.getUser();
-  const me = await supabase.from("user").select("username").eq("id", myAuth.data.user.id).single();
+  const me = await supabase.from("user").select().eq("id", myAuth.data.user.id).single();
   if (data) {
     if (data.username === me.data.username) redirect("/user");
   }
@@ -26,7 +27,8 @@ const username = async ({ params }) => {
         isVerified={data.isVerified}
       />
 
-      <Account myUsername={me.data.username} userUsername={data.username} />
+      {/* <Account myUsername={me.data.username} userUsername={data.username} /> */}
+      <AccountMain userdata={data} mydata={me.data} />
       {initPens.length === 0 && (
         <div className="flex flex-col px-6">
           <p className="font-alibaba">
