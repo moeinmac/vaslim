@@ -9,6 +9,9 @@ import { GiBleedingEye } from "react-icons/gi";
 import { useReducer } from "react";
 
 import ShareAccount from "./ShareAccount";
+import ReportUser from "./ReportUser";
+import BlockUser from "./BlockUser";
+import HideDot from "./HideDot";
 
 
 const settingItemData = [
@@ -90,6 +93,10 @@ const UserSetting = ({ onClose , user }) => {
         </div>
       )}
       {setting.share && <ShareAccount user={user} />}
+      {setting.report && <ReportUser user={user} closeReport={onClose}/>}
+      {setting.block && <BlockUser reportUser={() => clickItemHandler("report")} />}
+      {setting.hide && <HideDot  />}
+
     </Modal>
   );
 };

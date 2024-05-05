@@ -9,7 +9,7 @@ const SettingButton = ({ me, user }) => {
 
   return (
     <>
-      {open && me && <MySetting onClose={openHandler} />}
+      {open && me && <MySetting onClose={openHandler} user={user} />}
       {open && !me && <UserSetting onClose={openHandler} user={user} />}
       <HiMiniEllipsisVertical className=" text-orange" onClick={openHandler} />
     </>
