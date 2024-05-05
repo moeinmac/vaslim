@@ -10,6 +10,7 @@ import AccountData from "./AccountData";
 import ChangePassowrd from "./ChangePassword";
 import ChangePrivacy from "./ChangePrivacy";
 import ReportProblem from "./ReportProblem";
+import Signout from "./Signout";
 
 const settingItemData = [
   { id: "info", text: "اطلاعات حساب کــاربری", icon: <CgUserList /> },
@@ -108,6 +109,7 @@ const MySetting = ({ onClose }) => {
       {setting.report && <ReportProblem closeReport={onClose} />}
       {setting.password && <ChangePassowrd />}
       {setting.privacy && <ChangePrivacy />}
+      {setting.signout && <Signout />}
     </Modal>
   );
 };

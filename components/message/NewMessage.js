@@ -28,8 +28,7 @@ const NewMessage = ({ myid, sendMessageHandler }) => {
         placeholder="یه چیزی بگــو..."
         minRows={1}
         dir="auto"
-        maxRows={4}
-        maxLength={100}
+        maxRows={5}
         className="bg-transparent resize-none outline-0 text-lg overflow-hidden w-full font-alibaba pl-2 pr-1"
       ></TextareaAutosize>
     </div>

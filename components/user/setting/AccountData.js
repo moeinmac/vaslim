@@ -22,7 +22,7 @@ const AccountData = () => {
         <p className="text-sm">توجه کنید : تغییر در ایمیل و نام کـاربری فعلا در دسترس نیست</p>
         <div className="text-base stamp px-4 py-2 rounded-lg"> ایمیل : {data?.email}</div>
         <div className="text-base stamp px-4 py-2 rounded-lg">تاریخ ایجاد حساب : {dateThing(data?.created_at)}</div>
-        <div className="text-base stamp px-4 py-2 rounded-lg">تاریخ اخرین تغییر در حساب  : {dateThing(data?.created_at)}</div>
+        <div className="text-base stamp px-4 py-2 rounded-lg">تاریخ اخرین ویرایش حساب  : {dateThing(data?.created_at)}</div>
         <div className="text-base stamp px-4 py-2 rounded-lg">تاریخ اخرین ورود به حساب  : {dateThing(data?.last_sign_in_at)}</div>
       </div>
   );

@@ -53,7 +53,6 @@ const UserHeaderPen = ({ created_at, pen_id, pen }) => {
               defaultValue={pen}
               minRows={1}
               dir="auto"
-              maxLength={100}
               className="my-3 bg-white text-black rounded-lg px-4 py-2 resize-none outline-0 text-lg overflow-hidden w-full font-alibaba"
             ></TextareaAutosize>
             <SubmitButton

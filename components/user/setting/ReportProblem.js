@@ -41,7 +41,6 @@ const ReportProblem = ({ closeReport, id }) => {
           placeholder="پیام خود را اینجا بنویسید"
           minRows={6}
           dir="auto"
-          maxLength={100}
           className="my-3 bg-gray text-black rounded-lg px-4 py-2 resize-none outline-0 text-lg overflow-hidden w-full font-alibaba"
         ></TextareaAutosize>
         <SubmitButton
