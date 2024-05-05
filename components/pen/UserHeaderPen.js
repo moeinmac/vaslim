@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MdOutlineMoreVert } from "react-icons/md";
 import { BsTrash3 } from "react-icons/bs";
 import { SlPencil } from "react-icons/sl";
-import { VscCloseAll } from "react-icons/vsc";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import Modal from "../Modal/Modal";
 import { deletePen } from "@/lib/pen/deletePen";
 import TextareaAutosize from "react-textarea-autosize";
@@ -92,18 +92,18 @@ const UserHeaderPen = ({ created_at, pen_id, pen }) => {
         </Modal>
       )}
       <p className="font-alibaba text-[0.6rem]">{timeSince(convertedDate)}</p>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 relative">
         <MdOutlineMoreVert onClick={showMenuHandler} className="text-xl" />
         {showMenu && (
-          <ul className="flex flex-col gap-1 items-end rounded-tl-xl rounded-sm shadow-lg text-sm px-2 py-2 border-2 border-white bg-blue absolute top-0 left-0 font-alibaba">
-            <VscCloseAll onClick={showMenuHandler} className="text-xl mb-3" />
-            <li className="flex items-center gap-5" onClick={isEditingHandler}>
+          <div className="w-[40vw] flex items-end text-base flex-col gap-2 rounded-lg shadow-lg p-2 stamp -top-4 -left-4 font-alibaba absolute">
+            <IoIosCloseCircleOutline className="text-2xl ml-2" onClick={showMenuHandler}/>
+            <button className="flex items-center gap-5 w-full bg-[#5D85DD] py-1 px-4 rounded-lg" onClick={isEditingHandler}>
               <SlPencil /> ویرایش
-            </li>
-            <li className="flex items-center gap-8" onClick={confirmDeleteHandler}>
+            </button>
+            <button className="flex items-center gap-5 w-full bg-[#5D85DD] py-1 px-4 rounded-lg" onClick={confirmDeleteHandler}>
               <BsTrash3 /> حذف
-            </li>
-          </ul>
+            </button>
+          </div>
         )}
       </div>
     </>
