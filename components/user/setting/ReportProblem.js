@@ -6,7 +6,7 @@ import { sendReport } from "@/lib/sendReport";
 
 const ReportProblem = ({ closeReport, id }) => {
   const sendReportHandler = async (formData) => {
-    await sendReport(formData);
+    await sendReport(formData,id);
     closeReport();
   };
   return (
@@ -32,11 +32,10 @@ const ReportProblem = ({ closeReport, id }) => {
         />
         <div className="font-alibaba">
           <p>مــعین قــاسمی</p>
-          <p>واحد پشتیبانی و توسعه وصــلیم</p>
+          <p>مدیر توسعه و پشتیبانی وصــلیم</p>
         </div>
       </div>
       <form className="flex flex-col gap-4 w-full mb-4">
-        <input type="hidden" defaultValue={id} name="id" />
         <TextareaAutosize
           name="problem"
           placeholder="پیام خود را اینجا بنویسید"

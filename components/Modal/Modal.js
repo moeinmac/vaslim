@@ -1,4 +1,6 @@
+"use client";
 import "./Modal.css";
+import ReactDOM from "react-dom";
 
 const Backdrop = (props) => {
   return (
@@ -19,8 +21,11 @@ const ModalOverlay = (props) => {
 const Modal = ({ onClose, children, className }) => {
   return (
     <>
-      <Backdrop onClose={onClose} />
-      <ModalOverlay className={className}>{children}</ModalOverlay>
+      {ReactDOM.createPortal(<Backdrop onClose={onClose} />, document.getElementById("overlay"))}
+      {ReactDOM.createPortal(
+        <ModalOverlay className={className}>{children}</ModalOverlay>,
+        document.getElementById("overlay")
+      )}
     </>
   );
 };

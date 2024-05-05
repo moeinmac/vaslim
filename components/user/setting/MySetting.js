@@ -13,9 +13,9 @@ import ReportProblem from "./ReportProblem";
 
 const settingItemData = [
   { id: "info", text: "اطلاعات حساب کــاربری", icon: <CgUserList /> },
+  { id: "report", text: "گزارش مشکل به پشتیبانی", icon: <BiSupport /> },
   { id: "password", text: "تغییر گذرواژه", icon: <TbPasswordUser /> },
   { id: "privacy", text: "ویرایش حریم شخصی", icon: <TbUserShield /> },
-  { id: "report", text: "گزارش مشکل به پشتیبانی", icon: <BiSupport /> },
   { id: "signout", text: "خروج از حساب وصلیم", icon: <VscSignOut /> },
 ];
 
@@ -105,6 +105,7 @@ const MySetting = ({ onClose }) => {
         </div>
       )}
       {setting.info && <AccountData />}
+      {setting.report && <ReportProblem closeReport={onClose} />}
       {setting.password && <ChangePassowrd />}
       {setting.privacy && <ChangePrivacy />}
     </Modal>

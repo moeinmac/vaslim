@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
     <html lang="fa" dir="rtl">
       <body className={`${alibaba.variable} ${kalameh.variable} bg-black text-white`}>
         {children}
+        <div id="overlay"></div>
       </body>
     </html>
   );

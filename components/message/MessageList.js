@@ -48,7 +48,7 @@ const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
         if (index !== 0) {
           const timeDiff =
             new Date(messages[index].time).getDay() - new Date(messages[index - 1].time).getDay();
-          if (timeDiff >= 1) {
+          if (Math.abs(timeDiff) >= 1) {
             return (
               <>
                 <div
