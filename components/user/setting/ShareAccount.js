@@ -24,7 +24,7 @@ const ShareAccount = ({ user }) => {
     <>
       <div
         id="print"
-        className="bg-black pb-6 rounded-b-xl rounded-t-lg flex flex-col items-center relative mx-2"
+        className="bg-black pb-6 rounded-b-xl rounded-t-lg flex flex-col items-center relative mx-2 gap-6"
       >
         <div className="penItem_bg w-full h-36 rounded-t-lg rounded-b-3xl"></div>
         <img
@@ -33,8 +33,8 @@ const ShareAccount = ({ user }) => {
           height={130}
           className="rounded-3xl border-4 border-white absolute top-20"
         />
-        <div className="flex flex-col gap-3 items-center mt-20">
-          <p className="font-alibaba text-3xl">{user.fullname}</p>
+        <div className="flex flex-col gap-2 items-center mt-16">
+          <p className="font-alibaba text-2xl">{user.fullname}</p>
           <div className="flex items-center gap-2">
             <p className={`${user.isVerified ? "mb-6" : ""} text-xl font-alibaba`}>
               {user.username}@
@@ -42,7 +42,8 @@ const ShareAccount = ({ user }) => {
             {user.isVerified && <VerifiedSVG />}
           </div>
         </div>
-        <div className="font-alibaba text-sm flex-col gap-2 text-gray flex text-center mt-12">
+        <img className="max-w-[80px]" src="https://icvuxqufvnpifmhnduir.supabase.co/storage/v1/object/public/profile/logo.png"/>
+        <div className="font-alibaba text-sm flex-col gap-2 text-gray flex text-center">
           <p>به وصــلیم بپیوندید ، با وصــلیم شما به همه جا وصلین!</p>
           <p>vaslim.vercel.app</p>
         </div>
