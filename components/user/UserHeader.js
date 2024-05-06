@@ -16,7 +16,14 @@ const UserHeader = ({ profile, fullname, username, isVerified, me }) => {
     <>
       {isView && (
         <Modal onClose={viewProfileHandler} className={"top-24 w-[90%] left-[5%] rounded-xl"}>
-          <ViewProfile src={profile} width={300} height={300} className={"rounded-3xl mx-auto"} />
+          <ViewProfile
+            src={profile}
+            width={300}
+            height={300}
+            className={"rounded-3xl mx-auto pointer-events-none"}
+            alt={"پروفایل کاربر"}
+            load
+          />
         </Modal>
       )}
       <div className="flex w-full justify-between items-start text-4xl pt-8 pl-6 pr-5">

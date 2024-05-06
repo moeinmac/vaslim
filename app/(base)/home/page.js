@@ -3,9 +3,11 @@ import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
 import SwitchHomePen from "@/components/pen/SwitchHomePen";
 import SuggestUser from "@/components/search/SuggestUser";
+import ViewProfile from "@/components/user/ViewProfile";
 import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
 import { fetchHomePen } from "@/lib/pen/fetchHomePen";
 import { createClient } from "@/lib/supabase/server";
+import Image from "next/image";
 
 const Home = async () => {
   const supabase = createClient();
@@ -23,11 +25,7 @@ const Home = async () => {
         <h1 className="font-kalameh text-5xl ">وصـــلیم</h1>
         <BellButton myid={myAuth.data.user.id} />
       </header>
-      <GetDot
-        dotData={FAKEDOTDATA}
-        myProfile={data.profile}
-        isBlur={data.vasl.length > 1 ? true : false}
-      />
+      {data.vasl.length <= 1 && <GetDot dotData={FAKEDOTDATA} myProfile={data.profile} />}
       <SwitchHomePen />
       {firstPagePen.length > 0 ? (
         <HomePen initPens={firstPagePen} vasl={data.vasl} myid={myAuth.data.user.id} />

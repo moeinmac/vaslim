@@ -6,6 +6,7 @@ import { VscSignOut } from "react-icons/vsc";
 import SettingItem from "./SettingItem";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { RiUserSharedLine } from "react-icons/ri";
+import { GrInfo } from "react-icons/gr";
 import { useReducer } from "react";
 import AccountData from "./AccountData";
 import ChangePassowrd from "./ChangePassword";
@@ -13,6 +14,7 @@ import ChangePrivacy from "./ChangePrivacy";
 import ReportProblem from "./ReportProblem";
 import Signout from "./Signout";
 import ShareAccount from "./ShareAccount";
+import About from "./About";
 
 const settingItemData = [
   { id: "info", text: "اطلاعات حساب کــاربری", icon: <CgUserList /> },
@@ -20,6 +22,7 @@ const settingItemData = [
   { id: "share", text: "به اشتراک گذاشتن پروفایل", icon: <RiUserSharedLine /> },
   { id: "password", text: "تغییر گذرواژه", icon: <TbPasswordUser /> },
   { id: "privacy", text: "ویرایش حریم شخصی", icon: <TbUserShield /> },
+  { id: "about", text: "درباره وصــلیم", icon: <GrInfo /> },
   { id: "signout", text: "خروج از حساب وصلیم", icon: <VscSignOut /> },
 ];
 
@@ -27,66 +30,43 @@ const settingReducer = (state, action) => {
   if (action.type == "info") {
     return {
       info: true,
-      password: false,
-      share: false,
-      privacy: false,
-      report: false,
-      signout: false,
       back: true,
     };
   }
   if (action.type == "password") {
     return {
-      info: false,
-      share: false,
       password: true,
-      privacy: false,
-      report: false,
-      signout: false,
       back: true,
     };
   }
   if (action.type == "privacy") {
     return {
-      info: false,
-      share: false,
-      password: false,
+
       privacy: true,
-      report: false,
-      signout: false,
       back: true,
     };
   }
   if (action.type == "report") {
     return {
-      info: false,
-      password: false,
-      share: false,
-      privacy: false,
       report: true,
-      signout: false,
       back: true,
     };
   }
   if (action.type == "signout") {
     return {
-      info: false,
-      password: false,
-      privacy: false,
-      share: false,
-      report: false,
       signout: true,
       back: true,
     };
   }
   if (action.type == "share") {
     return {
-      info: false,
-      password: false,
-      privacy: false,
       share: true,
-      report: false,
-      signout: false,
+      back: true,
+    };
+  }
+  if (action.type == "about") {
+    return {
+      about: true,
       back: true,
     };
   }
@@ -129,6 +109,7 @@ const MySetting = ({ onClose, user }) => {
       {setting.password && <ChangePassowrd />}
       {setting.privacy && <ChangePrivacy />}
       {setting.signout && <Signout />}
+      {setting.about && <About />}
       {setting.share && <ShareAccount user={user} />}
     </Modal>
   );

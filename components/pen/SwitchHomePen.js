@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const SwitchHomePen = ({ explore }) => {
   return (
-    <div className="mx-6 my-6 stamp py-4 px-6 rounded-2xl border-2 border-white flex items-center justify-between relative">
+    <div className="mx-6 mt-4 mb-6 stamp py-4 px-6 rounded-2xl border-2 border-white flex items-center justify-between relative">
       <div
         className={`${
           explore ? "left-[0.8rem] px-[4.5rem]" : "right-3"
