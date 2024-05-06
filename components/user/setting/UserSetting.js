@@ -13,7 +13,6 @@ import ReportUser from "./ReportUser";
 import BlockUser from "./BlockUser";
 import HideDot from "./HideDot";
 
-
 const settingItemData = [
   { id: "share", text: "به اشتراک گذاشتن این کــاربر", icon: <RiUserSharedLine /> },
   { id: "report", text: "گزارش کردن", icon: <RiUserVoiceLine /> },
@@ -25,35 +24,23 @@ const settingReducer = (state, action) => {
   if (action.type == "share") {
     return {
       share: true,
-      report: false,
-      block: false,
-      hide: false,
       back: true,
     };
   }
   if (action.type == "report") {
     return {
-      share: false,
       report: true,
-      block: false,
-      hide: false,
       back: true,
     };
   }
   if (action.type == "block") {
     return {
-      share: false,
-      report: false,
       block: true,
-      hide: false,
       back: true,
     };
   }
   if (action.type == "hide") {
     return {
-      share: false,
-      report: false,
-      block: false,
       hide: true,
       back: true,
     };
@@ -67,7 +54,7 @@ const initState = {
   back: false,
 };
 
-const UserSetting = ({ onClose , user }) => {
+const UserSetting = ({ onClose, user }) => {
   const [setting, dispatchSetting] = useReducer(settingReducer, initState);
   const clickItemHandler = (id) => dispatchSetting({ type: id });
   return (
@@ -93,10 +80,9 @@ const UserSetting = ({ onClose , user }) => {
         </div>
       )}
       {setting.share && <ShareAccount user={user} />}
-      {setting.report && <ReportUser user={user} closeReport={onClose}/>}
+      {setting.report && <ReportUser user={user} closeReport={onClose} />}
       {setting.block && <BlockUser reportUser={() => clickItemHandler("report")} />}
-      {setting.hide && <HideDot  />}
-
+      {setting.hide && <HideDot />}
     </Modal>
   );
 };

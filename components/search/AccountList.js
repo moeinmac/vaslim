@@ -1,14 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import VerifiedButton from "../user/VerfiedButton";
+import { CiCirclePlus } from "react-icons/ci";
 
-const AccountItem = ({ profile, fullname, username, vasl,isVerified }) => {
+const AccountItem = ({ profile, fullname, username, vasl, isVerified }) => {
   return (
     <Link href={`/${username}/`}>
-      <div className="flex flex-col items-center gap-4 bg-blue p-2 pb-1 rounded-lg">
+      <div
+        className={`${
+          username.length <= 10 && !isVerified ? "pt-2 px-4" : "p-2"
+        } flex flex-col items-center gap-4 bg-blue  pb-1 rounded-lg`}
+      >
         <Image width={60} height={60} src={profile} alt={fullname} className="rounded-lg" />
         <div className="flex flex-col items-center">
-          <VerifiedButton isVerified={isVerified} username={username} className={"text-base"}/>
+          <VerifiedButton isVerified={isVerified} username={username} className={"text-base"} />
           <p className="font-alibaba text-[0.7rem]">{fullname}</p>
           <p className="flex gap-2">
             <span className="font-kalameh text-2xl">{vasl}</span>
@@ -20,7 +25,7 @@ const AccountItem = ({ profile, fullname, username, vasl,isVerified }) => {
   );
 };
 
-const AccountList = ({ accounts ,suggest}) => {
+const AccountList = ({ accounts, suggest, carousel }) => {
   if (accounts.length === 1 && accounts[0] === "clear") return;
   if (accounts.length === 0 && !suggest) {
     return (
@@ -31,7 +36,11 @@ const AccountList = ({ accounts ,suggest}) => {
     );
   }
   return (
-    <div className="grid grid-cols-3 gap-2 p-2">
+    <div
+      className={`${
+        carousel ? "flex w-screen overflow-auto gap-2 px-3 noscroll" : "grid grid-cols-3 gap-2"
+      }   p-2`}
+    >
       {accounts.map((account) => (
         <AccountItem
           profile={account.profile}
@@ -42,6 +51,14 @@ const AccountList = ({ accounts ,suggest}) => {
           key={account.username}
         />
       ))}
+      {carousel && (
+        <Link href={"/search"}>
+          <div className="flex flex-col items-center gap-4 bg-blue pt-2 px-6 pb-3 rounded-lg">
+            <CiCirclePlus className="text-6xl" />
+            <p className="text-[0.9rem] text-center">پیدا کردن دوســـتان بیشتر</p>
+          </div>
+        </Link>
+      )}
     </div>
   );
 };

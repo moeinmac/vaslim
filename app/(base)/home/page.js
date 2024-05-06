@@ -3,11 +3,10 @@ import BellButton from "@/components/notification/BellButton";
 import HomePen from "@/components/pen/HomePen";
 import SwitchHomePen from "@/components/pen/SwitchHomePen";
 import SuggestUser from "@/components/search/SuggestUser";
-import ViewProfile from "@/components/user/ViewProfile";
 import { FAKEDOTDATA } from "@/lib/FAKEDOTDATA";
 import { fetchHomePen } from "@/lib/pen/fetchHomePen";
 import { createClient } from "@/lib/supabase/server";
-import Image from "next/image";
+import { GiFastArrow } from "react-icons/gi";
 
 const Home = async () => {
   const supabase = createClient();
@@ -31,10 +30,24 @@ const Home = async () => {
         <HomePen initPens={firstPagePen} vasl={data.vasl} myid={myAuth.data.user.id} />
       ) : (
         <div className="flex flex-col">
-          <p className="font-alibaba text-xl px-4">
-            به وصـــلیم خوش اومدی ، میتونی به افراد زیر وصل شی یا از قسمت جستجو دنبال دوستات بگردی
+          {data.vasl.length === 0 ? (
+            <p className="font-alibaba text-xl px-4">
+              به وصــــلیم خوش اومدی ، اینجا خیلی زود میتونی دوست پیدا کنی. مثلا اینا خوبن؟
+            </p>
+          ) : (
+            <p className="font-alibaba text-xl px-4">
+              افرادی که بهشون وصلی ، هنوز دست به قلم نشدند ! یه نگاهی به لیست زیر بنداز :
+            </p>
+          )}
+          <SuggestUser myid={myAuth.data.user.id} text={"لیست پیشــنهادی"} carousel />
+        </div>
+      )}
+      {firstPagePen.length === 0 && (
+        <div className="flex flex-col items-center px-6 py-4 gap-20">
+          <p className="font-aliababa text-xl text-center">
+            از اینجا میتونی دست به قلم شی، هرچی دلت میخواد بگـــو ( بیریز بیرون خودتو){" "}
           </p>
-          <SuggestUser myid={myAuth.data.user.id} text={"لیست پیشــنهادی"} />
+          <GiFastArrow className="text-8xl mr-auto ml-16 my-0" />
         </div>
       )}
     </>

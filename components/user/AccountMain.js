@@ -58,7 +58,6 @@ const AccountMain = ({ userdata, mydata }) => {
 
   const [confirmUnvasl, setConfirmUnVasl] = useState();
   const confirmUnVaslHandler = () => setConfirmUnVasl(!confirmUnvasl);
-  console.log(status);
 
   const supabase = createClient();
 

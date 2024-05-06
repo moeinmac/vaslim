@@ -41,7 +41,6 @@ const ShareAccount = ({ user }) => {
   const shareAppsHandler = async () => {
     const data = await createPhoto();
     const file = dataUrltofile(data, "profile.jpg", "image/jpeg");
-    console.log(file);
     const shareData = {
       title: "Vaslim",
       files: [file],
