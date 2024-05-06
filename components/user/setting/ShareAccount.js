@@ -14,12 +14,39 @@ const ShareAccount = ({ user }) => {
       data = canvas.toDataURL("image/jpg"),
       link = document.createElement("a");
 
+    link.href = `https://instagram.com/create/story/?media=${data}`;
+    link.target = "_blank";
+    // link.href = data;
+    // link.download = "profile.jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadProfileHandler2 = async () => {
+    const element = document.getElementById("print"),
+      canvas = await html2canvas(element, {
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+      }),
+      data = canvas.toDataURL("image/jpg"),
+      link = document.createElement("a");
+
     link.href = data;
     link.download = "profile.jpg";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    const link2 = document.createElement("a");
+
+    link2.href = "instagram://story-camera";
+    document.body.appendChild(link2);
+    link2.click();
+    document.body.removeChild(link2);
   };
+
   return (
     <>
       <div
@@ -42,7 +69,10 @@ const ShareAccount = ({ user }) => {
             {user.isVerified && <VerifiedSVG />}
           </div>
         </div>
-        <img className="max-w-[80px]" src="https://icvuxqufvnpifmhnduir.supabase.co/storage/v1/object/public/profile/logo.png"/>
+        <img
+          className="max-w-[80px]"
+          src="https://icvuxqufvnpifmhnduir.supabase.co/storage/v1/object/public/profile/logo.png"
+        />
         <div className="font-alibaba text-sm flex-col gap-2 text-gray flex text-center">
           <p>به وصــلیم بپیوندید ، با وصــلیم شما به همه جا وصلین!</p>
           <p>vaslim.vercel.app</p>
@@ -53,6 +83,12 @@ const ShareAccount = ({ user }) => {
         className="font-kalameh text-3xl border-2 border-white rounded-lg py-1 bg-black"
       >
         دانلود پروفایل
+      </button>
+      <button
+        onClick={downloadProfileHandler2}
+        className="font-kalameh text-3xl border-2 border-white rounded-lg py-1 bg-black"
+      >
+        2دانلود پروفایل
       </button>
       <button
         onClick={copyToClipBoard}
