@@ -22,6 +22,7 @@ const ShareAccount = ({ user }) => {
     const link = document.createElement("a");
     link.href = data;
     link.download = "profile.jpg";
+    link.dataset = data
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
