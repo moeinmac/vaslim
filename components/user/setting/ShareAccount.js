@@ -1,57 +1,46 @@
 import useCopy from "@/lib/useCopy";
 import html2canvas from "html2canvas";
 import { VerifiedSVG } from "../VerfiedButton";
+import { BsInstagram } from "react-icons/bs";
+import { LuLink } from "react-icons/lu";
+import { SlCloudDownload } from "react-icons/sl";
 
 const ShareAccount = ({ user }) => {
   const { isCopied, copyToClipBoard } = useCopy(`vaslim.vercel.app/${user.username}`);
-  const downloadProfileHandler = async () => {
+  const createPhoto = async () => {
     const element = document.getElementById("print"),
       canvas = await html2canvas(element, {
         useCORS: true,
         allowTaint: true,
         backgroundColor: null,
-      }),
-      data = canvas.toDataURL("image/jpg"),
-      link = document.createElement("a");
-
-    link.href = `https://instagram.com/create/story/?media=${data}`;
-    link.target = "_blank";
-    // link.href = data;
-    // link.download = "profile.jpg";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      });
+    return canvas.toDataURL("image/jpg");
   };
 
-  const downloadProfileHandler2 = async () => {
-    const element = document.getElementById("print"),
-      canvas = await html2canvas(element, {
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: null,
-      }),
-      data = canvas.toDataURL("image/jpg"),
-      link = document.createElement("a");
-
+  const downloadPhotoHandler = async () => {
+    const data = await createPhoto();
+    const link = document.createElement("a");
     link.href = data;
     link.download = "profile.jpg";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
 
-    const link2 = document.createElement("a");
-
-    link2.href = "instagram://story-camera";
-    document.body.appendChild(link2);
-    link2.click();
-    document.body.removeChild(link2);
+  const shareToInstagram = async () => {
+    await downloadPhotoHandler();
+    const link = document.createElement("a");
+    link.href = "instagram://story-camera";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
     <>
       <div
         id="print"
-        className="bg-black pb-6 rounded-b-xl rounded-t-lg flex flex-col items-center relative mx-2 gap-6"
+        className="bg-black pb-6 rounded-b-xl rounded-t-lg flex flex-col items-center relative gap-6"
       >
         <div className="penItem_bg w-full h-36 rounded-t-lg rounded-b-3xl"></div>
         <img
@@ -78,25 +67,20 @@ const ShareAccount = ({ user }) => {
           <p>vaslim.vercel.app</p>
         </div>
       </div>
-      <button
-        onClick={downloadProfileHandler}
-        className="font-kalameh text-3xl border-2 border-white rounded-lg py-1 bg-black"
-      >
-        دانلود پروفایل
-      </button>
-      <button
-        onClick={downloadProfileHandler2}
-        className="font-kalameh text-3xl border-2 border-white rounded-lg py-1 bg-black"
-      >
-        2دانلود پروفایل
-      </button>
-      <button
-        onClick={copyToClipBoard}
-        className="font-kalameh text-3xl border-2 border-white rounded-lg py-1 bg-black"
-      >
-        کپی کردن آدرس صفحه
-      </button>
-      {isCopied && <p className="font-alibaba text-sm">آدرس این کاربر در کلیپ بورد شما کپی شد</p>}
+      <div className="flex w-full items-center justify-between stamp px-6 py-3 rounded-xl">
+        <button onClick={copyToClipBoard}>
+          <LuLink className="text-5xl" />
+        </button>
+
+        <button onClick={shareToInstagram}>
+          <BsInstagram className="text-5xl" />
+        </button>
+        <button onClick={downloadPhotoHandler}>
+          <SlCloudDownload className="text-5xl" />
+        </button>
+      </div>
+
+      {isCopied && <p className="font-alibaba text-sm text-center">آدرس این کاربر در کلیپ بورد شما کپی شد</p>}
     </>
   );
 };
