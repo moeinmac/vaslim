@@ -17,7 +17,7 @@ const AccountItem = ({ profile, fullname, username, vasl, isVerified }) => {
           <p className="font-alibaba text-[0.7rem]">{fullname}</p>
           <p className="flex gap-2">
             <span className="font-kalameh text-2xl">{vasl}</span>
-            <span className="pt-1">متصل</span>
+            <span className="pt-1 font-alibaba">متصل</span>
           </p>
         </div>
       </div>
@@ -55,7 +55,7 @@ const AccountList = ({ accounts, suggest, carousel }) => {
         <Link href={"/search"}>
           <div className="flex flex-col items-center gap-4 bg-blue pt-2 px-6 pb-3 rounded-lg">
             <CiCirclePlus className="text-6xl" />
-            <p className="text-[0.9rem] text-center">پیدا کردن دوســـتان بیشتر</p>
+            <p className="text-[0.9rem] text-center font-alibaba">پیدا کردن دوســـتان بیشتر</p>
           </div>
         </Link>
       )}

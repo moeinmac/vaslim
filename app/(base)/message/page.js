@@ -24,7 +24,7 @@ const message = async () => {
       {soretedMessages.length === 0 && (
         <>
           <p className="font-alibaba px-6 py-4">
-            هنوز به کـــسی پیامی ندادی ، میتونی به افراد زیر پیام بدی
+            هنوز با کسی گـــفتگو نداری ، میتونی از افراد زیر شروع کنی : 
           </p>
           <SuggestUser myid={myAuth.data.user.id} />
         </>

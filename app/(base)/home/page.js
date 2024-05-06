@@ -42,14 +42,6 @@ const Home = async () => {
           <SuggestUser myid={myAuth.data.user.id} text={"لیست پیشــنهادی"} carousel />
         </div>
       )}
-      {firstPagePen.length === 0 && (
-        <div className="flex flex-col items-center px-6 py-4 gap-20">
-          <p className="font-aliababa text-xl text-center">
-            از اینجا میتونی دست به قلم شی، هرچی دلت میخواد بگـــو ( بیریز بیرون خودتو){" "}
-          </p>
-          <GiFastArrow className="text-8xl mr-auto ml-16 my-0" />
-        </div>
-      )}
     </>
   );
 };
