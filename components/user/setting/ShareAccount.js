@@ -4,6 +4,8 @@ import { VerifiedSVG } from "../VerfiedButton";
 import { BsInstagram } from "react-icons/bs";
 import { LuLink } from "react-icons/lu";
 import { SlCloudDownload } from "react-icons/sl";
+import { HiShare } from "react-icons/hi2";
+import { dataUrltofile } from "@/lib/dataUrltofile";
 
 const ShareAccount = ({ user }) => {
   const { isCopied, copyToClipBoard } = useCopy(`vaslim.vercel.app/${user.username}`);
@@ -22,7 +24,6 @@ const ShareAccount = ({ user }) => {
     const link = document.createElement("a");
     link.href = data;
     link.download = "profile.jpg";
-    link.dataset = data
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -35,6 +36,18 @@ const ShareAccount = ({ user }) => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const shareAppsHandler = async () => {
+    const data = await createPhoto();
+    const file = dataUrltofile(data, "profile.jpg", "image/jpg");
+    const shareData = {
+      title: `${"پروفایل وصلیم"}`,
+      files: [file],
+    };
+    if (navigator.canShare && navigator.canShare(shareData)) {
+      await navigator.share(shareData);
+    }
   };
 
   return (
@@ -74,14 +87,21 @@ const ShareAccount = ({ user }) => {
         </button>
 
         <button onClick={shareToInstagram}>
+          <HiShare className="text-5xl" />
+        </button>
+
+        <button onClick={shareAppsHandler}>
           <BsInstagram className="text-5xl" />
         </button>
+
         <button onClick={downloadPhotoHandler}>
           <SlCloudDownload className="text-5xl" />
         </button>
       </div>
 
-      {isCopied && <p className="font-alibaba text-sm text-center">آدرس این کاربر در کلیپ بورد شما کپی شد</p>}
+      {isCopied && (
+        <p className="font-alibaba text-sm text-center">آدرس این کاربر در کلیپ بورد شما کپی شد</p>
+      )}
     </>
   );
 };
