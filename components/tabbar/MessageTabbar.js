@@ -6,33 +6,53 @@ import { useState, useEffect } from "react";
 import Pulse from "../notification/Pulse";
 
 const MessageTabbar = ({ active, activeStyle }) => {
-  const supabase = createClient();
-  let myid;
+  // const [isUnRead, setIsUnRead] = useState(false);
+  // const [messages, setMessages] = useState([]);
+  // const [myid, setmyid] = useState(false);
 
-  const [isUnRead, setIsUnRead] = useState(false);
-  const getIsUnreadMessage = async () => {
+  // console.log({ myid, isUnRead, messages });
+
+  const supabase = createClient();
+
+  const getUserMessages = async () => {
+    // if (myid) {
+    //   const { data } = await supabase.from("user").select("message").eq("id", myid).single();
+    //   return data.message;
+    // }
     const myAuth = await supabase.auth.getUser();
-    let unread = false;
     const { data } = await supabase
       .from("user")
       .select("message")
       .eq("id", myAuth.data.user.id)
       .single();
-    data.message.forEach((messageItem) => {
-      if (messageItem.hasOwnProperty("unread") && messageItem.unread >= 1) unread = true;
-    });
-    if (unread) setIsUnRead(true);
-    else setIsUnRead(false);
+    // setmyid(myAuth.data.user.id);
+    return data.message;
   };
 
-  useEffect(() => {
-    getIsUnreadMessage();
-    // myid = JSON.parse(localStorage.getItem("sb-dhqnztxmteoptdxbvbbl-auth-token")).user.id;
-  }, []);
+  const getIsUnreadMessage = (messages) => {
+    messages.forEach((messageItem) => {
+      if (messageItem.hasOwnProperty("unread") && messageItem.unread >= 1) return true;
+    });
+    return false;
+  };
+
+  // useEffect(() => {
+  //   const fetchUnReadMessages = async () => {
+  //     if (messages.length === 0) {
+  //       const messageList = await getUserMessages();
+  //       const unread = getIsUnreadMessage(messageList);
+  //       setIsUnRead(unread);
+  //       setMessages(messageList);
+  //     } else {
+  //       const unread = getIsUnreadMessage(messages);
+  //       setIsUnRead(unread);
+  //     }
+  //   };
+  //   fetchUnReadMessages();
+  // }, []);
 
   // const handleChanges = (paylod) => {
-  //   console.log(paylod);
-  //   // if (paylod.new.id === myid) getIsUnreadMessage();
+  //   if (paylod.new.id === myid) setMessages(paylod.new.message);
   // };
   // supabase
   //   .channel("updateUser")
@@ -42,9 +62,9 @@ const MessageTabbar = ({ active, activeStyle }) => {
   return active !== "message" ? (
     <div className="relative">
       <RiMessage3Line className="text-[2.2rem]" />
-      {isUnRead && (
+      {/* {isUnRead && (
         <Pulse className={"w-3 h-3 bg-orange bottom-0 left-0 shadow-none shadow-[#ff793f]"} />
-      )}
+      )} */}
     </div>
   ) : (
     <RiMessage3Fill className={`text-[2.2rem] ${activeStyle}`} />

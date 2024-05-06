@@ -3,7 +3,7 @@ import SuggestUser from "@/components/search/SuggestUser";
 import { convertUserItems } from "@/lib/getUsersByPrimary";
 import { createClient } from "@/lib/supabase/server";
 
-const message = async () => {
+const message = async ({ searchParams }) => {
   const supabase = createClient();
 
   const myAuth = await supabase.auth.getUser();
@@ -24,13 +24,21 @@ const message = async () => {
       {soretedMessages.length === 0 && (
         <>
           <p className="font-alibaba px-6 py-4">
-            هنوز با کسی گـــفتگو نداری ، میتونی از افراد زیر شروع کنی : 
+            هنوز با کسی گـــفتگو نداری ، میتونی از افراد زیر شروع کنی :
           </p>
           <SuggestUser myid={myAuth.data.user.id} />
         </>
       )}
 
       <UserMessageList messageList={soretedMessages} />
+      {searchParams.error && (
+        <p className="font-alibaba text-red-600 px-6 py-4">
+          {searchParams.error === "nomessage" &&
+            "گفتگویی که انتخاب کرده اید درحال حاضر وجود ندارد و یا به صورت دو طرفه پاک شده است"}
+          {searchParams.error === "privacy" &&
+            "گفتگویی که قصد وارد شدن به آن را دارید ، برای شما نیست و اجازه دسترسی به آن را ندارید"}
+        </p>
+      )}
     </div>
   );
 };

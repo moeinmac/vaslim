@@ -5,7 +5,7 @@ const loading = () => {
         <div className="loader"></div>
         <h1 className="font-kalameh text-3xl text-center">
           تحمل کـــن عزیز دل شکـــسته <br />
-          تحمل کن به پای شمع خاموش
+          تحمل کـن به پای شمع خاموش
         </h1>
       </div>
     </main>
