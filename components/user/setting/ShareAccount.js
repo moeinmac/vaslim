@@ -40,9 +40,10 @@ const ShareAccount = ({ user }) => {
 
   const shareAppsHandler = async () => {
     const data = await createPhoto();
-    const file = dataUrltofile(data, "profile.jpg", "image/jpg");
+    const file = dataUrltofile(data, "profile.jpg", "image/jpeg");
+    console.log(file);
     const shareData = {
-      title: `${"پروفایل وصلیم"}`,
+      title: "Vaslim",
       files: [file],
     };
     if (navigator.canShare && navigator.canShare(shareData)) {
@@ -87,11 +88,11 @@ const ShareAccount = ({ user }) => {
         </button>
 
         <button onClick={shareToInstagram}>
-          <HiShare className="text-5xl" />
+          <BsInstagram className="text-5xl" />
         </button>
 
         <button onClick={shareAppsHandler}>
-          <BsInstagram className="text-5xl" />
+          <HiShare className="text-5xl" />
         </button>
 
         <button onClick={downloadPhotoHandler}>
