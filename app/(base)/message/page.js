@@ -29,8 +29,10 @@ const message = async ({ searchParams }) => {
           <SuggestUser myid={myAuth.data.user.id} />
         </>
       )}
-
-      <UserMessageList messageList={soretedMessages} />
+      <p className="font-alibaba text-3xl px-6 py-4">
+        در حال تغییرات در زیر ساخت ها هستیم ، پیامرسان وصلیم فعلا کار نمیکند. از صبوری شما متشکریم
+      </p>
+      {/* <UserMessageList messageList={soretedMessages} /> */}
       {searchParams.error && (
         <p className="font-alibaba text-red-600 px-6 py-4">
           {searchParams.error === "nomessage" &&

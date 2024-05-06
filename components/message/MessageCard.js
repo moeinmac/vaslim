@@ -26,6 +26,7 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const onlineUserHandler = (value) => setIsOnline(value);
 
   const sendMessageHandler = async (message) => {
+    console.log({message});
     await sendNewMessage(message, isOnline);
   };
   return (
