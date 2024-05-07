@@ -86,7 +86,7 @@ const SignupForm = ({ message }) => {
           <SubmitButton
             formAction={nextSignupLevel}
             pendingText="بررسی اطلاعات..."
-            className={`text-4xl font-kalameh rounded-xl px-8 py-4 bg-blue text-white ${
+            className={`text-4xl font-kalameh rounded-xl  py-3 bg-blue text-white ${
               signupLevel.level != 0 ? "w-[90%]" : "w-full"
             }`}
           >

@@ -49,7 +49,7 @@ const LoginForm = ({ message }) => {
       <SubmitButton
         formAction={loginHandler}
         pendingText="در حال ورود..."
-        className="bg-orange text-black text-4xl font-kalameh rounded-xl px-8 py-4 "
+        className="bg-orange text-black text-4xl font-kalameh rounded-xl py-3"
       >
         ورود
       </SubmitButton>

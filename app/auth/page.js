@@ -24,7 +24,7 @@ const auth = async ({ searchParams }) => {
             هنوز در وصلیم حساب نداری؟ منتظر چی هستی پس؟
           </p>
           <Link
-            className="text-4xl font-kalameh text-black rounded-xl px-8 py-4 bg-orange text-center"
+            className="text-4xl font-kalameh text-black rounded-xl px-8 py-3 bg-orange text-center"
             href="/auth/signup"
           >
             ثبت نام سریع
