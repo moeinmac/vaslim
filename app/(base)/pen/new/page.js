@@ -1,6 +1,5 @@
-import SubmitButton from "@/components/Auth/SubmitButton";
-import NewText from "@/components/pen/NewText";
-import sendNewPen from "@/lib/pen/sendNewPen";
+import NewPenText from "@/components/pen/NewPenText";
+
 
 const newPen = ({ searchParams }) => {
   return (
@@ -10,14 +9,7 @@ const newPen = ({ searchParams }) => {
         <p className="font-alibaba">لحظات تان را با دوستان تان در میان بگـذارید</p>
       </header>
       <form className="px-6 py-4 flex flex-col gap-3">
-        <NewText />
-        <SubmitButton
-          formAction={sendNewPen}
-          pendingText="آماده سازی چاپار..."
-          className="bg-orange text-black text-4xl font-kalameh rounded-xl px-8 py-4 "
-        >
-          ارسال نوشته
-        </SubmitButton>
+        <NewPenText />
       </form>
       {searchParams.error && (
         <p className="font-alibaba text-red-600">
