@@ -10,17 +10,17 @@ import { BsSend } from "react-icons/bs";
 import Modal from "../Modal/Modal";
 
 const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
-  // const scrollRef = useRef();
+  const scrollRef = useRef();
 
-  // const scrolToBottom = () => {
-  //   if (scrollRef.current) {
-  //     scrollRef.current.scroll({
-  //       top: scrollRef.current.scrollHeight,
-  //       left: 0,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // };
+  const scrolToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scroll({
+        top: scrollRef.current.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  };
   // const { loadingMessage, sendNewMessage } = useNewMessage(id, userid);
 
   // const [isOnline, setIsOnline] = useState(false);
