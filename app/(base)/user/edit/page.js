@@ -6,7 +6,11 @@ import { createClient } from "@/lib/supabase/server";
 const edit = async () => {
   const supabase = createClient();
   const myAuth = await supabase.auth.getUser();
-  const { data } = await supabase.from("user").select().eq("id", myAuth.data.user.id);
+  const { data } = await supabase
+    .from("user")
+    .select("profile,username,phone,fullname")
+    .eq("id", myAuth.data.user.id)
+    .single();
   return (
     <>
       <header className="px-6 py-4 flex flex-col gap-1">
@@ -16,12 +20,13 @@ const edit = async () => {
         </div>
         <p className="font-alibaba">اطلاعات کـاربری تان را تغییر دهید</p>
       </header>
-      <EditProfile profile={data[0].profile} id={myAuth.data.user.id} />
+      <EditProfile profile={data.profile} id={myAuth.data.user.id} />
       <EditAccount
-        fullname={data[0].fullname}
-        username={data[0].username}
-        phone={data[0].phone}
+        fullname={data.fullname}
+        username={data.username}
+        phone={data.phone}
         email={myAuth.data.user.email}
+        id={myAuth.data.user.id}
       />
     </>
   );

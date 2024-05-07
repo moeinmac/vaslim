@@ -94,7 +94,7 @@ const ImageCropper = ({ onChangeProfile, isChangeProfile, onSetProfile, id }) =>
         accept="image/*"
       />
       {isChangeProfile && (
-        <div className="stamp w-full rounded-lg p-3 m-3 flex items-center flex-col">
+        <div className={`${loading ? "bg-transparent" : "stamp p-3"} w-full rounded-lg m-3 flex items-center flex-col`}>
           <header className="w-full">
             <button className="hover:bg-[#f1dfc2] p-1 rounded-xl" onClick={closeChangeProfile}>
               <MdOutlineClose className="text-xl text-orange" />

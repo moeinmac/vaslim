@@ -9,20 +9,19 @@ const signupWelcome = async () => {
   const { data } = await supabase.auth.getUser();
   if (!data.user) redirect("/auth");
 
-  let user = await supabase.from("user").select().eq("id", data.user.id);
+  let user = await supabase.from("user").select("profile").eq("id", data.user.id).single();
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       <div className="flex flex-col p-8 gap-4">
         <h1 className="font-alibaba text-3xl">
-          تـــبریک! به{" "}
-          <strong className="font-kalameh text-5xl">وصـــلیم</strong> خوش آمدید.
+          تـــبریک! به <strong className="font-kalameh text-5xl">وصـــلیم</strong> خوش آمدید.
         </h1>
         <div className="flex flex-col items-center gap-2 mt-10">
           <Image
             width={64}
             height={64}
-            src={user.data[0].profile}
+            src={user.data.profile}
             alt="profile"
             className="bg-white rounded-full"
           />

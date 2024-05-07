@@ -22,7 +22,7 @@ const AccountItem = ({ name, title, data, readOnly }) => {
   );
 };
 
-const EditAccount = ({ username, fullname, email, phone }) => {
+const EditAccount = ({ username, fullname, email, phone, id }) => {
   const updateAccount = async (formData) => {
     "use server";
     const supabase = createClient();
@@ -36,15 +36,16 @@ const EditAccount = ({ username, fullname, email, phone }) => {
         fullname,
         phone,
       })
-      .eq("username", username);
-    // if (error) {
-    //   return redirect("/user/edit?message=update-account-failed");
-    // }
+      .eq("id", id);
 
     return redirect("/user");
   };
   return (
     <form className="px-6 pt-5 flex flex-col gap-5">
+      <p className="font-alibaba text-sm text-gray mt-1">
+        تغییر نام کاربری و ایمیل هنوز در دست توسعه میباشد ، اگر از نام کاربری خود رضایت ندارید به
+        پشتیبانی اطلاع دهید
+      </p>
       <AccountItem data={username} readOnly title={"نام کــاربری"} />
       <AccountItem data={email} readOnly title={"ایمیل"} />
       <AccountItem data={fullname} name={"fullname"} title={"نام کــامل"} />
@@ -52,12 +53,12 @@ const EditAccount = ({ username, fullname, email, phone }) => {
       <SubmitButton
         formAction={updateAccount}
         pendingText="بررســی تغـــییرات..."
-        className="bg-orange text-black text-4xl font-kalameh rounded-xl px-8 py-4 "
+        className="bg-orange text-black text-4xl font-kalameh rounded-xl px-8 py-3 "
       >
         ذخــیره تغـــییرات
       </SubmitButton>
       <Link
-        className="bg-gray text-center text-black text-4xl font-kalameh rounded-xl px-8 py-4"
+        className="bg-gray text-center text-black text-4xl font-kalameh rounded-xl px-8 py-3"
         href="/user"
       >
         ولش کــن
