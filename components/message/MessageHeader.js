@@ -10,11 +10,11 @@ const MessageHeader = ({ data, myid, message_id, online }) => {
   const router = useRouter();
 
   useEffect(() => {
-    sendOnlineUser(message_id, myid, "join");
+    // sendOnlineUser(message_id, myid, "join");
   }, []);
 
   const backToMessageHandler = async () => {
-    sendOnlineUser(message_id, myid, "leave");
+    // sendOnlineUser(message_id, myid, "leave");
     await clearUnreadMessage(message_id, myid, true);
     router.back();
   };

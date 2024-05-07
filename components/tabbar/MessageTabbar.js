@@ -14,27 +14,22 @@ const MessageTabbar = ({ active, activeStyle }) => {
 
   const supabase = createClient();
 
-  const getUserMessages = async () => {
-    // if (myid) {
-    //   const { data } = await supabase.from("user").select("message").eq("id", myid).single();
-    //   return data.message;
-    // }
-    const myAuth = await supabase.auth.getUser();
-    const { data } = await supabase
-      .from("user")
-      .select("message")
-      .eq("id", myAuth.data.user.id)
-      .single();
-    // setmyid(myAuth.data.user.id);
-    return data.message;
-  };
+  // const getUserMessages = async () => {
+  //   const myAuth = await supabase.auth.getUser();
+  //   const { data } = await supabase
+  //     .from("user")
+  //     .select("message")
+  //     .eq("id", myAuth.data.user.id)
+  //     .single();
+  //   return data.message;
+  // };
 
-  const getIsUnreadMessage = (messages) => {
-    messages.forEach((messageItem) => {
-      if (messageItem.hasOwnProperty("unread") && messageItem.unread >= 1) return true;
-    });
-    return false;
-  };
+  // const getIsUnreadMessage = (messages) => {
+  //   messages.forEach((messageItem) => {
+  //     if (messageItem.hasOwnProperty("unread") && messageItem.unread >= 1) return true;
+  //   });
+  //   return false;
+  // };
 
   // useEffect(() => {
   //   const fetchUnReadMessages = async () => {

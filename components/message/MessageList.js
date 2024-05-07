@@ -7,18 +7,18 @@ import { sendOnlineUser } from "@/lib/message/sendOnlineUser";
 const MessageList = ({ myid, id, scrolToBottom, setOnlineUser }) => {
   const supabase = createClient();
   const [messages, setMessages] = useState([]);
-  console.log(messages);
 
   const messageChannel = supabase.channel(`room-${id}`);
 
   const messageReceived = (payload) => {
     if (payload.payload.type) {
       if (payload.payload.type === "join" && payload.payload.id !== myid) {
-        sendOnlineUser(id, myid, "join");
+        // sendOnlineUser(id, myid, "join");
         setOnlineUser(true);
         return;
       }
       if (payload.payload.type === "leave" && payload.payload.id !== myid) {
+        console.log("leave");
         setOnlineUser(false);
         return;
       }
