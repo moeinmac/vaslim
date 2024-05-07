@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import MessageHeader from "./MessageHeader";
 import MessageList from "./MessageList";
 import NewMessage from "./NewMessage";
 import MessageItem from "./MessageItem";
 import useNewMessage from "@/lib/message/useNewMessage";
 import { BsSend } from "react-icons/bs";
-import Modal from "../Modal/Modal";
+import useUserOnline from "@/lib/message/useUserOnline";
 
 const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const scrollRef = useRef();
@@ -21,17 +21,13 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
       });
     }
   };
-  // const { loadingMessage, sendNewMessage } = useNewMessage(id, userid);
 
-  // const [isOnline, setIsOnline] = useState(false);
-  // const onlineUserHandler = (value) => setIsOnline(value);
+  const { loadingMessage, sendNewMessage } = useNewMessage(id, userid);
+  const { online, sendOnlineUser } = useUserOnline(myid, userid, id);
+  const sendMessageHandler = async (message) => {
+    await sendNewMessage(message, online);
+  };
 
-  // const sendMessageHandler = async (message) => {
-  //   await sendNewMessage(message, isOnline);
-  // };
-
-  const [closeModal, setCloseModal] = useState(false);
-  const closeModalHandler = () => setCloseModal(!closeModal);
   return (
     <div
       ref={scrollRef}
@@ -42,8 +38,8 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
         userid={userid}
         myid={myid}
         message_id={id}
-        // online={isOnline}
-        online={false}
+        online={online}
+        sendOnlineUser={sendOnlineUser}
       />
 
       <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
@@ -51,28 +47,20 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
         ایجاد شد.
       </div>
 
-      {!closeModal && (
-        <Modal className={"w-full top-[30vh]"} onClose={closeModalHandler}>
-          <h2 className="font-kalameh text-4xl px-6 text-center">
-            متاسفـــانه به علت وجود مشکــلات در زیر ساخت های سرور امکــــان ارسال پیام تا اطلاع ثـــانوی برقرار
-            نمیباشد ، از شکیبیایی شما متشکـــــریم
-          </h2>
-        </Modal>
-      )}
-
-      {/* <MessageList
-        myid={myid}
-        id={id}
-        scrolToBottom={scrolToBottom}
-        setOnlineUser={onlineUserHandler}
-      />
+      {
+        <MessageList
+          myid={myid}
+          id={id}
+          scrolToBottom={scrolToBottom}
+        />
+      }
       {loadingMessage && (
         <div className="flex items-center gap-3 mr-3">
           <BsSend className="text-lg" />
           <MessageItem message={loadingMessage} myid={myid} isLoading />
         </div>
-      )} */}
-      {/* <NewMessage myid={myid} sendMessageHandler={sendMessageHandler} /> */}
+      )}
+      {<NewMessage myid={myid} sendMessageHandler={sendMessageHandler} />}
     </div>
   );
 };

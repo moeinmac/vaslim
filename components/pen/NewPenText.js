@@ -6,7 +6,7 @@ import SubmitButton from "@/components/Auth/SubmitButton";
 import sendNewPen from "@/lib/pen/sendNewPen";
 
 const newPenStyles = {
-  orange: { text: "bg-transparent border-4 border-orange", button: "bg-orange text-black" },
+  orange: { text: "bg-transparent border-2 border-orange", button: "bg-orange text-black" },
   blue: { text: "bg-blue", button: "bg-blue text-white" },
   bgpen: { text: "penItem_bg", button: "penItem_bg text-white" },
   stamp: { text: "stamp", button: "stamp text-white" },

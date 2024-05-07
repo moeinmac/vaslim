@@ -4,17 +4,15 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import Profile from "../user/Profile";
 import { useRouter } from "next/navigation";
 import { clearUnreadMessage } from "@/lib/message/clearUnreadMessage";
-import { sendOnlineUser } from "@/lib/message/sendOnlineUser";
 
-const MessageHeader = ({ data, myid, message_id, online }) => {
+const MessageHeader = ({ data, myid, message_id, online, sendOnlineUser }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // sendOnlineUser(message_id, myid, "join");
+    sendOnlineUser();
   }, []);
 
   const backToMessageHandler = async () => {
-    // sendOnlineUser(message_id, myid, "leave");
     await clearUnreadMessage(message_id, myid, true);
     router.back();
   };
