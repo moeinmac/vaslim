@@ -17,7 +17,7 @@ const baseLayout = async ({ children }) => {
       </h1>
       <main className="md:hidden flex flex-col min-h-screen pb-[5.5rem]">
         {children}
-        <MobileTabbar />
+        <MobileTabbar myid={data.data.user.id} />
         <Suspense fallback={null}>
           <NavigationEvents myid={data.data.user.id} />
         </Suspense>
