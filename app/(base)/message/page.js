@@ -13,15 +13,14 @@ const message = async ({ searchParams }) => {
     .eq("id", myAuth.data.user.id)
     .single();
 
-  const myMessageItems = await convertUserItems(data.message, "with");
-  const soretedMessages = myMessageItems.sort((a, b) => b.unread - a.unread);
+  const initChatList = await convertUserItems(data.message, "with");
 
   return (
     <div className="flex flex-col">
       <header>
         <h1 className="font-kalameh px-6 py-4 text-5xl">لیست پــیام های شما</h1>
       </header>
-      {soretedMessages.length === 0 && (
+      {initChatList.length === 0 && (
         <>
           <p className="font-alibaba px-6 py-4">
             هنوز با کسی گـــفتگو نداری ، میتونی از افراد زیر شروع کنی :
@@ -29,7 +28,7 @@ const message = async ({ searchParams }) => {
           <SuggestUser myid={myAuth.data.user.id} />
         </>
       )}
-      <UserMessageList messageList={soretedMessages} />
+      <UserMessageList initChatList={initChatList} myid={myAuth.data.user.id} />
       {searchParams.error && (
         <p className="font-alibaba text-red-600 px-6 py-4">
           {searchParams.error === "nomessage" &&

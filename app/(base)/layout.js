@@ -21,7 +21,7 @@ const baseLayout = async ({ children }) => {
         <Suspense fallback={null}>
           <NavigationEvents myid={data.data.user.id} />
         </Suspense>
-        <ShakeMobileDevice id={data.data.user.id}/>
+        {/* <ShakeMobileDevice id={data.data.user.id}/> */}
       </main>
     </>
   );
