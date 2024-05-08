@@ -9,8 +9,6 @@ import useNewMessage from "@/lib/message/useNewMessage";
 import { BsSend } from "react-icons/bs";
 import useUserOnline from "@/lib/message/useUserOnline";
 
-
-
 const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const scrollRef = useRef();
 
@@ -39,9 +37,6 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
       >
         <MessageHeader
           data={userdata}
-          userid={userid}
-          myid={myid}
-          message_id={id}
           online={online}
           sendOnlineUser={sendOnlineUser}
         />
