@@ -2,6 +2,7 @@
 import { createClient } from "@/lib/supabase/client";
 import MessageItem from "./MessageItem";
 import { useEffect, useState } from "react";
+import { clearUnreadMessage } from "@/lib/message/clearUnreadMessage";
 
 const MessageList = ({ myid, id, scrolToBottom }) => {
   const supabase = createClient();
@@ -19,10 +20,12 @@ const MessageList = ({ myid, id, scrolToBottom }) => {
 
   useEffect(() => {
     const loadMessages = async (id) => {
+      await clearUnreadMessage(id, myid, true);
       const { data } = await supabase.from("message").select("messages").eq("id", id).single();
       setMessages(data.messages);
     };
     loadMessages(id);
+    
   }, []);
 
   useEffect(() => {
