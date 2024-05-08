@@ -1,26 +1,23 @@
 import UserMessageList from "@/components/message/UserMessagesList";
 import SuggestUser from "@/components/search/SuggestUser";
 import { convertUserItems } from "@/lib/getUsersByPrimary";
+import { getChatList } from "@/lib/message/getChatList";
 import { createClient } from "@/lib/supabase/server";
 
 const message = async ({ searchParams }) => {
   const supabase = createClient();
 
   const myAuth = await supabase.auth.getUser();
-  const { data } = await supabase
-    .from("user")
-    .select("message")
-    .eq("id", myAuth.data.user.id)
-    .single();
+  const data = await getChatList(myAuth.data.user.id);
 
-  const initChatList = await convertUserItems(data.message, "with");
+  const chatListData = await convertUserItems(data.message, "with");
 
   return (
     <div className="flex flex-col">
       <header>
         <h1 className="font-kalameh px-6 py-4 text-5xl">لیست پــیام های شما</h1>
       </header>
-      {initChatList.length === 0 && (
+      {chatListData.length === 0 && (
         <>
           <p className="font-alibaba px-6 py-4">
             هنوز با کسی گـــفتگو نداری ، میتونی از افراد زیر شروع کنی :
@@ -28,7 +25,7 @@ const message = async ({ searchParams }) => {
           <SuggestUser myid={myAuth.data.user.id} />
         </>
       )}
-      <UserMessageList initChatList={initChatList} myid={myAuth.data.user.id} />
+      <UserMessageList chatList={chatListData} myid={myAuth.data.user.id} />
       {searchParams.error && (
         <p className="font-alibaba text-red-600 px-6 py-4">
           {searchParams.error === "nomessage" &&

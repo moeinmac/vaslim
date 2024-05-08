@@ -5,43 +5,19 @@ import { useState } from "react";
 import Modal from "../Modal/Modal";
 import { deleteChatItem } from "@/lib/message/deleteChatItem";
 import { HiOutlineTrash } from "react-icons/hi2";
-import { createClient } from "@/lib/supabase/client";
 
-const updateUnReadChats = (newChatList, prevChatList) => {
-  return prevChatList.map((chat, index) => {
-    return {
-      ...chat,
-      unread: newChatList[index].unread,
-    };
-  });
-};
-
-const UserMessageList = ({ initChatList, myid }) => {
-  const supabase = createClient();
-
-  const [chatList, setChatList] = useState(initChatList);
-
+const UserMessageList = ({ chatList }) => {
   const soretedMessages = chatList.sort((a, b) => b.unread - a.unread);
 
   const [confirmDelete, setConfirmDelete] = useState(false);
   const confirmDeleteHandler = (id) => {
     confirmDelete ? setConfirmDelete(false) : setConfirmDelete(id);
   };
+  
   const deleteChatHandler = () => {
     deleteChatItem(confirmDelete);
     setConfirmDelete(false);
   };
-
-  const handleChanges = (paylod) => {
-    if (paylod.new.id === myid) {
-      setChatList(updateUnReadChats(paylod.new.message, chatList));
-    }
-  };
-
-  supabase
-    .channel("updateUser")
-    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, handleChanges)
-    .subscribe();
 
   return (
     <div>
