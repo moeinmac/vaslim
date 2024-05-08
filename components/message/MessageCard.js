@@ -9,6 +9,8 @@ import useNewMessage from "@/lib/message/useNewMessage";
 import { BsSend } from "react-icons/bs";
 import useUserOnline from "@/lib/message/useUserOnline";
 
+
+
 const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   const scrollRef = useRef();
 
@@ -29,39 +31,36 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
   };
 
   return (
-    <div
-      ref={scrollRef}
-      className="noscroll mt-[6rem] flex flex-col h-[80vh] overflow-y-auto justify-between"
-    >
-      <MessageHeader
-        data={userdata}
-        userid={userid}
-        myid={myid}
-        message_id={id}
-        online={online}
-        sendOnlineUser={sendOnlineUser}
-      />
+    <>
 
-      <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
-        این مکالمه در تاریخ {new Date(created_at).toLocaleString("fa-IR", { dateStyle: "medium" })}{" "}
-        ایجاد شد.
-      </div>
-
-      {
-        <MessageList
+      <div
+        ref={scrollRef}
+        className="noscroll mt-[6rem] flex flex-col h-[80vh] overflow-y-auto justify-between"
+      >
+        <MessageHeader
+          data={userdata}
+          userid={userid}
           myid={myid}
-          id={id}
-          scrolToBottom={scrolToBottom}
+          message_id={id}
+          online={online}
+          sendOnlineUser={sendOnlineUser}
         />
-      }
-      {loadingMessage && (
-        <div className="flex items-center gap-3 mr-3">
-          <BsSend className="text-lg" />
-          <MessageItem message={loadingMessage} myid={myid} isLoading />
+
+        <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
+          این مکالمه در تاریخ{" "}
+          {new Date(created_at).toLocaleString("fa-IR", { dateStyle: "medium" })} ایجاد شد.
         </div>
-      )}
-      {<NewMessage myid={myid} sendMessageHandler={sendMessageHandler} />}
-    </div>
+
+        {<MessageList myid={myid} id={id} scrolToBottom={scrolToBottom} />}
+        {loadingMessage && (
+          <div className="flex items-center gap-3 mr-3">
+            <BsSend className="text-lg" />
+            <MessageItem message={loadingMessage} myid={myid} isLoading />
+          </div>
+        )}
+        {<NewMessage myid={myid} sendMessageHandler={sendMessageHandler} />}
+      </div>
+    </>
   );
 };
 

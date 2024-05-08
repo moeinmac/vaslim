@@ -1,7 +1,9 @@
+import { NavigationEvents } from "@/components/message/NavigationEvents";
 import MobileTabbar from "@/components/tabbar/MobileTabbar";
 import ShakeMobileDevice from "@/components/tabbar/ShakeMobileDevice";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 const baseLayout = async ({ children }) => {
   const supabase = createClient();
@@ -16,7 +18,10 @@ const baseLayout = async ({ children }) => {
       <main className="md:hidden flex flex-col min-h-screen pb-[5.5rem]">
         {children}
         <MobileTabbar />
-        {/* <ShakeMobileDevice id={data.data.user.id}/> */}
+        <Suspense fallback={null}>
+          <NavigationEvents myid={data.data.user.id} />
+        </Suspense>
+        <ShakeMobileDevice id={data.data.user.id}/>
       </main>
     </>
   );

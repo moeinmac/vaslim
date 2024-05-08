@@ -7,15 +7,15 @@ const MessageList = ({ myid, id, scrolToBottom }) => {
   const supabase = createClient();
   const [messages, setMessages] = useState([]);
 
-  // const messageChannel = supabase.channel(`room-${id}`);
+  const messageChannel = supabase.channel(`room-${id}`);
 
-  // const messageReceived = (payload) => {
-  //   setMessages((prevState) => [...prevState, payload.payload]);
-  // };
+  const messageReceived = (payload) => {
+    setMessages((prevState) => [...prevState, payload.payload]);
+  };
 
-  // messageChannel
-  //   .on("broadcast", { event: "message" }, (payload) => messageReceived(payload))
-  //   .subscribe();
+  messageChannel
+    .on("broadcast", { event: "message" }, (payload) => messageReceived(payload))
+    .subscribe();
 
   useEffect(() => {
     const loadMessages = async (id) => {
