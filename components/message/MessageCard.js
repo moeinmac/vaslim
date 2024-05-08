@@ -30,20 +30,21 @@ const MessageCard = ({ userdata, myid, id, created_at, userid }) => {
 
   return (
     <>
-
       <div
         ref={scrollRef}
         className="noscroll mt-[6rem] flex flex-col h-[80vh] overflow-y-auto justify-between"
       >
-        <MessageHeader
-          data={userdata}
-          online={online}
-          sendOnlineUser={sendOnlineUser}
-        />
+        <MessageHeader data={userdata} online={online} sendOnlineUser={sendOnlineUser} />
 
         <div className="font-alibaba inline text-sm text-center py-6 text-zinc-400 ">
           این مکالمه در تاریخ{" "}
           {new Date(created_at).toLocaleString("fa-IR", { dateStyle: "medium" })} ایجاد شد.
+          {userid === "5af81674-ba0f-4ffa-9d73-efadcdde153b" && (
+            <p className="font-alibaba mt-4 px-6 py-4 text-right penItem_bg mr-8 text-white rounded-lg rounded-bl-[3rem] rounded-tl-sm">
+              سلام وقت شما بخیر ! خیلی خوشحال میشویم اگر مشکلات انتقادات و حتی پیشنهادات خود را با
+              ما در میان بگذارید ، خیلی زود به شما پاسخ خواهیم داد. امیدوارم همیشه وصل بمانید!
+            </p>
+          )}
         </div>
 
         {<MessageList myid={myid} id={id} scrolToBottom={scrolToBottom} />}

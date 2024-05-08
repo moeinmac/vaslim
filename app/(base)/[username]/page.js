@@ -1,10 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
-import Account from "@/components/user/Account";
 import UserHeader from "@/components/user/UserHeader";
 import { redirect } from "next/navigation";
 import UserPen from "@/components/pen/UserPen";
 import { fetchUserPen } from "@/lib/pen/fetchUserPen";
 import AccountMain from "@/components/user/AccountMain";
+import VaslimAccount from "@/components/user/VaslimAccount";
 
 const username = async ({ params }) => {
   const supabase = createClient();
@@ -27,8 +27,16 @@ const username = async ({ params }) => {
         isVerified={data.isVerified}
       />
 
-      {/* <Account myUsername={me.data.username} userUsername={data.username} /> */}
-      <AccountMain userdata={data} mydata={me.data} />
+      {data.id !== "5af81674-ba0f-4ffa-9d73-efadcdde153b" ? (
+        <AccountMain userdata={data} mydata={me.data} />
+      ) : (
+        <VaslimAccount
+          usermessage={data.message}
+          mymessage={me.data.message}
+          myid={myAuth.data.user.id}
+          userid={data.id}
+        />
+      )}
       {initPens.length === 0 && (
         <div className="flex flex-col px-6">
           <p className="font-alibaba">

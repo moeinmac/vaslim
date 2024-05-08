@@ -38,19 +38,22 @@ const AccountList = ({ accounts, suggest, carousel }) => {
   return (
     <div
       className={`${
-        carousel ? "flex w-screen overflow-auto gap-2 px-3 noscroll" : "grid grid-cols-3 gap-2"
+        carousel ? "flex w-screen overflow-auto gap-2 px-3 noscroll relative" : "grid grid-cols-3 gap-2"
       }   p-2`}
     >
-      {accounts.map((account) => (
-        <AccountItem
-          profile={account.profile}
-          fullname={account.fullname}
-          username={account.username}
-          vasl={account.vasl.length}
-          isVerified={account.isVerified}
-          key={account.username}
-        />
-      ))}
+      {accounts.map((account) => {
+        if (carousel && account.username == "VASLIM") return <></>;
+        return (
+          <AccountItem
+            profile={account.profile}
+            fullname={account.fullname}
+            username={account.username}
+            vasl={account.vasl.length}
+            isVerified={account.isVerified}
+            key={account.username}
+          />
+        );
+      })}
       {carousel && (
         <Link href={"/search"}>
           <div className="flex flex-col items-center gap-4 bg-blue pt-2 px-6 pb-3 rounded-lg">
